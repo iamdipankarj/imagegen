@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "rm -rf ./next && rm -rf ./node_modules/.cache && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%"
+  ],
   "dependencies": {
     "clsx": "^2.1.0",
     "lucide-react": "^0.344.0",
