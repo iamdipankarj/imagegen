@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque as FontSans } from "next/font/google";
+import { Nunito as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 

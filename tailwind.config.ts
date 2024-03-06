@@ -7,7 +7,10 @@ const config: Config = {
     themes: [{
       light: {
         ...require("daisyui/src/theming/themes")["light"],
-        primary: "#5522FA"
+        primary: "#5522FA",
+        secondary: "#FEC309",
+        accent: "#23A7F2",
+        success: "#299850",
       }
     }]
   },
@@ -22,10 +25,8 @@ const config: Config = {
       colors: {
         tertiary: "var(--forground-tertiary)",
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      flex: {
+        '2': '2 2 0%'
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],

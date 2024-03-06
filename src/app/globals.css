@@ -21,6 +21,10 @@ body, html {
   .btn {
     @apply text-white;
   }
+
+  .btn-secondary {
+    @apply text-slate-900
+  }
 }
 
 @layer utilities {
