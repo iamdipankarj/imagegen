@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "tsc": "tsc --noEmit",
     "prisma:pull:dev": "dotenv -e .env.development -- npx prisma db pull",
     "prisma:pull:prod": "dotenv -e .env.production -- npx prisma db pull",
     "prisma:generate:dev": "dotenv -e .env.development -- npx prisma generate",

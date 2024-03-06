@@ -1,0 +1,7 @@
+[build]
+  base = "/"
+  command = "yarn run build"
+  publish = ".next"
+[dev]
+  command = "yarn run start"
+  publish = ".next"

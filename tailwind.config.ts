@@ -3,6 +3,14 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config: Config = {
   darkMode: "class",
+  daisyui: {
+    themes: [{
+      light: {
+        ...require("daisyui/src/theming/themes")["light"],
+        primary: "#5522FA"
+      }
+    }]
+  },
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -26,7 +34,8 @@ const config: Config = {
   },
   plugins: [
     require("tailwindcss-animate"),
-    require('@tailwindcss/typography')
+    require('@tailwindcss/typography'),
+    require('daisyui')
   ],
 };
 export default config;
