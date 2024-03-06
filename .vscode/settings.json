@@ -1,0 +1,27 @@
+{
+  "editor.wordWrap": "on",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "explorer.compactFolders": false,
+  "workbench.editor.enablePreview": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "editor.stickyScroll.enabled": false,
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "package-lock.json": true,
+    "yarn.lock": true,
+    "**/dist": true,
+    "**/tmp": true
+  },
+  "editor.formatOnSave": false,
+  "editor.fontSize": 13,
+  "editor.lineHeight": 24,
+  "editor.wordWrapColumn": 80,
+  "scss.lint.unknownAtRules": "ignore",
+  "css.customData": [".vscode/css_custom_data.json"],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+}
