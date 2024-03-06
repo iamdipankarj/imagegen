@@ -26,7 +26,7 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="en" suppressHydrationWarning data-theme="light">
-        <body className={cn("min-h-screen font-sans antialiased", fontSans.variable)}>
+        <body className={cn("min-h-screen font-sans flex flex-col antialiased", fontSans.variable)}>
           <AppHeader />
           {children}
         </body>
