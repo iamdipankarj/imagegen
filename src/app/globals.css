@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  --foreground-rgb: #F6F1ED;
+  --forground-tertiary: #5522FA;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  background-color: var(--foreground-rgb);
 }
 
 body, html {

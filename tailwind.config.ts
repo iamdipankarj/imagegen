@@ -11,6 +11,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        tertiary: "var(--forground-tertiary)",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
