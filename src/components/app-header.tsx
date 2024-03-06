@@ -11,7 +11,7 @@ export function AppHeader({
 }: React.HTMLAttributes<HTMLElement>) {
   return (
     <header className={cn("w-full transition-all z-50 duration-300 ease-in-out p-3 bg-transparent relative", className)} {...props}>
-      <div className="md:container mx-auto w-full flex flex-row items-center justify-between bg-white rounded-full px-3 py-3">
+      <div className="md:container mx-auto w-full flex flex-row items-center justify-between p-3">
         <Link href="/" className="flex-1 order-1 shrink-0">
           <Logo />
         </Link>
