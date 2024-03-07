@@ -33,7 +33,7 @@ export function Footer() {
                 <Link className="link link-hover" href="/#how">
                   How it works
                 </Link>
-                <Link className="link link-hover" href="/#pricing">
+                <Link className="link link-hover" href="/pricing">
                   Pricing
                 </Link>
               </div>

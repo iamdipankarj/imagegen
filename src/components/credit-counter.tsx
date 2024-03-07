@@ -30,7 +30,7 @@ export function CreditCounter({
     if (credits > 0) {
       return `${credits} Credits Left`
     } else if (credits === 0) {
-      return "Get More Credits"
+      return "Buy Credits"
     }
     return `${credits} Credit Left`
   }, [credits])
