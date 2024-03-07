@@ -7,8 +7,14 @@ export function Logo({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div className={cn("flex items-center space-x-2", className)} {...props}>
-      
-      <span className="text-base font-bold">PhotoWorks</span>
+      <Image
+        src="/logo.svg"
+        alt="PhotoWorks"
+        width={30}
+        height={30}
+        priority
+      />
+      <span className="text-2xl font-bold">PhotoWorks</span>
     </div>
   )
 }

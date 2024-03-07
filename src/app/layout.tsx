@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Nunito as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { getServerSession } from "next-auth";
-import SessionProvider from "@/components/session-provider";
 import { AppHeader } from "@/components/app-header";
 
 const fontSans = FontSans({
@@ -21,16 +19,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession();
 
   return (
-    <SessionProvider session={session}>
-      <html lang="en" suppressHydrationWarning data-theme="light">
-        <body className={cn("min-h-screen font-sans flex flex-col antialiased", fontSans.variable)}>
-          <AppHeader />
-          {children}
-        </body>
-      </html>
-    </SessionProvider>
+    <html lang="en" suppressHydrationWarning data-theme="light">
+      <body className={cn("min-h-screen font-sans flex flex-col antialiased", fontSans.variable)}>
+        <AppHeader />
+        {children}
+      </body>
+    </html>
   );
 }

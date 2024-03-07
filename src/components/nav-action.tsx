@@ -3,11 +3,8 @@
 import Link from "next/link";
 import { KeyRound, SwatchBook } from "lucide-react"
 import { CreditCounter } from "@/components/credit-counter";
-import { useSession } from "next-auth/react";
-import { UserNav } from "@/components/user-nav";
 
 export function NavAction() {
-  const { status } = useSession()
   const signedIn = status === "authenticated"
   const notSignedIn = status === "unauthenticated"
 
@@ -26,7 +23,7 @@ export function NavAction() {
           Sign In
         </Link>
       ) : null}
-      <UserNav className="hidden md:inline-flex" />
+      {/* <UserNav className="hidden md:inline-flex" /> */}
     </nav>
   )
 }
