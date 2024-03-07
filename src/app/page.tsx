@@ -10,6 +10,7 @@ export default function Home() {
           <FeatureCard
             heading="Interior Design"
             iconClass="bg-model-purple"
+            href="/interior"
             icon={(
               <Armchair className="text-white" />
             )}>
@@ -18,6 +19,7 @@ export default function Home() {
           <FeatureCard
             heading="Text to Image"
             iconClass="bg-model-yellow"
+            href="/text-to-image"
             icon={(
               <Sparkles className="text-white" />
             )}>
@@ -26,6 +28,7 @@ export default function Home() {
           <FeatureCard
             heading="Upscale Image"
             iconClass="bg-model-red"
+            href="/upscale"
             icon={(
               <Sparkles className="text-white" />
             )}>
@@ -34,6 +37,7 @@ export default function Home() {
           <FeatureCard
             heading="Restore Photos"
             iconClass="bg-model-teal"
+            href="/restore"
             icon={(
               <Sparkles className="text-white" />
             )}>
