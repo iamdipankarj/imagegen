@@ -5,8 +5,8 @@ import { KeyRound, SwatchBook } from "lucide-react"
 import { CreditCounter } from "@/components/credit-counter";
 
 export function NavAction() {
-  const signedIn = status === "authenticated"
-  const notSignedIn = status === "unauthenticated"
+  const signedIn = false
+  const notSignedIn = true
 
   return (
     <nav className="flex flex-col md:flex-row items-center gap-2 flex-1">
