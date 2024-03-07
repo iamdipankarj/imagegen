@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Nunito as FontSans } from "next/font/google";
+import { Gabarito as FontSans } from "next/font/google";
+import { ClerkProvider } from '@clerk/nextjs'
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { AppHeader } from "@/components/app-header";
+import { Footer } from "@/components/footer";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -21,11 +23,14 @@ export default async function RootLayout({
 }>) {
 
   return (
-    <html lang="en" suppressHydrationWarning data-theme="light">
-      <body className={cn("min-h-screen font-sans flex flex-col antialiased", fontSans.variable)}>
-        <AppHeader />
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning data-theme="light">
+        <body className={cn("min-h-screen font-sans flex flex-col antialiased", fontSans.variable)}>
+          <AppHeader />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -16,17 +16,9 @@ body, html {
 
 @layer components {
   .btn {
-    @apply text-white font-[800];
+    @apply text-white;
     --tw-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1)!important;
     @apply shadow-sm;
-  }
-
-  .link {
-    @apply font-[800];
-  }
-
-  .btn-secondary {
-    @apply text-slate-900
   }
 
   body[data-menu="open"] #mobileMenu {

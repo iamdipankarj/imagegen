@@ -36,7 +36,7 @@ export function CreditCounter({
   }, [credits])
 
   return (
-    <Link href="/pricing" className={cn("btn btn-neutral text-white text-lg rounded-badge", className)} {...props}>
+    <Link href="/pricing" className={cn("btn btn-sm btn-secondary text-white", className)} {...props}>
       <Coins className="h-5 w-5" />
       {!data ? (
         <span className="loading loading-spinner loading-sm" />

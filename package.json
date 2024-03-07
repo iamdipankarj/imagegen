@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "@bytescale/sdk": "^3.32.0",
+    "@clerk/nextjs": "^4.29.9",
     "@headlessui/react": "^1.7.18",
     "@prisma/client": "^5.10.2",
     "clsx": "^2.1.0",

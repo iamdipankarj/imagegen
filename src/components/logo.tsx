@@ -9,12 +9,12 @@ export function Logo({
     <div className={cn("flex items-center space-x-2", className)} {...props}>
       <Image
         src="/logo.svg"
-        alt="PhotoWorks"
+        alt="MakeMyRoom"
         width={30}
         height={30}
         priority
       />
-      <span className="text-2xl font-bold">PhotoWorks</span>
+      <span className="text-base font-bold">PhotoWorks</span>
     </div>
   )
 }
