@@ -8,6 +8,12 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
   --rgb-black: 35, 28, 51;
+  --model-purple: #9A15FF;
+  --model-yellow: #FCBE0B;
+  --model-red: #FB112E;
+  --model-teal: #1CD087;
+  --model-blue: #6B61F6;
+  --model-dark-blue: #291B81
 }
 
 body, html {
