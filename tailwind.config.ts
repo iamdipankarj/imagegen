@@ -32,7 +32,7 @@ const config: Config = {
         "model-dark-blue": "var(--model-dark-blue)"
       },
       backgroundImage: {
-        "gradient-br": "linear-gradient(135deg,#f79533,#f37055,#ef4e7b,#a166ab,#5073b8,#1098ad,#07b39b,#6fba82)"
+        "gradient-glow": "linear-gradient(135deg,#f79533,#f37055,#ef4e7b,#a166ab,#5073b8,#1098ad,#07b39b,#6fba82)"
       },
       flex: {
         '2': '2 2 0%'

@@ -1,28 +1,48 @@
+"use client";
+
+import { useTypingLine } from "@/hooks/use-typing-line";
 import { useEffect, useState } from "react";
 
-export const useTypingEffect = (
-  text: string,
-  duration: number,
-  isTypeByLetter = false
-) => {
-  const [currentPosition, setCurrentPosition] = useState(0);
-  const items = isTypeByLetter ? text.split("") : text.split(" ");
+const texts = [
+  "This is a simple text typing effect in React",
+  "This effect is created using React Hooks",
+  "We can use this effect to create a typing effect for our portfolio",
+  "We can also use this effect to create a typing effect for our resume",
+  "or for your blog",
+  "or for your landing page",
+  "let's go",
+];
+
+interface TextTypingEffectProps {
+  isTypeByLetter?: boolean;
+  duration?: number;
+};
+
+export function useTypingEffect({
+  isTypeByLetter = true,
+  duration = 50,
+}: TextTypingEffectProps) {
+  const [textIndex, setTextIndex] = useState(0);
+  const textToShow = useTypingLine(
+    texts[textIndex],
+    duration,
+    isTypeByLetter
+  );
 
   useEffect(() => {
-    setCurrentPosition(0);
-  }, [text]);
-
-  useEffect(() => {
-    if (currentPosition >= items.length) return;
-
     const intervalId = setInterval(() => {
-      setCurrentPosition((prevPosition) => prevPosition + 1);
-    }, duration);
+      setTextIndex((prevIndex) =>
+        prevIndex >= texts.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, [currentPosition, items, duration]);
+  }, []);
 
-  return items.slice(0, currentPosition).join(isTypeByLetter ? "" : " ");
+  return {
+    textIndex,
+    textToShow
+  };
 };
