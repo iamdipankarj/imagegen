@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import NSFWFilter from 'nsfw-filter';
 import Image from "next/image";
 import { UploadDropzone } from '@bytescale/upload-widget-react';
@@ -8,8 +8,12 @@ import { UploadWidgetConfig, UploadWidgetOnPreUploadResult } from '@bytescale/up
 import { UrlBuilder } from "@bytescale/sdk";
 import useSWR from "swr";
 import { toast } from "sonner";
-import { Loader2, Sparkles, Trash } from "lucide-react";
+import { Download, Loader2, Sparkles, Trash } from "lucide-react";
 import { rgbDataURL } from "@/lib/blurImage";
+import { SwitchToggle } from "@/components/switch-toggle";
+import { CompareSlider } from "@/components/compare-slider";
+import { appendNewToName, downloadPhoto } from "@/lib/downloadPhoto";
+import { cn } from "@/lib/utils";
 
 interface DreamProps extends React.HTMLAttributes<HTMLDivElement> {
   model: "restore" | "upscale" | "interior" | "text2img" | "caption";
@@ -24,6 +28,8 @@ export function Dream({
   const [restoredImage, setRestoredImage] = useState<string | null>(null);
   const [relativeFilePath, setRelativeFilePath] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [sideBySideEnabled, setSideBySideEnabled] = useState<boolean>(false);
+  const [downloadLoading, setDownloadLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [photoName, setPhotoName] = useState<string | null>(null);
 
@@ -51,9 +57,9 @@ export function Dream({
       if (!isSafe) {
         return { errorMessage: 'Detected a NSFW image which is not allowed.' };
       }
-      // if (data.credits === 0) {
-      //   return { errorMessage: 'No Credits Left. Buy Credits to create more images.' };
-      // }
+      if (data.credits === 0) {
+        return { errorMessage: 'No Credits Left. Buy Credits to create more images.' };
+      }
       return undefined;
     }
   };
@@ -110,17 +116,32 @@ export function Dream({
     })
   }
 
+  const handleDownload = (e: FormEvent) => {
+    e.preventDefault();
+    setDownloadLoading(true);
+    setTimeout(() => {
+      downloadPhoto(
+        restoredImage!,
+        appendNewToName(photoName!)
+      );
+    }, 500);
+    setTimeout(() => {
+      setDownloadLoading(false);
+    }, 1000);
+  }
+
   return (
     <div className={className} {...props}>
       <div className="basis-1/4 shrink-0 w-full">
         <ul className="steps steps-horizontal w-full mb-8">
-          <li className="step step-info after:!text-white">
+          <li className={cn("step", {
+            "step-info after:!text-white": originalPhoto !== null
+          })}>
             <span className="text-sm md:text-base">Choose Image</span>
           </li>
-          <li className="step">
-            <span className="text-sm md:text-base">Select Quality</span>
-          </li>
-          <li className="step">
+          <li className={cn("step", {
+            "step-info after:!text-white": restoredImage !== null
+          })}>
             <span className="text-sm md:text-base">Restore</span>
           </li>
         </ul>
@@ -172,13 +193,33 @@ export function Dream({
           />
         )}
       </div>
-      <div className="mb-4">
-        <p className="text-sm text-center text-neutral-500">
-          {photoName ? `Selected: ${photoName}` : "No Image Selected"}
-        </p>
-      </div>
+      {!restoredImage ? (
+        <div className="mb-4">
+          <p className="text-sm text-center text-neutral-500">
+            {photoName ? `Selected: ${photoName}` : "No Image Selected"}
+          </p>
+        </div>
+      ) : null}
       {restoredImage ? (
-        <img src={restoredImage} />
+        <SwitchToggle enabled={sideBySideEnabled} onChange={(value: boolean) => {
+          setSideBySideEnabled(value);
+        }} />
+      ) : null}
+      {restoredImage ? (
+        <div className="my-4 rounded-xl overflow-hidden relative">
+          {sideBySideEnabled ? (
+            <CompareSlider
+              original={originalPhoto!}
+              restored={restoredImage}
+            />
+          ) : (
+            <img src={restoredImage} />
+          )}
+          <button onClick={handleDownload} disabled={downloadLoading} className="btn btn-sm btn-primary absolute top-2 right-2">
+            {downloadLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+            Download
+          </button>
+        </div>
       ) : null}
       <button
         onClick={handleSubmit}
