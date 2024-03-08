@@ -8,7 +8,7 @@ import { UploadWidgetConfig, UploadWidgetOnPreUploadResult } from '@bytescale/up
 import { UrlBuilder } from "@bytescale/sdk";
 import useSWR from "swr";
 import { toast } from "sonner";
-import { Trash } from "lucide-react";
+import { Loader2, Sparkles, Trash } from "lucide-react";
 import { rgbDataURL } from "@/lib/blurImage";
 
 interface DreamProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -57,6 +57,40 @@ export function Dream({
       return undefined;
     }
   };
+
+  async function handleSubmit() {
+    if (!originalPhoto) {
+      toast.info("Please upload a photo to continue.")
+      return;
+    }
+    try {
+      setLoading(true)
+      const response = await fetch('/api/generate', {
+        method: 'POST',
+        body: JSON.stringify({
+          imageUrl: originalPhoto,
+          model
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+  
+      if (response.status !== 200) {
+        setLoading(false);
+        toast.error("Failed to initiate AI. Please try again.")
+        return;
+      }
+  
+      const { generatedImage } = await response.json();
+      setRestoredImage(generatedImage);
+      setLoading(false);
+      window.dispatchEvent(new CustomEvent("creditsUpdated"));
+    } catch (e) {
+      setLoading(false);
+      toast.error(JSON.stringify(e) || "Failed to initiate AI. Please try again.")
+    }
+  }
 
   const onTrashClick = () => {
     setOriginalPhoto(null);
@@ -138,7 +172,26 @@ export function Dream({
           />
         )}
       </div>
-      <button className="btn btn-primary">Generate</button>
+      <div className="mb-4">
+        <p className="text-sm text-center text-neutral-500">
+          {photoName ? `Selected: ${photoName}` : "No Image Selected"}
+        </p>
+      </div>
+      {restoredImage ? (
+        <img src={restoredImage} />
+      ) : null}
+      <button
+        onClick={handleSubmit}
+        className="btn btn-primary text-lg"
+        disabled={loading}
+      >
+        {loading ? (
+          <Loader2 className="h-5 w-5 animate-spin" />
+        ) : (
+          <Sparkles className="h-5 w-5" />
+        )}
+        Generate
+      </button>
     </div>
   )
 }

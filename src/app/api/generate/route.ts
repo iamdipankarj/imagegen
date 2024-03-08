@@ -1,7 +1,13 @@
 import prisma from "@/lib/db";
+import { getFormattedError } from "@/lib/errorHandler";
 import { NextResponse } from "next/server";
 
 export const dynamic = 'force-dynamic'
+
+const modelList: Record<string, string> = {
+  restore: "9283608cc6b7be6b65a8e44983db012355fde4132009bf99d976b2f0896856a3",
+  interior: "854e8727697a057c525cdb45ab037f64ecca770a1769cc52287c2e56472a247b"
+};
 
 export async function POST(req: Request, ) {
   const userEmail = "john@doe.com"
@@ -15,41 +21,59 @@ export async function POST(req: Request, ) {
   }
 
   // Get user from DB
-  const user = await prisma.user.findUnique({
-    where: {
-      email: userEmail
-    },
-    select: {
-      credits: true
-    }
-  });
+  // const user = await prisma.user.findUnique({
+  //   where: {
+  //     email: userEmail
+  //   },
+  //   select: {
+  //     credits: true
+  //   }
+  // });
 
-  // Check if user has any credits left
-  if (user?.credits === 0) {
-    return NextResponse.json(
-      { message: "no_credits" },
-      { status: 400 }
-    )
-  }
+  // // Check if user has any credits left
+  // if (user?.credits === 0) {
+  //   return NextResponse.json(
+  //     { message: "no_credits" },
+  //     { status: 400 }
+  //   )
+  // }
 
-  // If they have credits, decrease their credits by one and continue
-  await prisma.user.update({
-    where: {
-      email: userEmail
-    },
-    data: {
-      credits: {
-        decrement: 1
-      }
-    }
-  });
+  // // If they have credits, decrease their credits by one and continue
+  // await prisma.user.update({
+  //   where: {
+  //     email: userEmail
+  //   },
+  //   data: {
+  //     credits: {
+  //       decrement: 1
+  //     }
+  //   }
+  // });
 
   // Do the magic here
   try {
     const payload = await req.json();
-    const { imageUrl, renderCount } = payload;
+    const { imageUrl, renderCount, model } = payload;
 
-    const prompt = "my awesome prompt here";
+    let input = {}
+
+    if (model === "restore") {
+      input = {
+        img: imageUrl,
+        version: "v1.4",
+        scale: 2
+      }
+    } else if (model === "interior") {
+      input = {
+        image: imageUrl,
+        prompt: "interior prompt",
+        num_samples: renderCount,
+        image_resolution: "512",
+        scale: 20,
+        a_prompt: "best quality, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning, interior design",
+        n_prompt: "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
+      }
+    }
 
     // POST request to Replicate to start the image restoration generation process
     let startResponse = await fetch("https://api.replicate.com/v1/predictions", {
@@ -59,16 +83,8 @@ export async function POST(req: Request, ) {
         Authorization: `Token ${process.env.REPLICATE_API_KEY}`
       },
       body: JSON.stringify({
-        version: "854e8727697a057c525cdb45ab037f64ecca770a1769cc52287c2e56472a247b",
-        input: {
-          image: imageUrl,
-          prompt,
-          num_samples: renderCount,
-          image_resolution: "512",
-          scale: 20,
-          a_prompt: "best quality, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning, interior design",
-          n_prompt: "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
-        }
+        version: modelList[model],
+        input
       })
     });
 
@@ -79,7 +95,7 @@ export async function POST(req: Request, ) {
     const roomId = jsonStartResponse.id;
 
     // GET request to get the status of the image restoration process & return the result when it's ready
-    let generatedImage: string | null = null;
+    let generatedImage: string | string[] | null = null;
     while (!generatedImage) {
       // Loop in 1s intervals until the alt text is ready
       let finalResponse = await fetch(endpointUrl, {
@@ -92,7 +108,11 @@ export async function POST(req: Request, ) {
       let jsonFinalResponse = await finalResponse.json();
 
       if (jsonFinalResponse.status === "succeeded") {
-        generatedImage = jsonFinalResponse.output[1] as string;
+        if (model === "restore") {
+          generatedImage = jsonFinalResponse.output;
+        } else {
+          generatedImage = jsonFinalResponse.output as Array<string>;
+        }
       } else if (jsonFinalResponse.status === "failed") {
         break;
       } else {
@@ -100,27 +120,27 @@ export async function POST(req: Request, ) {
       }
     }
 
-    if (generatedImage) {
-      await prisma.room.create({
-        data: {
-          replicateId: roomId,
-          user: {
-            connect: {
-              email: userEmail
-            }
-          },
-          inputImage: originalImage,
-          outputImage: generatedImage,
-          prompt: prompt,
-        },
-      });
-    } else {
-      throw new Error("Failed to restore image");
-    }
+    // if (generatedImage) {
+    //   await prisma.room.create({
+    //     data: {
+    //       replicateId: roomId,
+    //       user: {
+    //         connect: {
+    //           email: userEmail
+    //         }
+    //       },
+    //       inputImage: originalImage,
+    //       outputImage: generatedImage,
+    //       prompt: "interior prompt",
+    //     },
+    //   });
+    // } else {
+    //   throw new Error("Failed to restore image");
+    // }
 
     if (generatedImage) {
       return NextResponse.json(
-        { orginalImage: originalImage, generatedImage: generatedImage},
+        { originalImage, generatedImage },
         { status: 200 }
       )
     } else {
@@ -130,18 +150,18 @@ export async function POST(req: Request, ) {
       )
     }
   } catch (error) {
-    await prisma.user.update({
-      where: {
-        email: userEmail
-      },
-      data: {
-        credits: {
-          increment: 1,
-        },
-      },
-    });
+    // await prisma.user.update({
+    //   where: {
+    //     email: userEmail
+    //   },
+    //   data: {
+    //     credits: {
+    //       increment: 1,
+    //     },
+    //   },
+    // });
     return NextResponse.json(
-      { message: JSON.stringify(error) },
+      { message: getFormattedError(error) },
       { status: 500 }
     )
   }
