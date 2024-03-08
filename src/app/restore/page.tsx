@@ -1,8 +1,10 @@
+import { Dream } from "@/components/dream";
+
 export default function RestorePage() {
   return (
-    <main className="flex flex-col flex-1 items-stretch justify-center space-y-2">
+    <main className="app-main">
       <section className="container px-4 mx-auto">
-        Restore
+        <Dream className="flex-1 flex flex-col items-center" model="restore" />
       </section>
     </main>
   )

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Gabarito as FontSans } from "next/font/google";
 import { ClerkProvider } from '@clerk/nextjs'
+import { Toaster } from 'sonner'
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { AppHeader } from "@/components/app-header";
@@ -29,6 +30,11 @@ export default async function RootLayout({
           <AppHeader />
           {children}
           <Footer />
+          <Toaster
+            toastOptions={{ className: 'font-sans !text-sm' }}
+            position="top-center"
+            richColors
+          />
         </body>
       </html>
     </ClerkProvider>

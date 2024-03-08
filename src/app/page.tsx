@@ -5,7 +5,7 @@ import { Armchair, Sparkles } from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="flex flex-col flex-1 items-stretch justify-center space-y-2">
+    <main className="app-main">
       <section className="container px-4 mx-auto">
         <PromptInput />
         <h1 className="text-5xl text-center my-10">What do you want to create today?</h1>

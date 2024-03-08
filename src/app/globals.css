@@ -31,6 +31,20 @@ body, html {
     @apply scale-y-100;
   }
 
+  .app-main {
+    @apply flex flex-col flex-1 items-stretch justify-center space-y-2 py-10;
+  }
+
+  #uploader {
+    .btn {
+      height: auto;
+      @apply !font-sans;
+      & + p.text-secondary {
+        @apply !font-sans;
+      }
+    }
+  }
+
   .hamburger-root {
     cursor: pointer;
     user-select: none;

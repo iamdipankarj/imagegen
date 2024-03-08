@@ -12,7 +12,7 @@ export function AppHeader({
   return (
     <header className={cn("h-14", className)} {...props}>
       <div className="fixed top-0 left-0 w-full h-14 transition-all z-50 duration-300 ease-in-out p-3 shadow bg-base-100/80 backdrop-blur flex items-center">
-        <div className="md:container mx-auto w-full flex flex-row items-center justify-between px-4">
+        <div className="md:container mx-auto w-full flex flex-row items-center justify-between md:px-4">
           <div className="order-1 shrink-0">
             <Link href="/" className="block">
               <Logo />

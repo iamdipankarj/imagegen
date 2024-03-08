@@ -19,10 +19,27 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
-"@bytescale/sdk@^3.32.0":
+"@bytescale/sdk@^3.27.0", "@bytescale/sdk@^3.32.0":
   version "3.32.0"
   resolved "https://registry.yarnpkg.com/@bytescale/sdk/-/sdk-3.32.0.tgz#7db7e8af23ee141825b93e1dcc0ac6b82f6972a3"
   integrity sha512-keIrzeiXEDfJ8Q+LPMEBvX9MsYFWpNjFNUqYk28XSG29heH7yDO76OFSdv+xdP8lH4Y+FGgpDFQctYSoFc3T9g==
+
+"@bytescale/upload-widget-react@^4.18.0":
+  version "4.18.0"
+  resolved "https://registry.yarnpkg.com/@bytescale/upload-widget-react/-/upload-widget-react-4.18.0.tgz#24f279a5daa070c22348d0ddf56b713750f61df7"
+  integrity sha512-7EX8iBUHQxabdNg7bwLIV4LfHHZG+g+EID9rCfWqO48jOYsmxDiFbJpAWVV5QFpA1py7H6vkNiA+dJI2hoPAow==
+  dependencies:
+    "@bytescale/upload-widget" "^4.24.0"
+    lodash.isequal "^4.5.0"
+
+"@bytescale/upload-widget@^4.24.0", "@bytescale/upload-widget@^4.25.0":
+  version "4.25.0"
+  resolved "https://registry.yarnpkg.com/@bytescale/upload-widget/-/upload-widget-4.25.0.tgz#d122472707bc05486d0116dd971023629a486c98"
+  integrity sha512-vu2sUNcdNlIKV//+88hls8HtqT7CIgzpeq5A2qqhBnrtmbEniXjS0UBLDO+jAeRzBAV54UA2OQPyY7Yh50L1oQ==
+  dependencies:
+    "@bytescale/sdk" "^3.27.0"
+    classnames "^2.2.6"
+    preact "^10.6.5"
 
 "@clerk/backend@0.38.3":
   version "0.38.3"
@@ -1122,6 +1139,11 @@ chokidar@^3.5.3:
     readdirp "~3.6.0"
   optionalDependencies:
     fsevents "~2.3.2"
+
+classnames@^2.2.6:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.5.1.tgz#ba774c614be0f016da105c858e7159eae8e7687b"
+  integrity sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==
 
 client-only@0.0.1, client-only@^0.0.1:
   version "0.0.1"
@@ -2527,6 +2549,11 @@ lodash.castarray@^4.4.0:
   resolved "https://registry.yarnpkg.com/lodash.castarray/-/lodash.castarray-4.4.0.tgz#c02513515e309daddd4c24c60cfddcf5976d9115"
   integrity sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==
 
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
+
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
@@ -3061,6 +3088,11 @@ postcss@^8, postcss@^8.4.23:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
+preact@^10.6.5:
+  version "10.19.6"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.19.6.tgz#66007b67aad4d11899f583df1b0116d94a89b8f5"
+  integrity sha512-gympg+T2Z1fG1unB8NH29yHJwnEaCH37Z32diPDku316OTnRPeMbiRV9kTrfZpocXjdfnWuFUl/Mj4BHaf6gnw==
+
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
@@ -3405,6 +3437,11 @@ snakecase-keys@5.4.4:
     map-obj "^4.1.0"
     snake-case "^3.0.4"
     type-fest "^2.5.2"
+
+sonner@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/sonner/-/sonner-1.4.3.tgz#b0c1cc175a0e9184460911ca9c396daec5311ae9"
+  integrity sha512-SArYlHbkjqRuLiR0iGY2ZSr09oOrxw081ZZkQPfXrs8aZQLIBOLOdzTYxGJB5yIZ7qL56UEPmrX1YqbODwG0Lw==
 
 source-map-js@^1.0.2:
   version "1.0.2"

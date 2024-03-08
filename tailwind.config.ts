@@ -11,6 +11,7 @@ const config: Config = {
         secondary: "#FEC309",
         accent: "#23A7F2",
         success: "#299850",
+        info: "#1CD087"
       }
     }]
   },
