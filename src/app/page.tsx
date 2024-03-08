@@ -1,10 +1,12 @@
 import { FeatureCard } from "@/components/feature-card";
-import { Armchair, Sparkle, Sparkles } from "lucide-react";
+import { TextTypingEffectWithTexts } from "@/components/typing-effect";
+import { Armchair, Sparkles } from "lucide-react";
 
 export default function Home() {
   return (
     <main className="flex flex-col flex-1 items-stretch justify-center space-y-2">
       <section className="container px-4 mx-auto">
+        <TextTypingEffectWithTexts />
         <h1 className="text-5xl text-center my-10">What do you want to create today?</h1>
         <div className="grid grid-cols-2 gap-4 auto-rows-fr">
           <FeatureCard
