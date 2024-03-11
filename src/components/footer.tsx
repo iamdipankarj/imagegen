@@ -59,7 +59,7 @@ export function Footer() {
                 FEATURES
               </div>
               <div className="flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm">
-                <Link className="link link-hover" href="/restore">
+                <Link className="link link-hover" href="/text-to-image">
                   Text to Image
                 </Link>
                 <Link className="link link-hover" href="/restore">

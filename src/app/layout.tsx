@@ -7,6 +7,12 @@ import { cn } from "@/lib/utils";
 import { AppHeader } from "@/components/app-header";
 import { Footer } from "@/components/footer";
 
+declare global {
+  interface Window {
+    GLightbox: any
+  }
+}
+
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -26,6 +32,9 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning data-theme="light">
+        <head>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+        </head>
         <body className={cn("min-h-screen font-sans flex flex-col antialiased", fontSans.variable)}>
           <AppHeader />
           {children}

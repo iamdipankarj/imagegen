@@ -6,7 +6,8 @@ export const dynamic = 'force-dynamic'
 
 const modelList: Record<string, string> = {
   restore: "9283608cc6b7be6b65a8e44983db012355fde4132009bf99d976b2f0896856a3",
-  interior: "854e8727697a057c525cdb45ab037f64ecca770a1769cc52287c2e56472a247b"
+  interior: "854e8727697a057c525cdb45ab037f64ecca770a1769cc52287c2e56472a247b",
+  text2Image: "ea1addaab376f4dc227f5368bbd8eff901820fd1cc14ed8cad63b29249e9d463"
 };
 
 export async function POST(req: Request, ) {
@@ -53,7 +54,7 @@ export async function POST(req: Request, ) {
   // Do the magic here
   try {
     const payload = await req.json();
-    const { imageUrl, renderCount, model } = payload;
+    const { imageUrl, renderCount, model, prompt } = payload;
 
     let input = {}
 
@@ -72,6 +73,16 @@ export async function POST(req: Request, ) {
         scale: 20,
         a_prompt: "best quality, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning, interior design",
         n_prompt: "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
+      }
+    } else if (model === "text2image") {
+      input = {
+        width: 1024,
+        height: 1024,
+        negative_prompt: "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
+        prompt,
+        num_outputs: 1,
+        num_inference_steps: 75,
+        num_inference_steps_prior: 25
       }
     }
 
@@ -108,10 +119,10 @@ export async function POST(req: Request, ) {
       let jsonFinalResponse = await finalResponse.json();
 
       if (jsonFinalResponse.status === "succeeded") {
-        if (model === "restore") {
+        if (Array.isArray(jsonFinalResponse.output)) {
           generatedImage = jsonFinalResponse.output;
         } else {
-          generatedImage = jsonFinalResponse.output as Array<string>;
+          generatedImage = [null, jsonFinalResponse.output];
         }
       } else if (jsonFinalResponse.status === "failed") {
         break;

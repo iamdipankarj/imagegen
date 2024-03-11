@@ -16,7 +16,7 @@ import { appendNewToName, downloadPhoto } from "@/lib/downloadPhoto";
 import { cn } from "@/lib/utils";
 
 interface DreamProps extends React.HTMLAttributes<HTMLDivElement> {
-  model: "restore" | "upscale" | "interior" | "text2img" | "caption";
+  model: "restore" | "upscale" | "interior" | "text2image" | "caption";
 }
 
 export function Dream({
@@ -57,9 +57,9 @@ export function Dream({
       if (!isSafe) {
         return { errorMessage: 'Detected a NSFW image which is not allowed.' };
       }
-      if (data.credits === 0) {
-        return { errorMessage: 'No Credits Left. Buy Credits to create more images.' };
-      }
+      // if (data.credits === 0) {
+      //   return { errorMessage: 'No Credits Left. Buy Credits to create more images.' };
+      // }
       return undefined;
     }
   };
