@@ -34,7 +34,7 @@ body, html {
   }
 
   .app-main {
-    @apply flex flex-col flex-1 items-stretch justify-center space-y-2 py-10;
+    @apply flex flex-col flex-1 items-stretch justify-center py-10;
   }
 
   #uploader {

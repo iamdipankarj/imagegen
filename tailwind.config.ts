@@ -35,7 +35,8 @@ const config: Config = {
       backgroundImage: {
         "gradient-glow": "linear-gradient(135deg,#f79533,#f37055,#ef4e7b,#a166ab,#5073b8,#1098ad,#07b39b,#6fba82)",
         "gradient-cta": "linear-gradient(165deg, var(--model-orange) 0, var(--model-sunny) 100%)",
-        "gradient-heading": "linear-gradient(to right, #1EE7B5, #BAFD0A, #98FF74, #FA3244, #F94A6E, #15ABF3)"
+        "gradient-heading": "linear-gradient(to right, #1EE7B5, #BAFD0A, #98FF74, #FA3244, #F94A6E, #15ABF3)",
+        "gradient-section": "linear-gradient(135deg, #0074e4 0%, #5522fa 100%)"
       },
       boxShadow: {
         "elevate": "0 0 0 1px rgba(var(--rgb-black), 0.05), 0 1px 0 0 rgba(var(--rgb-black), 0.05), 0 0.2em 1.6em -0.8em rgba(var(--rgb-black), 0.2), 0 0.4em 2.4em -1em rgba(var(--rgb-black), 0.3), 0 0.4em 0.8em -1.2em rgba(var(--rgb-black), 0.4), 0 0.8em 1.2em -1.6em rgba(var(--rgb-black), 0.5), 0 1.2em 1.6em -2em rgba(var(--rgb-black), 0.6)"
