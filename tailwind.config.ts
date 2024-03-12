@@ -33,14 +33,31 @@ const config: Config = {
         "model-dark-blue": "var(--model-dark-blue)"
       },
       backgroundImage: {
-        "gradient-glow": "linear-gradient(135deg,#f79533,#f37055,#ef4e7b,#a166ab,#5073b8,#1098ad,#07b39b,#6fba82)"
+        "gradient-glow": "linear-gradient(135deg,#f79533,#f37055,#ef4e7b,#a166ab,#5073b8,#1098ad,#07b39b,#6fba82)",
+        "gradient-cta": "linear-gradient(165deg, var(--model-orange) 0, var(--model-sunny) 100%)"
       },
       flex: {
         '2': '2 2 0%'
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
-      }
+      },
+      keyframes: {
+        shimmer: {
+          '0%': {
+            'background-position': '0 50%'
+          },
+          '50%': {
+            'background-position': '100% 50%'
+          },
+          '100%': {
+            'background-position': '0 50%'
+          }
+        },
+      },
+      animation: {
+        shimmer: "shimmer 2s ease-in-out infinite",
+      },
     },
   },
   plugins: [

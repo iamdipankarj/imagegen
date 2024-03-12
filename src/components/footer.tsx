@@ -52,6 +52,12 @@ export function Footer() {
                 <Link className="link link-hover" href="/privacy-policy">
                   Privacy policy
                 </Link>
+                <Link className="link link-hover" href="/refund-policy">
+                  Refund Policy
+                </Link>
+                <Link className="link link-hover" href="/support">
+                  Help &amp; Support
+                </Link>
               </div>
             </div>
             <div className="lg:w-1/3 md:w-1/2 w-full px-4">
@@ -67,12 +73,6 @@ export function Footer() {
                 </Link>
                 <Link className="link link-hover" href="/upscale">
                   Upscale Images
-                </Link>
-                <Link
-                  href="/caption"
-                  className="link link-hover"
-                >
-                  Caption Images
                 </Link>
                 <Link className="link link-hover" href="/interior">
                   Redesign Interiors

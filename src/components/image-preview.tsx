@@ -43,7 +43,7 @@ export function ImagePreview({
     }, className)} {...props}>
       <figure className="group w-full rounded-2xl overflow-hidden relative cursor-pointer">
         {loading ? (
-          <div className="animate-pulse shadow rounded-2xl bg-slate-200 w-full h-full flex items-center justify-center">
+          <div className="animate-pulse shadow rounded-2xl bg-slate-200 w-full h-[200px] flex items-center justify-center">
             <Loader2 className="h-10 w-10 animate-spin text-primary" />
           </div>
         ) : (
