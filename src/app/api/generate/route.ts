@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 const modelList: Record<string, string> = {
   restore: "9283608cc6b7be6b65a8e44983db012355fde4132009bf99d976b2f0896856a3",
   interior: "854e8727697a057c525cdb45ab037f64ecca770a1769cc52287c2e56472a247b",
-  text2Image: "ea1addaab376f4dc227f5368bbd8eff901820fd1cc14ed8cad63b29249e9d463"
+  text2image: "ea1addaab376f4dc227f5368bbd8eff901820fd1cc14ed8cad63b29249e9d463"
 };
 
 export async function POST(req: Request, ) {
@@ -54,7 +54,7 @@ export async function POST(req: Request, ) {
   // Do the magic here
   try {
     const payload = await req.json();
-    const { imageUrl, renderCount, model, prompt } = payload;
+    const { imageUrl, renderCount, model, prompt, resolution } = payload;
 
     let input = {}
 
@@ -76,11 +76,11 @@ export async function POST(req: Request, ) {
       }
     } else if (model === "text2image") {
       input = {
-        width: 1024,
-        height: 1024,
+        width: parseInt(resolution),
+        height: parseInt(resolution),
         negative_prompt: "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
         prompt,
-        num_outputs: 1,
+        num_outputs: parseInt(renderCount),
         num_inference_steps: 75,
         num_inference_steps_prior: 25
       }
@@ -102,12 +102,12 @@ export async function POST(req: Request, ) {
     let jsonStartResponse = await startResponse.json();
 
     let endpointUrl = jsonStartResponse.urls.get;
-    const originalImage = jsonStartResponse.input.image;
+    const originalImage = jsonStartResponse.input?.image || null;
     const roomId = jsonStartResponse.id;
 
     // GET request to get the status of the image restoration process & return the result when it's ready
-    let generatedImage: string | string[] | null = null;
-    while (!generatedImage) {
+    let outputs: string[] | null = null;
+    while (!outputs) {
       // Loop in 1s intervals until the alt text is ready
       let finalResponse = await fetch(endpointUrl, {
         method: "GET",
@@ -120,9 +120,9 @@ export async function POST(req: Request, ) {
 
       if (jsonFinalResponse.status === "succeeded") {
         if (Array.isArray(jsonFinalResponse.output)) {
-          generatedImage = jsonFinalResponse.output;
+          outputs = jsonFinalResponse.output;
         } else {
-          generatedImage = [null, jsonFinalResponse.output];
+          outputs = [jsonFinalResponse.output];
         }
       } else if (jsonFinalResponse.status === "failed") {
         break;
@@ -149,9 +149,9 @@ export async function POST(req: Request, ) {
     //   throw new Error("Failed to restore image");
     // }
 
-    if (generatedImage) {
+    if (outputs) {
       return NextResponse.json(
-        { originalImage, generatedImage },
+        { originalImage, outputs },
         { status: 200 }
       )
     } else {

@@ -1,10 +1,25 @@
 "use client";
-import { useTypingEffect } from "@/hooks/use-typing-effect";
-import { Loader2, Sparkles } from "lucide-react";
 import { FormEvent, useEffect, useState } from "react";
+import Image from "next/image";
+import { toast } from "sonner";
+import { Loader2, Sparkles } from "lucide-react";
+import { useTypingEffect } from "@/hooks/use-typing-effect";
 import { ImagePreview } from "@/components/image-preview";
 import { useScript } from "@/hooks/use-script";
 import { cn } from "@/lib/utils";
+
+const texts = [
+  "A mysterious forest cloaked in twilight.",
+  "A futuristic cityscape bustling with energy.",
+  "A tranquil beach at sunrise, with pastel hues.",
+  "An enchanted castle atop a misty mountain.",
+  "A cosmic voyage through swirling galaxies.",
+  "A vibrant marketplace alive with colors and culture.",
+  "A surreal dreamscape filled with floating islands.",
+  "A majestic waterfall cascading into a serene pool.",
+  "A magical garden blooming with fantastical flora.",
+  "A bustling metropolis seen from above, aglow with city lights."
+];
 
 const imageResolutions: Array<number> = [
   384,
@@ -27,15 +42,10 @@ export function TextToImage({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [prompt, setPrompt] = useState<string>("");
-  const [resolution, setResolution] = useState<string>("512");
+  const [resolution, setResolution] = useState<string>("1024");
   const [renderCount, setRenderCount] = useState<string>("1");
   const [loading, setLoading] = useState<boolean>(false);
-  const [outputs, setOutputs] = useState<Array<string>>([
-    "https://replicate.delivery/pbxt/WZ8IYkfFzNU9Bq5TnYeeH41XAk7qXaMFeDIiREetvprWRkxTC/out-0.png",
-    "https://replicate.delivery/pbxt/WZ8IYkfFzNU9Bq5TnYeeH41XAk7qXaMFeDIiREetvprWRkxTC/out-0.png",
-    "https://replicate.delivery/pbxt/WZ8IYkfFzNU9Bq5TnYeeH41XAk7qXaMFeDIiREetvprWRkxTC/out-0.png",
-    "https://replicate.delivery/pbxt/WZ8IYkfFzNU9Bq5TnYeeH41XAk7qXaMFeDIiREetvprWRkxTC/out-0.png"
-  ]);
+  const [outputs, setOutputs] = useState<Array<string>>([]);
 
   const { ready: lightboxReady } = useScript('https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js')
 
@@ -57,19 +67,55 @@ export function TextToImage({
     setRenderCount(event.target.value as string);
   }
 
-  const handlePromptChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePromptChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPrompt(event.target.value);
   }
 
   async function handleSubmit(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
+    if (!prompt) {
+      toast.info("Please enter a prompt to generate an image.")
+      return;
+    } else if (prompt.length < 10) {
+      toast.info("Please enter a prompt with at least 10 characters.")
+      return;
+    }
     setLoading(true)
-    alert("will generate image from text")
+    try {
+      setLoading(true)
+      const response = await fetch('/api/generate', {
+        method: 'POST',
+        body: JSON.stringify({
+          model: "text2image",
+          renderCount,
+          resolution,
+          prompt
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+  
+      if (response.status !== 200) {
+        setLoading(false);
+        toast.error("Failed to initiate AI. Please try again.")
+        return;
+      }
+  
+      const { outputs } = await response.json();
+      setOutputs(outputs);
+      setLoading(false);
+      window.dispatchEvent(new CustomEvent("creditsUpdated"));
+    } catch (e) {
+      setLoading(false);
+      toast.error(JSON.stringify(e) || "Failed to initiate AI. Please try again.")
+    }
   }
 
   const { textToShow } = useTypingEffect({
     isTypeByLetter: true,
-    duration: 50
+    duration: 50,
+    texts
   });
 
   return (
@@ -78,13 +124,14 @@ export function TextToImage({
         <div>
           <div className="w-full relative bg-base-transparent group">
             <span className="absolute inset-1 bg-gradient-glow opacity-40 group-focus-within:opacity-80 group-focus-within:inset-0 group-hover:opacity-80 group-hover:inset-0 blur-lg duration-300 -z-1" />
-            <div className="relative bg-base-100 p-3 rounded-2xl outline outline-base-content/0 group-focus-within:outline-gray-300/50">
-              <input
-                className="input input-sm md:input-md !text-lg !pl-2 md:!pl-4 w-full border-none focus:outline-none"
+            <div className="relative bg-base-100 p-2 rounded-2xl outline outline-base-content/0 group-focus-within:outline-gray-300/50">
+              <textarea
+                className="input px-2 !text-lg w-full border-none focus:outline-none min-h-[100px]"
                 placeholder={textToShow}
                 minLength={10}
                 maxLength={1000}
                 value={prompt}
+                rows={6}
                 onChange={handlePromptChange}
               />
             </div>
@@ -133,6 +180,32 @@ export function TextToImage({
         </button>
       </div>
       <div className="w-full md:basis-2/3">
+        {!loading && outputs.length === 0 ? (
+          <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
+            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate an <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">image</span> in seconds.</h3>
+            <p className="text-zinc-500 text-center">Write a prompt, choose your resolution, how many renders do you want to create and hit Generate when you are ready.</p>
+            <div className="flex -space-x-4 !mt-8">
+              <figure className="shadow-elevate rounded-md overflow-hidden rotate-[4.2deg]">
+                <Image
+                  src="/samples/sample1.png"
+                  width={300}
+                  height={300}
+                  alt="Generate an image in seconds"
+                  className="w-48 h-48"
+                />
+              </figure>
+              <figure className="shadow-elevate rounded-md overflow-hidden rotate-[-4.2deg] translate-y-[0.5em]">
+                <Image
+                  src="/samples/sample2.png"
+                  width={300}
+                  height={300}
+                  alt="Generate an image in seconds"
+                  className="w-48 h-48"
+                />
+              </figure>
+            </div>
+          </div>
+        ) : null}
         {outputs.length > 0 ? (
           <div className="flex flex-wrap gap-2 md:gap-4 mx-auto md:max-w-4xl justify-center">
             {outputs.map((outputImage, index) => (
