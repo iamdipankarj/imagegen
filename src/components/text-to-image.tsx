@@ -75,24 +75,29 @@ export function TextToImage({
   return (
     <div className={cn("flex flex-col md:flex-row items-start gap-6", className)} {...props}>
       <div className="space-y-4 w-full md:basis-1/3">
-        <div className="w-full relative bg-base-transparent group">
-          <span className="absolute inset-1 bg-gradient-glow opacity-40 group-focus-within:opacity-80 group-focus-within:inset-0 group-hover:opacity-80 group-hover:inset-0 blur-lg duration-300 -z-1" />
-          <div className="relative bg-base-100 p-3 rounded-3xl outline outline-base-content/0 group-focus-within:outline-gray-300/50">
-            <input
-              className="input input-sm md:input-md !pl-2 md:!pl-4 w-full border-none focus:outline-none"
-              placeholder={textToShow}
-              minLength={10}
-              maxLength={1000}
-              value={prompt}
-              onChange={handlePromptChange}
-            />
+        <div>
+          <div className="w-full relative bg-base-transparent group">
+            <span className="absolute inset-1 bg-gradient-glow opacity-40 group-focus-within:opacity-80 group-focus-within:inset-0 group-hover:opacity-80 group-hover:inset-0 blur-lg duration-300 -z-1" />
+            <div className="relative bg-base-100 p-3 rounded-2xl outline outline-base-content/0 group-focus-within:outline-gray-300/50">
+              <input
+                className="input input-sm md:input-md !text-lg !pl-2 md:!pl-4 w-full border-none focus:outline-none"
+                placeholder={textToShow}
+                minLength={10}
+                maxLength={1000}
+                value={prompt}
+                onChange={handlePromptChange}
+              />
+            </div>
           </div>
+          <span className="text-xs leading-4 block mt-5">
+            Enter the text you want to generate an image from. You can enter a maximum of 1000 characters.
+          </span>
         </div>
         <label className="form-control w-full">
           <div className="label">
             <span className="label-text font-semibold">Select Resolution</span>
           </div>
-          <select value={resolution} onChange={handleResolution} className="select select-bordered">
+          <select value={resolution} onChange={handleResolution} className="select select-bordered disabled:bg-zinc-200 disabled:border-none" disabled={loading}>
             {imageResolutions.map((resolution, index) => (
               <option value={resolution} key={index}>{resolution}x{resolution}</option>
             ))}
@@ -107,7 +112,7 @@ export function TextToImage({
           <div className="label">
             <span className="label-text font-semibold">Number of renders</span>
           </div>
-          <select value={renderCount} onChange={handleRenderCount} className="select select-bordered">
+          <select value={renderCount} onChange={handleRenderCount} className="select select-bordered disabled:bg-zinc-200 disabled:border-none" disabled={loading}>
             {[1, 2, 3, 4].map((count, index) => (
               <option value={count} key={index}>{count}</option>
             ))}
@@ -118,9 +123,12 @@ export function TextToImage({
             </span>
           </div>
         </label>
-        <button onClick={handleSubmit} className="btn border-none btn-md bg-gradient-cta bg-[length:200%_200%] animate-shimmer rounded-xl shadow-lg gap-1 w-full">
-          {loading ? <Loader2 className="h-10 w-10 animate-spin text-primary" /> : null}
-          <Sparkles className="hidden md:inline w-[18px] h-[18px]" />
+        <button onClick={handleSubmit} className="btn border-none btn-md enabled:bg-gradient-cta bg-[length:200%_200%] animate-shimmer rounded-xl shadow-lg gap-1 w-full" disabled={loading}>
+          {loading ? (
+            <Loader2 className="h-6 w-6 animate-spin" />
+          ) : (
+            <Sparkles className="hidden md:inline w-[18px] h-[18px]" />
+          )}
           {loading ? "Generating..." : "Generate"}
         </button>
       </div>
