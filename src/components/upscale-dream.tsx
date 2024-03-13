@@ -18,7 +18,6 @@ export function UpscaleDream({
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
   const [restoredImage, setRestoredImage] = useState<string | null>(null);
-  const [relativeFilePath, setRelativeFilePath] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [sideBySideEnabled, setSideBySideEnabled] = useState<boolean>(false);
   const [downloadLoading, setDownloadLoading] = useState<boolean>(false);
@@ -56,24 +55,6 @@ export function UpscaleDream({
       setLoading(false);
       toast.error(JSON.stringify(e) || "Failed to initiate AI. Please try again.")
     }
-  }
-
-  const onTrashClick = () => {
-    setOriginalPhoto(null);
-    setPhotoName(null);
-    fetch('/api/remove-image', {
-      method: 'POST',
-      body: JSON.stringify({
-        filePath: relativeFilePath
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then((response) => response.json()).then((_: any) => {
-      toast.info("Photo removed successfully.")
-    }).catch((error: any) => {
-      toast.error(JSON.stringify(error) || "Failed to initiate AI. Please try again.")
-    })
   }
 
   const handleNewPhoto = (e: FormEvent) => {
