@@ -6,6 +6,7 @@
     "dev": "rm -rf ./next && rm -rf ./node_modules/.cache && next dev",
     "build": "NODE_ENV=production next build",
     "start": "NODE_ENV=production next start",
+    "postinstall": "dotenv -e .env.development -- npx prisma generate",
     "lint": "next lint",
     "tsc": "tsc --noEmit",
     "prisma:pull:dev": "dotenv -e .env.development -- npx prisma db pull",
