@@ -17,11 +17,11 @@ export function RestoreDream({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
+  const [photoName, setPhotoName] = useState<string | null>(null);
   const [restoredImage, setRestoredImage] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [sideBySideEnabled, setSideBySideEnabled] = useState<boolean>(false);
   const [downloadLoading, setDownloadLoading] = useState<boolean>(false);
-  const [photoName, setPhotoName] = useState<string | null>(null);
 
   async function handleSubmit() {
     if (!originalPhoto) {

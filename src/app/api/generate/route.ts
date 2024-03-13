@@ -68,7 +68,7 @@ export async function POST(req: Request, ) {
     } else if (model === "interior") {
       input = {
         image: imageUrl,
-        prompt: "interior prompt",
+        prompt: "a kids bedroom, with lots of toys, medium colorful, 8k, high resolution, very detailed",
         num_samples: renderCount,
         image_resolution: "512",
         scale: 20,
