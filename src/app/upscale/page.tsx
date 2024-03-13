@@ -1,10 +1,12 @@
-import { UpscaleDream } from "@/components/upscale-dream";
+import { ComingSoon } from "@/components/coming-soon";
+// import { UpscaleDream } from "@/components/upscale-dream";
 
 export default function UpscalePage() {
   return (
     <main className="app-main">
       <section className="container px-4 mx-auto">
-        <UpscaleDream />
+        <ComingSoon />
+        {/* <UpscaleDream /> */}
       </section>
     </main>
   )
