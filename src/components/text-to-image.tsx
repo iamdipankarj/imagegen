@@ -2,11 +2,11 @@
 import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { toast } from "sonner";
-import { Loader2, Sparkles } from "lucide-react";
 import { useTypingEffect } from "@/hooks/use-typing-effect";
 import { ImagePreview } from "@/components/image-preview";
 import { useScript } from "@/hooks/use-script";
 import { cn } from "@/lib/utils";
+import { GenerateButton } from "@/components/generate-button";
 
 const texts = [
   "A mysterious forest cloaked in twilight.",
@@ -170,14 +170,7 @@ export function TextToImage({
             </span>
           </div>
         </label>
-        <button onClick={handleSubmit} className="btn border-none btn-md enabled:bg-gradient-cta bg-[length:200%_200%] animate-shimmer rounded-xl shadow-lg gap-1 w-full" disabled={loading}>
-          {loading ? (
-            <Loader2 className="h-6 w-6 animate-spin" />
-          ) : (
-            <Sparkles className="hidden md:inline w-[18px] h-[18px]" />
-          )}
-          {loading ? "Generating..." : "Generate"}
-        </button>
+        <GenerateButton onClick={handleSubmit} loading={loading} />
       </div>
       <div className="w-full md:basis-2/3">
         {!loading && outputs.length === 0 ? (

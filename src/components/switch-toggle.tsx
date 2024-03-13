@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Switch } from '@headlessui/react'
 
 interface SwitchToggleProps {
@@ -13,8 +12,8 @@ export function SwitchToggle({
 
   return (
     <Switch.Group>
-      <div className="flex items-center flex-col">
-        <Switch.Label className="mb-2">Side By Side</Switch.Label>
+      <div className="flex items-center flex-row justify-between">
+        <Switch.Label className="mr-4">Side By Side</Switch.Label>
         <Switch
           checked={enabled}
           onChange={onChange}

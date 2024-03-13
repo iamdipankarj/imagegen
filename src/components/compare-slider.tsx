@@ -19,7 +19,6 @@ export const CompareSlider = ({
       className={cn("flex w-full", className)}
       itemOne={<ReactCompareSliderImage src={original} alt="original photo" />}
       itemTwo={<ReactCompareSliderImage src={restored} alt="restored photo" />}
-      portrait
     />
   );
 };
