@@ -21,7 +21,7 @@ export function Navigation() {
           FAQ
         </Link>
       </nav>
-      <NavAction className="md:ml-6" />
+      {/* <NavAction className="md:ml-6" /> */}
     </>
   )
 }

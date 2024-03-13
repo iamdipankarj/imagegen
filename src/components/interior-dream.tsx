@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 import { CreditInfo } from "@/components/credit-info";
 import { Dropzone } from "@/components/dropzone";
-import { InfiniteLoader } from "@/components/infinite-loader";
 
 export function InteriorDream({
   className,

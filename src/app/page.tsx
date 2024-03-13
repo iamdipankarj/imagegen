@@ -86,23 +86,23 @@ export default function Home() {
                   If our servers encounter any error, your credits will not be consumed. You shall be able to try again. In case you face any issue, feel free to reach out to us at <a className="font-semibold underline-offset-2 underline" href="mailto:photoworkshq@gmail.com">photoworkshq@gmail.com</a>.
                 </p>
               </div>
-              <div className="my-2">
+              {/* <div className="my-2">
                 <h3 className="text-zinc-700 font-semibold text-md md:text-xl">Is payment secure?</h3>
                 <p className="mt-2 text-zinc-500 leading-7">
                   Yes, our transactions are processed through Lemon Squeezy. We do not
                   store any of your credit card information.
                 </p>
-              </div>
+              </div> */}
             </div>
             <div className="flex-1 flex flex-col content-stretch justify-start gap-8">
-              <div className="my-2">
+              {/* <div className="my-2">
                 <h3 className="text-zinc-700 font-semibold text-md md:text-xl">
                   What do you do with my photos?
                 </h3>
                 <p className="mt-2 text-zinc-500 leading-7">
                   We train our AI model with your input photo, and this model stored very securely. The photos will be used ONLY for training the model.
                 </p>
-              </div>
+              </div> */}
               <div className="my-2">
                 <h3 className="text-zinc-700 font-semibold text-md md:text-xl">
                   Can I use my photos anywhere?

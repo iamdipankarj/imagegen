@@ -7,13 +7,10 @@ export function Banner() {
   return (
     <div className="mt-4 flex flex-col lg:flex-row items-center">
       <div className="hero-copy w-full lg:w-2/3">
-        <h1 className="font-[500] text-4xl lg:text-5xl xl:text-5xl text-[#1b1b1b]">
+        <h1 className="font-bold text-3xl lg:text-5xl xl:text-5xl text-zinc-700">
           Your personal AI Image Generator
         </h1>
-        <p
-          className="text-base lg:text-lg xl:text-lg my-5 lg:w-[88%] xl:w-[80%]"
-          style={{ lineHeight: "175%" }}
-        >
+        <p className="text-base lg:text-lg xl:text-lg my-5 lg:w-[88%] xl:w-[80%]">
           Let AI design the perfect icon for your app. No more expensive
           time-consuming traditional app icon design.
         </p>
