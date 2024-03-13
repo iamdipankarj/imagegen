@@ -1,9 +1,13 @@
-import { FeatureCard } from "@/components/feature-card";
 import { Armchair, Sparkles } from "lucide-react";
+import { FeatureCard } from "@/components/feature-card";
+import { Banner } from "@/components/banner";
 
 export default function Home() {
   return (
     <main className="app-main justify-start">
+      <section className="container px-4 mx-auto">
+        <Banner />
+      </section>
       <section className="container px-4 mx-auto">
         <h1 className="text-5xl text-center mb-10">What do you want to create today?</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr">
