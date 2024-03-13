@@ -114,6 +114,11 @@ export function UpscaleDream({
         )}
       </div>
       <div className="w-full md:basis-2/3">
+        {loading ? (
+          <div className="mt-4 text-center">
+            <span className="loading loading-spinner text-primary loading-lg" />
+          </div>
+        ) : null}
         {restoredImage ? (
           <div className="text-center">
             {sideBySideEnabled ? (

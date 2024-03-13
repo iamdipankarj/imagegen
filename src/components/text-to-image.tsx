@@ -175,6 +175,11 @@ export function TextToImage({
         <CreditInfo />
       </div>
       <div className="w-full md:basis-2/3">
+        {loading ? (
+          <div className="mt-4 text-center">
+            <span className="loading loading-spinner text-primary loading-lg" />
+          </div>
+        ) : null}
         {!loading && outputs.length === 0 ? (
           <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
             <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate an <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">image</span> in seconds.</h3>

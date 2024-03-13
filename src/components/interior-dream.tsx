@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 import { CreditInfo } from "@/components/credit-info";
 import { Dropzone } from "@/components/dropzone";
+import { InfiniteLoader } from "@/components/infinite-loader";
 
 export function InteriorDream({
   className,
@@ -38,6 +39,8 @@ export function InteriorDream({
 
   async function handleSubmit(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
+    setLoading(true);
+    return
     if (!originalPhoto) {
       toast.info("Please upload a photo to continue.")
       return;
@@ -106,6 +109,11 @@ export function InteriorDream({
         <CreditInfo />
       </div>
       <div className="w-full md:basis-2/3">
+        {loading ? (
+          <div className="mt-4 text-center">
+            <span className="loading loading-spinner text-primary loading-lg" />
+          </div>
+        ) : null}
         {!loading && outputs.length === 0 ? (
           <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
             <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate your <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">dream interior</span> in seconds.</h3>
