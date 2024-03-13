@@ -23,34 +23,34 @@ export async function POST(req: Request, ) {
   }
 
   // Get user from DB
-  // const user = await prisma.user.findUnique({
-  //   where: {
-  //     email: userEmail
-  //   },
-  //   select: {
-  //     credits: true
-  //   }
-  // });
+  const user = await prisma.user.findUnique({
+    where: {
+      email: userEmail
+    },
+    select: {
+      credits: true
+    }
+  });
 
-  // // Check if user has any credits left
-  // if (user?.credits === 0) {
-  //   return NextResponse.json(
-  //     { message: "no_credits" },
-  //     { status: 400 }
-  //   )
-  // }
+  // Check if user has any credits left
+  if (user?.credits === 0) {
+    return NextResponse.json(
+      { message: "no_credits" },
+      { status: 400 }
+    )
+  }
 
-  // // If they have credits, decrease their credits by one and continue
-  // await prisma.user.update({
-  //   where: {
-  //     email: userEmail
-  //   },
-  //   data: {
-  //     credits: {
-  //       decrement: 1
-  //     }
-  //   }
-  // });
+  // If they have credits, decrease their credits by one and continue
+  await prisma.user.update({
+    where: {
+      email: userEmail
+    },
+    data: {
+      credits: {
+        decrement: 1
+      }
+    }
+  });
 
   // Do the magic here
   try {
@@ -139,23 +139,23 @@ export async function POST(req: Request, ) {
       }
     }
 
-    // if (generatedImage) {
-    //   await prisma.room.create({
-    //     data: {
-    //       replicateId: roomId,
-    //       user: {
-    //         connect: {
-    //           email: userEmail
-    //         }
-    //       },
-    //       inputImage: originalImage,
-    //       outputImage: generatedImage,
-    //       prompt: "interior prompt",
-    //     },
-    //   });
-    // } else {
-    //   throw new Error("Failed to restore image");
-    // }
+    if (outputs && outputs.length > 0) {
+      await prisma.room.create({
+        data: {
+          replicateId: roomId,
+          user: {
+            connect: {
+              email: userEmail
+            }
+          },
+          inputImage: originalImage,
+          outputImage: outputs.join("$"),
+          prompt: "interior prompt",
+        },
+      });
+    } else {
+      throw new Error("Failed to generate image");
+    }
 
     if (outputs) {
       return NextResponse.json(
@@ -164,21 +164,21 @@ export async function POST(req: Request, ) {
       )
     } else {
       return NextResponse.json(
-        { message: "Failed to restore image" },
+        { message: "Failed to generate image" },
         { status: 500 }
       )
     }
   } catch (error) {
-    // await prisma.user.update({
-    //   where: {
-    //     email: userEmail
-    //   },
-    //   data: {
-    //     credits: {
-    //       increment: 1,
-    //     },
-    //   },
-    // });
+    await prisma.user.update({
+      where: {
+        email: userEmail
+      },
+      data: {
+        credits: {
+          increment: 1,
+        },
+      },
+    });
     return NextResponse.json(
       { message: getFormattedError(error) },
       { status: 500 }

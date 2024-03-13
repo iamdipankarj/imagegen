@@ -17,11 +17,14 @@ export function Navigation() {
         <Link href="/text-to-image" className="link font-semibold text-neutral whitespace-nowrap">
           Text To Image
         </Link>
+        <Link href="/pricing" className="link font-semibold text-neutral whitespace-nowrap">
+          Pricing
+        </Link>
         <Link href="#faq" className="link font-semibold text-neutral whitespace-nowrap">
           FAQ
         </Link>
       </nav>
-      {/* <NavAction className="md:ml-6" /> */}
+      <NavAction className="md:ml-6" />
     </>
   )
 }

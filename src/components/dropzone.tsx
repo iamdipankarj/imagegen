@@ -53,9 +53,9 @@ export function Dropzone({
       if (!isSafe) {
         return { errorMessage: 'Detected a NSFW image which is not allowed.' };
       }
-      // if (data.credits === 0) {
-      //   return { errorMessage: 'No Credits Left. Buy Credits to create more images.' };
-      // }
+      if (data.credits === 0) {
+        return { errorMessage: 'No Credits Left. Buy Credits to create more images.' };
+      }
       return undefined;
     }
   };

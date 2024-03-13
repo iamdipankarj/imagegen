@@ -192,6 +192,7 @@ export function TextToImage({
                   height={300}
                   alt="Generate an image in seconds"
                   className="w-48 h-48"
+                  priority
                 />
               </figure>
               <figure className="shadow-elevate rounded-md overflow-hidden rotate-[-4.2deg] translate-y-[0.5em]">

@@ -38,8 +38,6 @@ export function InteriorDream({
 
   async function handleSubmit(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
-    setLoading(true);
-    return
     if (!originalPhoto) {
       toast.info("Please upload a photo to continue.")
       return;
@@ -125,6 +123,7 @@ export function InteriorDream({
                   height={300}
                   alt="Generate an image in seconds"
                   className="w-48 h-48"
+                  priority
                 />
               </figure>
               <figure className="shadow-elevate rounded-md overflow-hidden rotate-[-4.2deg] translate-y-[0.5em]">
