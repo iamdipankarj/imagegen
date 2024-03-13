@@ -114,7 +114,7 @@ export default function Home() {
                 <h3 className="text-zinc-700 font-semibold text-md md:text-xl">Can I get an invoice?</h3>
                 <p className="mt-2 text-zinc-500 leading-7">
                   Yes, an invoice for your purchase can be provided. Shoot us an email
-                  at hello@thumbnails.pro, and we will send the invoice asap.
+                  at photoworkshq@gmail.com, and we will send the invoice asap.
                 </p>
               </div>
             </div>

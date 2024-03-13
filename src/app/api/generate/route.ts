@@ -7,7 +7,8 @@ export const dynamic = 'force-dynamic'
 const modelList: Record<string, string> = {
   restore: "9283608cc6b7be6b65a8e44983db012355fde4132009bf99d976b2f0896856a3",
   interior: "854e8727697a057c525cdb45ab037f64ecca770a1769cc52287c2e56472a247b",
-  text2image: "ea1addaab376f4dc227f5368bbd8eff901820fd1cc14ed8cad63b29249e9d463"
+  text2image: "ea1addaab376f4dc227f5368bbd8eff901820fd1cc14ed8cad63b29249e9d463",
+  upscale: "660d922d33153019e8c263a3bba265de882e7f4f70396546b6c9c8f9d47a021a"
 };
 
 export async function POST(req: Request, ) {
@@ -83,6 +84,13 @@ export async function POST(req: Request, ) {
         num_outputs: parseInt(renderCount),
         num_inference_steps: 75,
         num_inference_steps_prior: 25
+      }
+    } else if (model === "upscale") {
+      input = {
+        jpeg: 40,
+        image: imageUrl,
+        noise: 15,
+        task_type: "Real-World Image Super-Resolution-Large"
       }
     }
 

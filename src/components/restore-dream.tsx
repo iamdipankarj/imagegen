@@ -16,15 +16,10 @@ import { appendNewToName, downloadPhoto } from "@/lib/downloadPhoto";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 
-interface DreamProps extends React.HTMLAttributes<HTMLDivElement> {
-  model: "restore" | "upscale" | "interior" | "text2image" | "caption";
-}
-
-export function Dream({
+export function RestoreDream({
   className,
-  model,
   ...props
-}: DreamProps) {
+}: React.HTMLAttributes<HTMLDivElement>) {
   const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
   const [restoredImage, setRestoredImage] = useState<string | null>(null);
   const [relativeFilePath, setRelativeFilePath] = useState<string | null>(null);
@@ -75,7 +70,7 @@ export function Dream({
         method: 'POST',
         body: JSON.stringify({
           imageUrl: originalPhoto,
-          model
+          model: "restore"
         }),
         headers: {
           'Content-Type': 'application/json'
