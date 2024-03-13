@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowDown } from "lucide-react";
 import Link from "next/link";
 import { Wand } from "lucide-react";
 
@@ -18,23 +19,28 @@ export function Banner() {
         </p>
         <ul className="mb-8">
           <li className="my-2">
-            ✍️ <Link href="/" className="link">Describe your image</Link>, get it in seconds
+            ✍️ <Link href="/text-to-image" className="link">Describe your image</Link>, get it in seconds
           </li>
           <li className="my-2">
-            🏠 <Link href="/" className="link">Redesign your room</Link> instantly
+            🏠 <Link href="/interior" className="link">Redesign your room</Link> instantly
           </li>
           <li className="my-2">
-            🌇 <Link href="/" className="link">Upscale your photos</Link> in an easy way
+            🌇 <Link href="/upscale" className="link">Upscale your photos</Link> in an easy way
           </li>
           <li className="my-2">
-            📷 <Link href="/" className="link">Restore your memories</Link> from any old photograph
+            📷 <Link href="/restore" className="link">Restore your memories</Link> from any old photograph
           </li>
         </ul>
-        <div className="cursor-pointer w-fit" tabIndex={0}>
-          <Link className="btn border-none btn-md bg-gradient-cta bg-[length:200%_200%] animate-shimmer rounded-badge shadow-lg gap-1 w-full text-xl" href="/text-to-image">
+        <div className="cursor-pointer w-fit flex gap-4">
+          <Link className="btn border-none btn-md bg-gradient-cta bg-[length:200%_200%] animate-shimmer rounded-badge shadow-lg gap-1 text-xl inline-flex" href="/text-to-image">
             <div className="blue-overlay" />
             <Wand className="hidden md:inline w-[18px] h-[18px]" />
             Create Now
+          </Link>
+          <Link className="btn btn-outline rounded-badge shadow-lg gap-1 text-xl text-zinc-700 inline-flex" href="/#examples">
+            <div className="blue-overlay" />
+            <ArrowDown className="hidden md:inline w-[18px] h-[18px]" />
+            View Examples
           </Link>
         </div>
       </div>

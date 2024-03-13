@@ -1,6 +1,8 @@
 import { Armchair, Sparkles } from "lucide-react";
 import { FeatureCard } from "@/components/feature-card";
 import { Banner } from "@/components/banner";
+import { Gallery } from "@/components/gallery";
+import { SectionHeader } from "@/components/section-header";
 
 export default function Home() {
   return (
@@ -8,8 +10,8 @@ export default function Home() {
       <section className="container px-4 mx-auto">
         <Banner />
       </section>
-      <section className="container px-4 mx-auto">
-        <h1 className="text-5xl text-center mb-10">What do you want to create today?</h1>
+      <section className="container px-4 mx-auto mt-10">
+        <SectionHeader className="mb-10">Choose a Model</SectionHeader>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr">
           <FeatureCard
             heading="Interior Design"
@@ -49,11 +51,15 @@ export default function Home() {
           </FeatureCard>
         </div>
       </section>
-      <section id="faq" className="mt-20">
+      <section id="examples" className="py-10 my-10">
         <div className="container mx-auto px-4">
-          <h3 className="text-center relative mx-auto before:content-[''] before:absolute before:h-px before:z-[-1] before:top-2/4 before:inset-x-0 before:bg-gradient-section">
-            <span className="px-3 w-max bg-white font-semibold text-xl md:text-2xl">Frequently Asked Questions</span>
-          </h3>
+          <SectionHeader className="mb-10">Interior Designs by PhotoWorks.ai</SectionHeader>
+          <Gallery />
+        </div>
+      </section>
+      <section id="faq" className="mt-10">
+        <div className="container mx-auto px-4">
+          <SectionHeader>Frequently Asked Questions</SectionHeader>
           <div className="flex flex-col md:flex-row content-stretch justify-center box-border w-full gap-8 mt-10">
             <div className="flex-1 flex flex-col content-stretch justify-start gap-8">
               <div className="my-2">
