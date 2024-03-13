@@ -70,14 +70,14 @@ export default function Home() {
                   It highly varies depending in your inputs, number of renders, resolution and other parameters. Typically it takes 10-45 seconds.
                 </p>
               </div>
-              <div className="my-2">
+              {/* <div className="my-2">
                 <h3 className="text-zinc-700 font-semibold text-md md:text-xl">
                   How many photos can I expect?
                 </h3>
                 <p className="mt-2 text-zinc-500 leading-7">
                   Some of the models generate multiple outputs. You can choose the number of renders you want to generate. However, each time you hit Generate, you will get a different output and <strong>1 Credit</strong> will be consumed.
                 </p>
-              </div>
+              </div> */}
               <div className="my-2">
                 <h3 className="text-zinc-700 font-semibold text-md md:text-xl">
                   What happens if there is an error while generating an image?
@@ -119,13 +119,13 @@ export default function Home() {
                   Not at all. You can use the generated images without any attribution. But a shoutout to us would be appreciated.
                 </p>
               </div>
-              <div className="my-2">
+              {/* <div className="my-2">
                 <h3 className="text-zinc-700 font-semibold text-md md:text-xl">Can I get an invoice?</h3>
                 <p className="mt-2 text-zinc-500 leading-7">
                   Yes, an invoice for your purchase can be provided. Shoot us an email
                   at photoworkshq@gmail.com, and we will send the invoice asap.
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
