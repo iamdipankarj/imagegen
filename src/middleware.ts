@@ -7,6 +7,7 @@ export default authMiddleware({
     '/login',
     '/register',
     '/privacy-policy',
+    '/refund-policy',
     '/terms-of-service',
   ],
   // Routes that can always be accessed, and have
