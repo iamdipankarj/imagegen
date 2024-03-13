@@ -33,12 +33,12 @@ export function Footer() {
                 <Link className="link link-hover" href="/#how">
                   How it works
                 </Link>
-                <Link className="link link-hover" href="/pricing">
+                {/* <Link className="link link-hover" href="/pricing">
                   Pricing
                 </Link>
                 <Link className="link link-hover" href="/billing">
                   Billing
-                </Link>
+                </Link> */}
               </div>
             </div>
             <div className="lg:w-1/3 md:w-1/2 w-full px-4">
