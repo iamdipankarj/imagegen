@@ -6,6 +6,7 @@ import Image from "next/image";
 import { UploadDropzone } from '@bytescale/upload-widget-react';
 import { UploadWidgetConfig, UploadWidgetOnPreUploadResult } from '@bytescale/upload-widget';
 import { UrlBuilder } from "@bytescale/sdk";
+import useSWR from "swr";
 import { toast } from "sonner";
 import { Download, FilePlus, Loader2, Trash } from "lucide-react";
 import { rgbDataURL } from "@/lib/blurImage";
@@ -15,7 +16,7 @@ import { appendNewToName, downloadPhoto } from "@/lib/downloadPhoto";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 
-export function RestoreDream({
+export function UpscaleDream({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
@@ -66,7 +67,7 @@ export function RestoreDream({
         method: 'POST',
         body: JSON.stringify({
           imageUrl: originalPhoto,
-          model: "restore"
+          model: "upscale"
         }),
         headers: {
           'Content-Type': 'application/json'
@@ -190,7 +191,7 @@ export function RestoreDream({
           <div className="flex flex-col gap-4">
             <button onClick={handleDownload} disabled={downloadLoading} className="btn btn-md btn-accent mx-auto flex-1 w-full">
               {downloadLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
-              Download Restored Photo
+              Download Upscaled Photo
             </button>
             <button onClick={handleNewPhoto} className="btn btn-md btn-info mx-auto flex-1 w-full">
               {downloadLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <FilePlus className="h-4 w-4" />}
@@ -225,9 +226,9 @@ export function RestoreDream({
           </div>
         ) : (
           <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
-            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Restore your <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">photos</span> in seconds.</h3>
+            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Upscale your <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">photos</span> in seconds.</h3>
             <p className="text-zinc-500 text-center">
-              Upload a photo and hit Generate to restore it. You can also compare the original and restored image side by side a toggle that will be visible after the image is restored.
+              Upload a photo and hit Generate to upscale it. You can also compare the original and upscaled image side by side a toggle that will be visible after the image is upscaled.
             </p>
             <div className="flex -space-x-4 !mt-8">
               <figure className="shadow-elevate rounded-md overflow-hidden rotate-[4.2deg]">

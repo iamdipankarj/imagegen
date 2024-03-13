@@ -1,4 +1,3 @@
-import { Accordion } from "@/components/accordion";
 import { FeatureCard } from "@/components/feature-card";
 import { Armchair, Sparkles } from "lucide-react";
 
