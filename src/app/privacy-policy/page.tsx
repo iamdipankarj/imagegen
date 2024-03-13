@@ -7,7 +7,7 @@ export default async function PrivacyPolicyPage() {
         </div>
       </div>
       <div className="container mx-auto px-4 py-6 prose">
-        <p><strong>Last updated</strong>: February 27, 2024</p>
+        <p><strong>Last updated</strong>: March 13, 2024</p>
         <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
         <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. </p>
         <h2>Interpretation and Definitions</h2>
@@ -256,7 +256,7 @@ export default async function PrivacyPolicyPage() {
         <p>We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
         <h2>Changes to this Privacy Policy</h2>
         <p>We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.</p>
-        <p>We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the &quot;Last updated&quot; date at the top of this Privacy Policy.</p>
+        <p>We will update the &quot;Last updated&quot; date at the top of this Privacy Policy.</p>
         <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
         <h2>Contact Us</h2>
         <p>If you have any questions about this Privacy Policy, You can contact us:</p>
