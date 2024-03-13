@@ -21,6 +21,7 @@ export default authMiddleware({
     '/text-to-image',
     // --------- END @TODO ---------------
     '/privacy-policy',
+    '/refund-policy',
     '/terms-of-service'
   ]
 });
