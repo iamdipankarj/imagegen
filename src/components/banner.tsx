@@ -27,8 +27,7 @@ export function Banner() {
             📷 <Link href="/restore" className="link">Restore your memories</Link> from any old photograph
           </li>
         </ul>
-        <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto] text-4xl">Coming Soon</span>
-        {/* <div className="cursor-pointer w-fit flex gap-4">
+        <div className="cursor-pointer w-fit flex gap-4">
           <Link className="btn border-none btn-md bg-gradient-cta bg-[length:200%_200%] animate-shimmer rounded-badge shadow-lg gap-1 text-xl inline-flex" href="/text-to-image">
             <div className="blue-overlay" />
             <Wand className="hidden md:inline w-[18px] h-[18px]" />
@@ -39,7 +38,7 @@ export function Banner() {
             <ArrowDown className="hidden md:inline w-[18px] h-[18px]" />
             View Examples
           </Link>
-        </div> */}
+        </div>
       </div>
       <div className="hero-examples hidden lg:block w-1/3">
       <div className="flex -space-x-4 !mt-8">

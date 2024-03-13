@@ -14,12 +14,6 @@ export default authMiddleware({
   // no authentication information
   ignoredRoutes: [
     '/',
-    //--------- @TODO Remove the next 4 lines when ready for launch ---------
-    '/interior',
-    '/upscale',
-    '/restore',
-    '/text-to-image',
-    // --------- END @TODO ---------------
     '/privacy-policy',
     '/refund-policy',
     '/terms-of-service'
