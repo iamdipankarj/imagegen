@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String     @id @unique @default(cuid())
+  clerkId          String?
+  name             String?
+  email            String     @unique
+  emailVerified    DateTime?
+  stripeCustomerId String?    @unique
+  credits          Int        @default(5)
+  image            String?
+  purchases        Purchase[]
+  rooms            Room[]
+
+  @@unique([id, email, clerkId])
+}
+
+model Room {
+  id          String   @id @unique @default(cuid())
+  replicateId String
+  inputImage  String
+  outputImage String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  prompt      String
+  email       String
+  user        User     @relation(fields: [email], references: [id], onDelete: Cascade)
+
+  @@unique([replicateId, email])
+}
+
+model Purchase {
+  id              String   @id @unique @default(cuid())
+  stripePaymentId String   @unique
+  amount          Int
+  creditsReceived Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  email           String
+  user            User     @relation(fields: [email], references: [id], onDelete: Cascade)
+}

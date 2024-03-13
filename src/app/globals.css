@@ -7,14 +7,81 @@
   --forground-tertiary: #5522FA;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-}
-
-body {
-  background-color: var(--foreground-rgb);
+  --rgb-black: 35, 28, 51;
+  --model-purple: #9A15FF;
+  --model-yellow: #FCBE0B;
+  --model-orange: #ff7d0f;
+  --model-sunny: #ffcd05;
+  --model-red: #FB112E;
+  --model-teal: #1CD087;
+  --model-blue: #6B61F6;
+  --model-dark-blue: #291B81
 }
 
 body, html {
   @apply !scroll-smooth;
+}
+
+@layer components {
+  .btn {
+    @apply text-white;
+    --tw-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1)!important;
+    @apply shadow-sm;
+  }
+
+  body[data-menu="open"] #mobileMenu {
+    @apply scale-y-100;
+  }
+
+  .app-main {
+    @apply flex flex-col flex-1 items-stretch justify-center py-10;
+  }
+
+  #uploader {
+    .btn {
+      height: auto;
+      @apply !font-sans;
+      & + p.text-secondary {
+        @apply !font-sans;
+      }
+    }
+  }
+
+  .hamburger-root {
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+
+    .ham-svg {
+      transition: transform 400ms;
+    }
+
+    .ham-line {
+      fill: none;
+      transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+      stroke: currentColor;
+      stroke-width: 5.5;
+      stroke-linecap: round;
+    }
+
+    .ham-top {
+      stroke-dasharray: 40 139;
+    }
+    
+    .ham-bottom {
+      stroke-dasharray: 40 180;
+    }
+
+    .ham-active {
+      transform: rotate(45deg);
+      .ham-top {
+        stroke-dashoffset: -98px;
+      }
+      .ham-bottom {
+        stroke-dashoffset: -138px;
+      }
+    }
+  }
 }
 
 @layer utilities {
