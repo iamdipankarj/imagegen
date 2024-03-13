@@ -7,6 +7,7 @@ import { ImagePreview } from "@/components/image-preview";
 import { useScript } from "@/hooks/use-script";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
+import { CreditInfo } from "@/components/credit-info";
 
 const texts = [
   "A mysterious forest cloaked in twilight.",
@@ -171,6 +172,7 @@ export function TextToImage({
           </div>
         </label>
         <GenerateButton onClick={handleSubmit} loading={loading} />
+        <CreditInfo />
       </div>
       <div className="w-full md:basis-2/3">
         {!loading && outputs.length === 0 ? (

@@ -15,6 +15,7 @@ import { CompareSlider } from "@/components/compare-slider";
 import { appendNewToName, downloadPhoto } from "@/lib/downloadPhoto";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
+import { CreditInfo } from "@/components/credit-info";
 
 export function UpscaleDream({
   className,
@@ -199,10 +200,13 @@ export function UpscaleDream({
             </button>
           </div>
         ) : (
-          <GenerateButton
-            onClick={handleSubmit}
-            loading={loading}
-          />
+          <>
+            <GenerateButton
+              onClick={handleSubmit}
+              loading={loading}
+            />
+            <CreditInfo />
+          </>
         )}
       </div>
       <div className="w-full md:basis-2/3">
