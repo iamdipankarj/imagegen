@@ -55,9 +55,9 @@ export function Footer() {
                 <Link className="link link-hover" href="/refund-policy">
                   Refund Policy
                 </Link>
-                <Link className="link link-hover" href="/support">
+                {/* <Link className="link link-hover" href="/support">
                   Help &amp; Support
-                </Link>
+                </Link> */}
               </div>
             </div>
             <div className="lg:w-1/3 md:w-1/2 w-full px-4">
