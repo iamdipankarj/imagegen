@@ -11,8 +11,7 @@ export function Banner() {
           Your personal AI Image Generator
         </h1>
         <p className="text-base lg:text-lg xl:text-lg my-5 lg:w-[88%] xl:w-[80%]">
-          Let AI design the perfect icon for your app. No more expensive
-          time-consuming traditional app icon design.
+          Let AI design the perfect image for you. Just describe your image and get it in seconds.
         </p>
         <ul className="mb-8">
           <li className="my-2">
