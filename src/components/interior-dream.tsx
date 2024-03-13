@@ -86,7 +86,7 @@ export function InteriorDream({
             onPhotoNameChange={(name) => setPhotoName(name)}
           />
           <span className="text-xs leading-4 block mt-5">
-            Upload a photo of your current room. For best results, make sure it shows the entire room and is well lit. Although the model can handle angled pics, it's better to have a straight-on view. Try to upload an image in a 90-degree angle facing a wall or a window.
+            Upload a photo of your current room. For best results, make sure it shows the entire room and is well lit. Although the model can handle angled pics, it&apos;s better to have a straight-on view. Try to upload an image in a 90-degree angle facing a wall or a window.
           </span>
         </div>
         <label className="form-control w-full">

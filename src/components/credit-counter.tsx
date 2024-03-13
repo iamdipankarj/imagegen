@@ -24,7 +24,7 @@ export function CreditCounter({
     return () => {
       window.removeEventListener('creditsUpdated', handleUpdate);
     };
-  }, [])
+  }, [mutate])
 
   const creditsLeft = useMemo(() => {
     if (credits > 0) {

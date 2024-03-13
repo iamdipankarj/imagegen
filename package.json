@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "rm -rf ./next && rm -rf ./node_modules/.cache && next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "NODE_ENV=production next build",
+    "start": "NODE_ENV=production next start",
     "lint": "next lint",
     "tsc": "tsc --noEmit",
     "prisma:pull:dev": "dotenv -e .env.development -- npx prisma db pull",
@@ -34,6 +34,7 @@
     "react": "^18",
     "react-compare-slider": "^3.0.1",
     "react-dom": "^18",
+    "sharp": "^0.33.2",
     "sonner": "^1.4.3",
     "swr": "^2.2.5",
     "tailwind-merge": "^2.2.1",
