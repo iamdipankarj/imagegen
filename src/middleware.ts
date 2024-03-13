@@ -6,6 +6,7 @@ export default authMiddleware({
     '/',
     '/login',
     '/register',
+    '/pricing',
     '/privacy-policy',
     '/refund-policy',
     '/terms-of-service',
@@ -22,6 +23,7 @@ export default authMiddleware({
     // --------- END @TODO ---------------
     '/privacy-policy',
     '/refund-policy',
+    '/pricing',
     '/terms-of-service'
   ]
 });
