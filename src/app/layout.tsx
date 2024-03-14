@@ -6,6 +6,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { AppHeader } from "@/components/app-header";
 import { Footer } from "@/components/footer";
+import ProgressProvider from "@/components/progress-provider";
 
 declare global {
   interface Window {
@@ -36,14 +37,16 @@ export default async function RootLayout({
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
         </head>
         <body className={cn("min-h-screen font-sans flex flex-col antialiased", fontSans.variable)}>
-          <AppHeader />
-          {children}
-          <Footer />
-          <Toaster
-            toastOptions={{ className: 'font-sans !text-sm' }}
-            position="top-center"
-            richColors
-          />
+          <ProgressProvider>
+            <AppHeader />
+            {children}
+            <Footer />
+            <Toaster
+              toastOptions={{ className: 'font-sans !text-sm' }}
+              position="top-center"
+              richColors
+            />
+          </ProgressProvider>
         </body>
       </html>
     </ClerkProvider>
