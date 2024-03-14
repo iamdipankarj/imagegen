@@ -9,13 +9,16 @@ export default authMiddleware({
     '/privacy-policy',
     '/refund-policy',
     '/terms-of-service',
+    "/api/lemonsqueezy/capture",
     '/api/clerk/capture'
   ],
+  publishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
   // Routes that can always be accessed, and have
   // no authentication information
   ignoredRoutes: [
     '/',
     '/privacy-policy',
+    "/api/lemonsqueezy/capture",
     '/refund-policy',
     '/terms-of-service'
   ]

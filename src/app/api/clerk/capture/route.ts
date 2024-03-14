@@ -1,11 +1,9 @@
 import { WebhookEvent } from "@clerk/nextjs/server";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/db";
 import { headers } from 'next/headers'
 import { Webhook } from "svix";
 
 export const dynamic = 'force-dynamic'
-
-const prisma = new PrismaClient()
 
 const webhookSecret = process.env.CLERK_WEBHOOK_SECRET || ``;
 
