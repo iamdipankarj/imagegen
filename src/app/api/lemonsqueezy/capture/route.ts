@@ -3,13 +3,25 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getFormattedError } from "@/lib/errorHandler";
 import { creditMap } from "@/lib/credits";
+// import crypto from 'crypto';
 
 export const dynamic = 'force-dynamic'
 
-const webhookSecret = process.env.LEMONSQUEEZY_WEBHOOK_SECRET || ``;
-
 export async function POST(req: Request, _: NextApiResponse) {
   try {
+    // const text = await req.text();
+    // const hmac = crypto.createHmac("sha256", process.env.LEMONSQUEEZY_WEBHOOK_SECRET!);
+    // const digest = Buffer.from(hmac.update(text).digest("hex"), "utf8");
+    // const signature = Buffer.from(req.headers.get("X-Signature") as string, "utf8");
+
+    // if (!crypto.timingSafeEqual(digest, signature)) {
+    //   console.log("Invalid Request Signature")
+    //   return NextResponse.json(
+    //     { data: "Invalid Request Signature" },
+    //     { status: 400 }
+    //   )
+    // }
+    
     const body = await req.json()
 
     if (body?.meta?.event_name === "order_created") {

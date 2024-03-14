@@ -24,8 +24,6 @@ export async function POST(request: Request) {
   try {
     const payload = await validateRequest(request);
 
-    console.log(JSON.stringify(payload, null, 2))
-
     if (payload.type === 'user.created') {
       const parsedPayload = payload.data as any;
       const emailAddress = parsedPayload?.email_addresses?.[0]?.email_address
