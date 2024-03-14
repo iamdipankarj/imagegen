@@ -12,8 +12,10 @@ model User {
   clerkId          String?
   name             String?
   email            String     @unique
-  emailVerified    DateTime?
   stripeCustomerId String?    @unique
+  lemonCustomerId  String?    @unique
+  rzpCustomerId    String?    @unique
+  paddleCustomerId String?    @unique
   credits          Int        @default(5)
   image            String?
   purchases        Purchase[]
@@ -38,7 +40,10 @@ model Room {
 
 model Purchase {
   id              String   @id @unique @default(cuid())
-  stripePaymentId String   @unique
+  stripePaymentId String?  @unique
+  lemonPaymentId  String?  @unique
+  rzpPaymentId    String?  @unique
+  paddlePaymentId String?  @unique
   amount          Int
   creditsReceived Int
   createdAt       DateTime @default(now())

@@ -6,10 +6,10 @@ export default authMiddleware({
     '/',
     '/login',
     '/register',
-    '/pricing',
     '/privacy-policy',
     '/refund-policy',
     '/terms-of-service',
+    '/api/clerk/capture'
   ],
   // Routes that can always be accessed, and have
   // no authentication information
@@ -17,7 +17,6 @@ export default authMiddleware({
     '/',
     '/privacy-policy',
     '/refund-policy',
-    '/pricing',
     '/terms-of-service'
   ]
 });
