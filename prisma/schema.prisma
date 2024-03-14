@@ -27,8 +27,8 @@ model User {
 model Room {
   id          String   @id @unique @default(cuid())
   replicateId String
-  inputImage  String
-  outputImage String
+  inputImage  String?
+  outputImage String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   prompt      String

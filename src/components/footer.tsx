@@ -17,9 +17,9 @@ export function Footer() {
             <p className="mt-3 text-sm text-base-content-secondary">
               Your all-in-one AI design tool for creating stunning visual content.
             </p>
-            <p className="mt-3 text-sm text-base-content-secondary/80">
+            {/* <p className="mt-3 text-sm text-base-content-secondary/80">
               Made with ❤️ in India
-            </p>
+            </p> */}
           </div>
           <div className="flex-grow flex flex-wrap md:pl-24 -mb-10 md:mt-0 mt-10 text-center">
             <div className="lg:w-1/3 md:w-1/2 w-full px-4">
