@@ -29,8 +29,6 @@ export async function POST(req: Request, _: NextApiResponse) {
       const userEmail = body?.meta?.custom_data?.user_email;
       const credits = creditMap[priceId];
 
-      console.log("Updating credits for user", userEmail, "with", credits, "credits")
-
       await prisma.user.update({
         where: {
           email: userEmail
@@ -38,6 +36,19 @@ export async function POST(req: Request, _: NextApiResponse) {
         data: {
           credits: {
             increment: credits
+          }
+        }
+      });
+
+      await prisma.purchase.create({
+        data: {
+          amount: (Number(body?.data?.attributes?.total_usd) || 0) / 100,
+          creditsReceived: credits,
+          lemonPaymentId: body?.data?.id,
+          user: {
+            connect: {
+              email: userEmail
+            }
           }
         }
       });
