@@ -1,6 +1,7 @@
 import { Armchair, Sparkles } from "lucide-react";
 import { FeatureCard } from "@/components/feature-card";
 import { Banner } from "@/components/banner";
+import Link from "next/link";
 import { Gallery } from "@/components/gallery";
 import { SectionHeader } from "@/components/section-header";
 
@@ -70,14 +71,14 @@ export default function Home() {
                   It highly varies depending in your inputs, number of renders, resolution and other parameters. Typically it takes 10-45 seconds.
                 </p>
               </div>
-              {/* <div className="my-2">
+              <div className="my-2">
                 <h3 className="text-zinc-700 font-semibold text-md md:text-xl">
                   How many photos can I expect?
                 </h3>
                 <p className="mt-2 text-zinc-500 leading-7">
-                  Some of the models generate multiple outputs. You can choose the number of renders you want to generate. However, each time you hit Generate, you will get a different output and <strong>1 Credit</strong> will be consumed.
+                  Some of the models generate multiple outputs. You can choose the number of renders you want to generate. However, each time you hit Generate, you will get a different output and <strong>1 Credit</strong> will be consumed. You can always <Link className="font-semibold underline-offset-2 underline link-primary" href="/pricing">buy more credits</Link>.
                 </p>
-              </div> */}
+              </div>
               <div className="my-2">
                 <h3 className="text-zinc-700 font-semibold text-md md:text-xl">
                   What happens if there is an error while generating an image?
@@ -86,29 +87,29 @@ export default function Home() {
                   If our servers encounter any error, your credits will not be consumed. You shall be able to try again. In case you face any issue, feel free to reach out to us at <a className="font-semibold underline-offset-2 underline" href="mailto:photoworkshq@gmail.com">photoworkshq@gmail.com</a>.
                 </p>
               </div>
-              {/* <div className="my-2">
+              <div className="my-2">
                 <h3 className="text-zinc-700 font-semibold text-md md:text-xl">Is payment secure?</h3>
                 <p className="mt-2 text-zinc-500 leading-7">
                   Yes, our transactions are processed through Lemon Squeezy. We do not
                   store any of your credit card information.
                 </p>
-              </div> */}
+              </div>
             </div>
             <div className="flex-1 flex flex-col content-stretch justify-start gap-8">
-              {/* <div className="my-2">
+              <div className="my-2">
                 <h3 className="text-zinc-700 font-semibold text-md md:text-xl">
-                  What do you do with my photos?
+                  Is there watermark on the generated images?
                 </h3>
                 <p className="mt-2 text-zinc-500 leading-7">
-                  We train our AI model with your input photo, and this model stored very securely. The photos will be used ONLY for training the model.
+                  No, there is no watermark on the generated images. You can use them as you wish. We strongly believe your imagination is uniquely yours and should not be watermarked.
                 </p>
-              </div> */}
+              </div>
               <div className="my-2">
                 <h3 className="text-zinc-700 font-semibold text-md md:text-xl">
                   Can I use my photos anywhere?
                 </h3>
                 <p className="mt-2 text-zinc-500 leading-7">
-                  Absolutely, you can use those photos any way you wish, for personal use and commercial use both.
+                  Absolutely, you can use those photos any way you wish, both for personal use and commercial use.
                 </p>
               </div>
               <div className="my-2">
@@ -119,13 +120,13 @@ export default function Home() {
                   Not at all. You can use the generated images without any attribution. But a shoutout to us would be appreciated.
                 </p>
               </div>
-              {/* <div className="my-2">
+              <div className="my-2">
                 <h3 className="text-zinc-700 font-semibold text-md md:text-xl">Can I get an invoice?</h3>
                 <p className="mt-2 text-zinc-500 leading-7">
-                  Yes, an invoice for your purchase can be provided. Shoot us an email
-                  at photoworkshq@gmail.com, and we will send the invoice asap.
+                  Yes, an invoice for your purchase can be provided. You should be able to generate an invoice by yourself through the purchase confirmation email. If it doesn&apos;t, shoot us an email
+                  at <a className="link underline-offset-2 underline font-semibold" href="mailto:photoworkshq@gmail.com">photoworkshq@gmail.com</a>, and we will send the invoice asap.
                 </p>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
