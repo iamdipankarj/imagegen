@@ -8,6 +8,7 @@ import { useScript } from "@/hooks/use-script";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 import { CreditInfo } from "@/components/credit-info";
+import PromptGuide from "@/components/prompt-guide";
 
 const texts = [
   "A mysterious forest cloaked in twilight.",
@@ -81,6 +82,7 @@ export function TextToImage({
       toast.info("Please enter a prompt with at least 10 characters.")
       return;
     }
+    setOutputs([]);
     setLoading(true)
     try {
       setLoading(true)
@@ -137,9 +139,9 @@ export function TextToImage({
               />
             </div>
           </div>
-          <span className="text-xs leading-4 block mt-5">
-            Enter the text you want to generate an image from. You can enter a maximum of 1000 characters.
-          </span>
+          <div className="text-xs leading-4 block mt-5">
+            Enter the text you want to generate an image from. You can enter a maximum of 1000 characters. <PromptGuide />.
+          </div>
         </div>
         <label className="form-control w-full">
           <div className="label">
@@ -214,6 +216,8 @@ export function TextToImage({
                 key={index}
                 src={outputImage}
                 loading={loading}
+                imageWidth={Number(resolution)}
+                imageHeight={Number(resolution)}
                 photoName={`photoworksai_output_${index + 1}.png`}
                 className="flex-1"
               />

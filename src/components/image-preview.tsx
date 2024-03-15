@@ -9,12 +9,16 @@ interface ImagePreviewProps extends React.HTMLAttributes<HTMLAnchorElement> {
   photoName: string | null
   src: string
   loading?: boolean
+  imageWidth?: number
+  imageHeight?: number
 }
 
 export function ImagePreview({
   src,
   loading = false,
   photoName,
+  imageWidth = 768,
+  imageHeight = 512,
   className,
   ...props
 }: ImagePreviewProps) {
@@ -51,8 +55,9 @@ export function ImagePreview({
             src={src}
             className="block h-full w-full object-cover object-center transition-transform duration-300 transform md:group-hover:scale-110"
             alt="output"
-            width={768}
-            height={512}
+            width={imageWidth}
+            height={imageHeight}
+            priority
           />
         )}
         {!loading ? (

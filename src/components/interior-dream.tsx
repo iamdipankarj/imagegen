@@ -42,7 +42,8 @@ export function InteriorDream({
       toast.info("Please upload a photo to continue.")
       return;
     }
-    setLoading(true)
+    setLoading(true);
+    setOutputs([]);
     try {
       setLoading(true)
       const response = await fetch('/api/generate', {
