@@ -6,6 +6,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { AppHeader } from "@/components/app-header";
 import { Footer } from "@/components/footer";
+import { getMetaData, getStructuredData } from "@/lib/seo";
 // import ProgressProvider from "@/components/progress-provider";
 
 declare global {
@@ -19,10 +20,7 @@ const fontSans = FontSans({
   variable: "--font-sans",
 })
 
-export const metadata: Metadata = {
-  title: "PhotoWorks.ai | AI Powered Photo Generation",
-  description: "AI powered photo generation. Generate high quality images from text, upscale images, restore old photos and more.",
-};
+export const metadata: Metadata = getMetaData();
 
 export default async function RootLayout({
   children,
@@ -35,6 +33,12 @@ export default async function RootLayout({
       <html lang="en" suppressHydrationWarning data-theme="light">
         <head>
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#41c289" />
+          <script
+            key="structured-data"
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(getStructuredData()) }}
+          />
         </head>
         <body className={cn("min-h-screen font-sans flex flex-col antialiased", fontSans.variable)}>
           <AppHeader />

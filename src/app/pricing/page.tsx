@@ -1,7 +1,14 @@
+import { Metadata } from "next";
+import { currentUser } from "@clerk/nextjs";
 import { PayNowButton } from "@/components/pay-now";
 import { PriceColumn } from "@/components/price-column";
 import { PLUS_PRICE_ID, PRO_PRICE_ID, STARTER_PRICE_ID } from "@/lib/credits";
-import { currentUser } from "@clerk/nextjs";
+import { getMetaData } from "@/lib/seo";
+
+export const metadata: Metadata = getMetaData({
+  title: "Pricing | PhotoWorks.ai",
+  description: "Get credits to use PhotoWorks.ai."
+});
 
 export default async function Pricing() {
   const clerkUser = await currentUser();

@@ -1,4 +1,11 @@
+import { Metadata } from "next";
 import { RestoreDream } from "@/components/restore-dream";
+import { getMetaData } from "@/lib/seo";
+
+export const metadata: Metadata = getMetaData({
+  title: "Restore Photos | PhotoWorks.ai",
+  description: "Restore old photos with AI."
+});
 
 export default function RestorePage() {
   return (

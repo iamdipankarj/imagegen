@@ -18,6 +18,11 @@
   --model-dark-blue: #291B81
 }
 
+::selection {
+  color: #fff;
+  background: #27ae60;
+}
+
 body, html {
   @apply !scroll-smooth;
 }

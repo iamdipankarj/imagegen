@@ -1,3 +1,11 @@
+import { getMetaData } from "@/lib/seo";
+import { Metadata } from "next";
+
+export const metadata: Metadata = getMetaData({
+  title: "Terms of Service | PhotoWorks.ai",
+  description: "Terms of Service for PhotoWorks.ai."
+});
+
 export default async function TermsOfServicePage() {
   return (
     <section id="tos">

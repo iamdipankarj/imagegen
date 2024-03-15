@@ -1,3 +1,11 @@
+import { getMetaData } from "@/lib/seo";
+import { Metadata } from "next";
+
+export const metadata: Metadata = getMetaData({
+  title: "Refund Policy | PhotoWorks.ai",
+  description: "Create beautiful interior designs with AI"
+});
+
 export default async function RefundPolicyPage() {
   return (
     <section id="refund">

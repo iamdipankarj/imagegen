@@ -8,7 +8,7 @@ export function Logo({
   return (
     <div className={cn("flex items-center space-x-2", className)} {...props}>
       <Image
-        src="/logo.svg"
+        src="/logo.png"
         alt="PhotoWorks.ai"
         width={30}
         height={30}
