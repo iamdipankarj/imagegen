@@ -33,6 +33,7 @@ export default async function RootLayout({
       <html lang="en" suppressHydrationWarning data-theme="light">
         <head>
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+          <script defer data-domain="photoworks.ai" src="https://plausible.io/js/script.js" />
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#41c289" />
           <script
             key="structured-data"
