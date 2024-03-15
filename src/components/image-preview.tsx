@@ -36,7 +36,7 @@ export function ImagePreview({
   }
 
   return (
-    <a href={src} className={cn("flex aspect-4/3 flex-wrap glightbox", {
+    <a href={src} target="_blank" className={cn("flex aspect-4/3 glightbox", {
       "cursor-not-allowed": loading,
       "cursor-pointer": !loading,
       "pointer-events-none": loading
@@ -56,8 +56,8 @@ export function ImagePreview({
           />
         )}
         {!loading ? (
-          <div className="absolute flex items-center justify-center inset-0 bg-slate-600/50 transition-opacity opacity-0 md:group-hover:opacity-100">
-            <button onClick={handleDownload} className="btn btn-md btn-success text-white">
+          <div className="absolute flex items-center justify-center left-0 bottom-0 right-0 md:inset-0 bg-slate-600/50 transition-opacity md:opacity-0 md:group-hover:opacity-100">
+            <button onClick={handleDownload} className="btn rounded-none md:rounded-md w-full md:w-auto btn-sm md:btn-md btn-success text-white">
               {downloadLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
               Download
             </button>

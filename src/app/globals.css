@@ -37,6 +37,10 @@ body, html {
     @apply flex flex-col flex-1 items-stretch justify-center py-10;
   }
 
+  .grid-container {
+    @apply grid gap-2 md:gap-4 grid-rows-[repeat(2,auto)] grid-cols-[repeat(2,auto)] mx-auto md:max-w-4xl
+  }
+
   #uploader {
     .btn {
       height: auto;

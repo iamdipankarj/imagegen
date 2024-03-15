@@ -208,7 +208,7 @@ export function TextToImage({
           </div>
         ) : null}
         {outputs.length > 0 ? (
-          <div className="flex flex-wrap gap-2 md:gap-4 mx-auto md:max-w-4xl justify-center">
+          <div className="grid-container">
             {outputs.map((outputImage, index) => (
               <ImagePreview
                 key={index}
