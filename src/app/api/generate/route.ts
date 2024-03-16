@@ -179,7 +179,7 @@ export async function POST(req: Request, ) {
           },
           inputImage: originalImage,
           outputImage: outputs.join("||"),
-          prompt: "prompt",
+          prompt: prompt || "Not Applicable",
         },
       });
     }
