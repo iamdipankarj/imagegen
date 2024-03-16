@@ -55,6 +55,10 @@ export function PortraitDream({
 
   async function handleSubmit(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
+    if (!prompt) {
+      toast.info("Please enter a prompt along with an image to continue.")
+      return;
+    }
     if (!image1) {
       toast.info("Please upload atleast one photo to continue.")
       return;
@@ -66,11 +70,12 @@ export function PortraitDream({
       const response = await fetch('/api/generate', {
         method: 'POST',
         body: JSON.stringify({
+          prompt,
           inputImage1: image1 || null,
           inputImage2: image2 || null,
           inputImage3: image3 || null,
           inputImage4: image4 || null,
-          styleName: "Comic book",
+          styleName: "Cinematic",
           model: "photomaker",
           renderCount
         }),

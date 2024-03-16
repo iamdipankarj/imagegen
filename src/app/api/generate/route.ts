@@ -100,7 +100,7 @@ export async function POST(req: Request, ) {
       }
     }  else if (model === "photomaker") {
       input = {
-        prompt,
+        prompt: prompt + " img",
         num_steps: 50,
         style_name: styleName,
         num_outputs: Number(renderCount),
