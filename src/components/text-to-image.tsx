@@ -9,6 +9,7 @@ import { GenerateButton } from "@/components/generate-button";
 import { CreditInfo } from "@/components/credit-info";
 import PromptGuide from "@/components/prompt-guide";
 import { PromptBox } from "@/components/prompt-box";
+import { Select } from "@/components/select";
 
 const texts = [
   "A mysterious forest cloaked in twilight.",
@@ -128,36 +129,20 @@ export function TextToImage({
             Enter the text you want to generate an image from. You can enter a maximum of 1000 characters. <PromptGuide />.
           </div>
         </div>
-        <label className="form-control w-full">
-          <div className="label">
-            <span className="label-text font-semibold">Select Resolution</span>
-          </div>
-          <select value={resolution} onChange={handleResolution} className="select select-bordered disabled:bg-zinc-200 disabled:border-none" disabled={loading}>
-            {imageResolutions.map((resolution, index) => (
-              <option value={resolution} key={index}>{resolution}x{resolution}</option>
-            ))}
-          </select>
-          <div className="label">
-            <span className="label-text-alt">
-              Choose the resolution of the image you want to generate. Note that, higher resolution images will take longer to generate.
-            </span>
-          </div>
-        </label>
-        <label className="form-control w-full">
-          <div className="label">
-            <span className="label-text font-semibold">Number of renders</span>
-          </div>
-          <select value={renderCount} onChange={handleRenderCount} className="select select-bordered disabled:bg-zinc-200 disabled:border-none" disabled={loading}>
-            {[1, 2, 3, 4].map((count, index) => (
-              <option value={count} key={index}>{count}</option>
-            ))}
-          </select>
-          <div className="label">
-            <span className="label-text-alt">
-              Choose the number of renders you want to generate. Note that, more renders will take longer to generate. This option is provided in case you want to generate multiple variations of the same prompt.
-            </span>
-          </div>
-        </label>
+        <Select
+          label="Select Resolution"
+          value={resolution}
+          onValueChange={handleResolution}
+          options={imageResolutions}
+          description="Choose the resolution of the image you want to generate. Note that, higher resolution images will take longer to generate."
+        />
+        <Select
+          label="Number of renders"
+          value={renderCount}
+          onValueChange={handleRenderCount}
+          options={[1, 2, 3, 4]}
+          description="Choose the number of renders you want to generate. Note that, more renders will take longer to generate. This option is provided in case you want to generate multiple variations of the same prompt."
+        />
         <GenerateButton onClick={handleSubmit} loading={loading} />
         <CreditInfo />
       </div>

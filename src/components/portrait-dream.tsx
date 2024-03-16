@@ -11,11 +11,26 @@ import { CreditInfo } from "@/components/credit-info";
 import { Dropzone } from "@/components/dropzone";
 import PromptGuide from "@/components/prompt-guide";
 import { PromptBox } from "@/components/prompt-box";
+import { Select } from "@/components/select";
 
 const texts = [
   "A mysterious forest cloaked in twilight.",
   "A futuristic cityscape bustling with energy."
 ];
+
+const styleList = [
+  "(No style)",
+  "Cinematic",
+  "Disney Charactor",
+  "Digital Art",
+  "Photographic (Default)",
+  "Fantasy art",
+  "Neonpunk",
+  "Enhance",
+  "Comic book",
+  "Lowpoly",
+  "Line art"
+]
 
 export function PortraitDream({
   className,
@@ -26,6 +41,7 @@ export function PortraitDream({
   const [loading, setLoading] = useState<boolean>(false);
   const [outputs, setOutputs] = useState<Array<string>>([]);
 
+  const [styleName, setStyleName] = useState<string>(styleList[1]);
   const [image1, setImage1] = useState<string | null>(null);
   const [image2, setImage2] = useState<string | null>(null);
   const [image3, setImage3] = useState<string | null>(null);
@@ -53,6 +69,10 @@ export function PortraitDream({
     setRenderCount(event.target.value as string);
   }
 
+  const handleStyleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setStyleName(event.target.value as string);
+  }
+
   async function handleSubmit(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (!prompt) {
@@ -75,7 +95,7 @@ export function PortraitDream({
           inputImage2: image2 || null,
           inputImage3: image3 || null,
           inputImage4: image4 || null,
-          styleName: "Cinematic",
+          styleName,
           model: "photomaker",
           renderCount
         }),
@@ -113,6 +133,22 @@ export function PortraitDream({
             Enter the text you want to generate an image from. You can enter a maximum of 1000 characters. <PromptGuide />.
           </div>
         </div>
+        {/* Style Name */}
+        <Select
+          label="Style"
+          value={styleName}
+          onValueChange={handleStyleChange}
+          options={styleList}
+          description="Choose the style you want to apply to the generated image. This option is provided in case you want to generate the same prompt with different styles."
+        />
+        {/* Render Count */}
+        <Select
+          label="Number of renders"
+          value={renderCount}
+          onValueChange={handleRenderCount}
+          options={[1, 2, 3, 4]}
+          description="Choose the number of renders you want to generate. Note that, more renders will take longer to generate. This option is provided in case you want to generate multiple variations of the same prompt."
+        />
         <div>
           <span className="label-text font-semibold">Input Photo 1</span>
           <Dropzone
@@ -161,22 +197,6 @@ export function PortraitDream({
             Additional photo, for example in another angle or pose.
           </span>
         </div>
-        {/* Render Count */}
-        <label className="form-control w-full">
-          <div className="label">
-            <span className="label-text font-semibold">Number of renders</span>
-          </div>
-          <select value={renderCount} onChange={handleRenderCount} className="select select-bordered disabled:bg-zinc-200 disabled:border-none" disabled={loading}>
-            {[1, 2, 3, 4].map((count, index) => (
-              <option value={count} key={index}>{count}</option>
-            ))}
-          </select>
-          <div className="label">
-            <span className="label-text-alt">
-              Choose the number of renders you want to generate. Note that, more renders will take longer to generate. This option is provided in case you want to generate multiple variations of the same prompt.
-            </span>
-          </div>
-        </label>
         <GenerateButton onClick={handleSubmit} loading={loading} />
         <CreditInfo />
       </div>
