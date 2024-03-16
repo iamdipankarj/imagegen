@@ -9,18 +9,28 @@ import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 import { CreditInfo } from "@/components/credit-info";
 import { Dropzone } from "@/components/dropzone";
-import { RoomTypes } from "@/lib/data";
+import PromptGuide from "@/components/prompt-guide";
+import { PromptBox } from "@/components/prompt-box";
 
-export function InteriorDream({
+const texts = [
+  "A mysterious forest cloaked in twilight.",
+  "A futuristic cityscape bustling with energy."
+];
+
+export function PortraitDream({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
+  const [prompt, setPrompt] = useState<string>("");
   const [renderCount, setRenderCount] = useState<string>("1");
-  const [roomStyle, setRoomStyle] = useState<string>("Modern");
-  const [roomType, setRoomType] = useState<string>("Living Room");
   const [loading, setLoading] = useState<boolean>(false);
   const [outputs, setOutputs] = useState<Array<string>>([]);
-  const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
+
+  const [image1, setImage1] = useState<string | null>(null);
+  const [image2, setImage2] = useState<string | null>(null);
+  const [image3, setImage3] = useState<string | null>(null);
+  const [image4, setImage4] = useState<string | null>(null);
+
   const [photoName, setPhotoName] = useState<string | null>(null);
 
   const { ready: lightboxReady } = useScript('https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js')
@@ -35,22 +45,18 @@ export function InteriorDream({
     }
   }, [lightboxReady, outputs])
 
+  const handlePromptChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setPrompt(event.target.value);
+  }
+
   const handleRenderCount = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setRenderCount(event.target.value as string);
   }
 
-  const handleRoomStyle = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setRoomStyle(event.target.value as string);
-  }
-
-  const handleRoomType = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setRoomType(event.target.value as string);
-  }
-
   async function handleSubmit(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
-    if (!originalPhoto) {
-      toast.info("Please upload a photo to continue.")
+    if (!image1) {
+      toast.info("Please upload atleast one photo to continue.")
       return;
     }
     setLoading(true);
@@ -60,8 +66,12 @@ export function InteriorDream({
       const response = await fetch('/api/generate', {
         method: 'POST',
         body: JSON.stringify({
-          imageUrl: originalPhoto,
-          model: "interior",
+          inputImage1: image1 || null,
+          inputImage2: image2 || null,
+          inputImage3: image3 || null,
+          inputImage4: image4 || null,
+          styleName: "Comic book",
+          model: "photomaker",
           renderCount
         }),
         headers: {
@@ -89,32 +99,63 @@ export function InteriorDream({
     <div className={cn("flex flex-col md:flex-row items-start gap-6", className)} {...props}>
       <div className="space-y-4 w-full md:basis-1/3">
         <div>
+          <PromptBox
+            placeholderList={texts}
+            value={prompt}
+            onPromptChange={handlePromptChange}
+          />
+          <div className="text-xs leading-4 block mt-5">
+            Enter the text you want to generate an image from. You can enter a maximum of 1000 characters. <PromptGuide />.
+          </div>
+        </div>
+        <div>
+          <span className="label-text font-semibold">Input Photo 1</span>
           <Dropzone
-            photo={originalPhoto}
+            photo={image1}
             photoName={photoName}
-            onPhotoChange={(photoUrl) => setOriginalPhoto(photoUrl)}
+            onPhotoChange={(photoUrl) => setImage1(photoUrl)}
             onPhotoNameChange={(name) => setPhotoName(name)}
           />
-          <span className="text-xs leading-4 block mt-5">
-            Upload a photo of your current room. For best results, make sure it shows the entire room and is well lit. Although the model can handle angled pics, it&apos;s better to have a straight-on view. Try to upload an image in a 90-degree angle facing a wall or a window.
+          <span className="text-xs leading-4 block mt-2">
+            Original Photo. For example, a photo of your face.
           </span>
         </div>
-        {/* Room Type */}
-        <label className="form-control w-full">
-          <div className="label">
-            <span className="label-text font-semibold">Room Type</span>
-          </div>
-          <select value={roomType} onChange={handleRoomType} className="select select-bordered disabled:bg-zinc-200 disabled:border-none" disabled={loading}>
-            {Object.keys(RoomTypes).map((count, index) => (
-              <option value={count} key={index}>{count}</option>
-            ))}
-          </select>
-          <div className="label">
-            <span className="label-text-alt">
-              Choose the type of room you want to generate. The model will generate the interior based on the room type you select.
-            </span>
-          </div>
-        </label>
+        <div>
+          <span className="label-text font-semibold">Input Photo 2</span>
+          <Dropzone
+            photo={image2}
+            photoName={photoName}
+            onPhotoChange={(photoUrl) => setImage2(photoUrl)}
+            onPhotoNameChange={(name) => setPhotoName(name)}
+          />
+          <span className="text-xs leading-4 block mt-2">
+            Additional photo, for example in another angle or pose.
+          </span>
+        </div>
+        <div>
+          <span className="label-text font-semibold">Input Photo 3</span>
+          <Dropzone
+            photo={image3}
+            photoName={photoName}
+            onPhotoChange={(photoUrl) => setImage3(photoUrl)}
+            onPhotoNameChange={(name) => setPhotoName(name)}
+          />
+          <span className="text-xs leading-4 block mt-2">
+            Additional photo, for example in another angle or pose.
+          </span>
+        </div>
+        <div>
+          <span className="label-text font-semibold">Input Photo 4</span>
+          <Dropzone
+            photo={image4}
+            photoName={photoName}
+            onPhotoChange={(photoUrl) => setImage4(photoUrl)}
+            onPhotoNameChange={(name) => setPhotoName(name)}
+          />
+          <span className="text-xs leading-4 block mt-2">
+            Additional photo, for example in another angle or pose.
+          </span>
+        </div>
         {/* Render Count */}
         <label className="form-control w-full">
           <div className="label">
@@ -142,7 +183,7 @@ export function InteriorDream({
         ) : null}
         {!loading && outputs.length === 0 ? (
           <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
-            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate your <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">dream interior</span> in seconds.</h3>
+            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate your <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">beautiful portraits</span> in seconds.</h3>
             <p className="text-zinc-500 text-center">Upload a photo, select a room type, how many renders do you want to create and hit Generate when you are ready.</p>
             <div className="flex -space-x-4 !mt-8">
               <figure className="shadow-elevate rounded-md overflow-hidden rotate-[4.2deg]">

@@ -7,9 +7,9 @@ export const dynamic = 'force-dynamic'
 
 const modelList: Record<string, string> = {
   restore: "9283608cc6b7be6b65a8e44983db012355fde4132009bf99d976b2f0896856a3",
-  interior: "854e8727697a057c525cdb45ab037f64ecca770a1769cc52287c2e56472a247b",
   text2image: "ea1addaab376f4dc227f5368bbd8eff901820fd1cc14ed8cad63b29249e9d463",
-  upscale: "660d922d33153019e8c263a3bba265de882e7f4f70396546b6c9c8f9d47a021a"
+  upscale: "660d922d33153019e8c263a3bba265de882e7f4f70396546b6c9c8f9d47a021a",
+  photomaker: "ddfc2b08d209f9fa8c1eca692712918bd449f695dabb4a958da31802a9570fe4"
 };
 
 export async function POST(req: Request, ) {
@@ -60,25 +60,26 @@ export async function POST(req: Request, ) {
 
     // Do the magic here
     const payload = await req.json();
-    const { imageUrl, renderCount, model, prompt, resolution } = payload;
+    const {
+      imageUrl,
+      renderCount,
+      model,
+      prompt,
+      resolution,
+      styleName,
+      inputImage1,
+      inputImage2,
+      inputImage3,
+      inputImage4
+    } = payload;
 
-    let input = {}
+    let input: any = {}
 
     if (model === "restore") {
       input = {
         img: imageUrl,
         version: "v1.4",
         scale: 2
-      }
-    } else if (model === "interior") {
-      input = {
-        image: imageUrl,
-        prompt: "a kids bedroom, with lots of toys, medium colorful, 8k, high resolution, very detailed",
-        num_samples: renderCount,
-        image_resolution: "512",
-        scale: 20,
-        a_prompt: "best quality, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning, interior design",
-        n_prompt: "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
       }
     } else if (model === "text2image") {
       input = {
@@ -96,6 +97,29 @@ export async function POST(req: Request, ) {
         image: imageUrl,
         noise: 15,
         task_type: "Real-World Image Super-Resolution-Large"
+      }
+    }  else if (model === "photomaker") {
+      input = {
+        prompt,
+        num_steps: 50,
+        style_name: styleName,
+        num_outputs: Number(renderCount),
+        guidance_scale: 5,
+        negative_prompt: "nsfw, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry",
+        style_strength_ratio: 20,
+        disable_safety_checker: true
+      }
+      if (inputImage1) {
+        input.input_image = inputImage1;
+      }
+      if (inputImage2) [
+        input.input_image2 = inputImage2
+      ]
+      if (inputImage3) {
+        input.input_image3 = inputImage3;
+      }
+      if (inputImage4) {
+        input.input_image4 = inputImage4;
       }
     }
 

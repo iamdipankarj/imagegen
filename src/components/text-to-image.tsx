@@ -2,13 +2,13 @@
 import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { toast } from "sonner";
-import { useTypingEffect } from "@/hooks/use-typing-effect";
 import { ImagePreview } from "@/components/image-preview";
 import { useScript } from "@/hooks/use-script";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 import { CreditInfo } from "@/components/credit-info";
 import PromptGuide from "@/components/prompt-guide";
+import { PromptBox } from "@/components/prompt-box";
 
 const texts = [
   "A mysterious forest cloaked in twilight.",
@@ -115,30 +115,15 @@ export function TextToImage({
     }
   }
 
-  const { textToShow } = useTypingEffect({
-    isTypeByLetter: true,
-    duration: 50,
-    texts
-  });
-
   return (
     <div className={cn("flex flex-col md:flex-row items-start gap-6", className)} {...props}>
       <div className="space-y-4 w-full md:basis-1/3">
         <div>
-          <div className="w-full relative bg-base-transparent group">
-            <span className="absolute inset-1 bg-gradient-glow opacity-40 group-focus-within:opacity-80 group-focus-within:inset-0 group-hover:opacity-80 group-hover:inset-0 blur-lg duration-300 -z-1" />
-            <div className="relative bg-base-100 p-2 rounded-2xl outline outline-base-content/0 group-focus-within:outline-gray-300/50">
-              <textarea
-                className="input px-2 !text-lg w-full border-none focus:outline-none min-h-[100px]"
-                placeholder={textToShow}
-                minLength={10}
-                maxLength={1000}
-                value={prompt}
-                rows={6}
-                onChange={handlePromptChange}
-              />
-            </div>
-          </div>
+          <PromptBox
+            placeholderList={texts}
+            value={prompt}
+            onPromptChange={handlePromptChange}
+          />
           <div className="text-xs leading-4 block mt-5">
             Enter the text you want to generate an image from. You can enter a maximum of 1000 characters. <PromptGuide />.
           </div>

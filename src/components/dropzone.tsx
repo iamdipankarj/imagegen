@@ -13,17 +13,17 @@ import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
 interface DropzoneProps extends React.HTMLAttributes<HTMLDivElement> {
-  originalPhoto: string | null;
+  photo: string | null;
   photoName: string | null;
-  onOriginalPhotoChange: (originalPhoto: string | null) => void;
+  onPhotoChange: (photo: string | null) => void;
   onPhotoNameChange: (photoName: string | null) => void;
 }
 
 export function Dropzone({
-  originalPhoto,
+  photo,
   photoName,
   onPhotoNameChange,
-  onOriginalPhotoChange,
+  onPhotoChange,
   className,
   ...props
 }: DropzoneProps) {
@@ -61,7 +61,7 @@ export function Dropzone({
   };
 
   const onTrashClick = () => {
-    onOriginalPhotoChange(null);
+    onPhotoChange(null);
     onPhotoNameChange(null);
     fetch('/api/remove-image', {
       method: 'POST',
@@ -79,12 +79,12 @@ export function Dropzone({
   }
 
   return (
-    <div id="uploader" className={cn("rounded-md overflow-hidden w-full max-w-5xl flex flex-col items-center justify-center mb-5", className)} {...props}>
-      {originalPhoto ? (
+    <div id="uploader" className={cn("rounded-md overflow-hidden w-full max-w-5xl flex flex-col items-center justify-center mb-2", className)} {...props}>
+      {photo ? (
         <div className="relative inline-flex">
           <Image
             alt="original photo"
-            src={originalPhoto}
+            src={photo}
             className="rounded-2xl h-96 block"
             placeholder="blur"
             blurDataURL={rgbDataURL(237, 181, 6)}
@@ -117,7 +117,7 @@ export function Dropzone({
               });
               onPhotoNameChange(imageName);
               setRelativeFilePath(image.filePath);
-              onOriginalPhotoChange(imageUrl);
+              onPhotoChange(imageUrl);
             }
           }}
           className="w-2"
@@ -125,9 +125,9 @@ export function Dropzone({
           height="250px"
         />
       )}
-      {!originalPhoto ? (
+      {/* {!originalPhoto ? (
         <span className="label-text-alt">Accepted file types: .jpg, .png</span>
-      ) : null}
+      ) : null} */}
     </div>
   )
 }

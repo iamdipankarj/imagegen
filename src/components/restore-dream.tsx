@@ -82,9 +82,9 @@ export function RestoreDream({
     <div className={cn("flex flex-col md:flex-row items-start gap-6", className)} {...props}>
       <div className="space-y-4 w-full md:basis-1/3">
         <Dropzone
-          originalPhoto={originalPhoto}
+          photo={originalPhoto}
           photoName={photoName}
-          onOriginalPhotoChange={(photoUrl) => setOriginalPhoto(photoUrl)}
+          onPhotoChange={(photoUrl) => setOriginalPhoto(photoUrl)}
           onPhotoNameChange={(name) => setPhotoName(name)}
         />
         {restoredImage ? (

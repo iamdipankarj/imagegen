@@ -1,4 +1,4 @@
-import { Armchair, Sparkles } from "lucide-react";
+import { FileImage, Sparkles } from "lucide-react";
 import { FeatureCard } from "@/components/feature-card";
 import { Banner } from "@/components/banner";
 import Link from "next/link";
@@ -14,13 +14,13 @@ export default function Home() {
       <section className="container px-4 mx-auto mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr">
           <FeatureCard
-            heading="Interior Design"
+            heading="Portraits"
             iconClass="bg-model-purple"
-            href="/interior"
+            href="/portrait"
             icon={(
-              <Armchair className="text-white" />
+              <FileImage className="text-white" />
             )}>
-            Redesign your interior instantly. Upload a Photo, select a style and hit Generate.
+            Create beautiful portraits with AI. Just upload a photo and hit Generate.
           </FeatureCard>
           <FeatureCard
             heading="Text to Image"
