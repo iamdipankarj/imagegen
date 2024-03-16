@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = getMetaData({
   title: "Refund Policy | PhotoWorks.ai",
-  description: "Create beautiful interior designs with AI"
+  description: "Refund Policy for PhotoWorks.ai."
 });
 
 export default async function RefundPolicyPage() {

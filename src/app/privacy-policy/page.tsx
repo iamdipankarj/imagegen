@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = getMetaData({
   title: "Privacy Policy | PhotoWorks.ai",
-  description: "Create beautiful interior designs with AI"
+  description: "Privacy policy for PhotoWorks.ai."
 });
 
 export default async function PrivacyPolicyPage() {

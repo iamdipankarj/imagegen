@@ -5,8 +5,8 @@ export function Navigation() {
   return (
     <>
       <nav className="flex-col md:flex-row items-center gap-4 md:gap-8 flex">
-        <Link href="/interior" className="link font-semibold text-neutral whitespace-nowrap">
-          Interior Design
+        <Link href="/portrait" className="link font-semibold text-neutral whitespace-nowrap">
+          Portraits
         </Link>
         <Link href="/restore" className="link font-semibold text-neutral whitespace-nowrap">
           Restore Photos

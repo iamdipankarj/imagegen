@@ -34,7 +34,7 @@ export function getMetaData({
       "msapplication-TileImage": "/mstile-150x150.png",
       "theme-color": "#41c289"
     },
-    keywords: "ai, saas, interior, interior design",
+    keywords: "ai, saas, portrait, text to image, restore photos, upscale photos, interior design, photoworks.ai, photoworks, photoworksai, ai photo generator",
     openGraph: {
       type: "website",
       locale: "en_US",

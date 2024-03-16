@@ -4,7 +4,7 @@ import { getMetaData } from "@/lib/seo";
 
 export const metadata: Metadata = getMetaData({
   title: "Register | PhotoWorks.ai",
-  description: "Create beautiful interior designs with AI"
+  description: "Register for PhotoWorks.ai."
 });
  
 export default function Page() {

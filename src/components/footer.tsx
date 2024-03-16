@@ -74,8 +74,8 @@ export function Footer() {
                 <Link className="link link-hover" href="/upscale">
                   Upscale Images
                 </Link>
-                <Link className="link link-hover" href="/interior">
-                  Redesign Interiors
+                <Link className="link link-hover" href="/portrait">
+                  Generate Portraits
                 </Link>
               </div>
             </div>

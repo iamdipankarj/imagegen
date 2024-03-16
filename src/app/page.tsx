@@ -12,7 +12,6 @@ export default function Home() {
         <Banner />
       </section>
       <section className="container px-4 mx-auto mt-10">
-        <SectionHeader className="mb-10">Choose a Model</SectionHeader>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr">
           <FeatureCard
             heading="Interior Design"
