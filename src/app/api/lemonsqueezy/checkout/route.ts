@@ -1,6 +1,5 @@
 import { NextApiResponse } from "next";
 import { NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs";
 import { getFormattedError } from "@/lib/errorHandler";
 
 export const dynamic = 'force-dynamic'
