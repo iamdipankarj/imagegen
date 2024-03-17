@@ -35,7 +35,7 @@ export function Dropzone({
   const options: UploadWidgetConfig = {
     apiKey: process.env.NEXT_PUBLIC_BYTESCALE_API_KEY!,
     maxFileCount: 1,
-    mimeTypes: ['image/jpeg', 'image/png', 'image/jpg'],
+    mimeTypes: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'],
     editor: { images: { crop: false } },
     styles: { colors: { primary: '#299850' } },
     onPreUpload: async (

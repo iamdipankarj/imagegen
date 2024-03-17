@@ -18,7 +18,7 @@ export function Banner() {
             ✍️ <Link href="/text-to-image" className="link">Describe your image</Link>, get it in seconds
           </li>
           <li className="my-2">
-            🏠 <Link href="/portraits" className="link">Generate High Quality Portraits</Link> instantly
+            🏠 <Link href="/portrait" className="link">Generate High Quality Portraits</Link> instantly
           </li>
           <li className="my-2">
             🌇 <Link href="/upscale" className="link">Upscale your photos</Link> in an easy way

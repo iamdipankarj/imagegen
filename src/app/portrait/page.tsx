@@ -3,8 +3,8 @@ import { getMetaData } from "@/lib/seo";
 import { PortraitDream } from "@/components/portrait-dream";
 
 export const metadata: Metadata = getMetaData({
-  title: "Interior Design | PhotoWorks.ai",
-  description: "Create beautiful interior designs with AI"
+  title: "Portrait Design | PhotoWorks.ai",
+  description: "Create a portrait design with PhotoWorks.ai."
 });
 
 export default function PortraitPage() {
