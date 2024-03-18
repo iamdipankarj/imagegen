@@ -8,7 +8,7 @@ export function Banner() {
     <div className="mt-4 flex flex-col lg:flex-row items-center">
       <div className="hero-copy w-full lg:w-2/3">
         <h1 className="font-bold text-3xl lg:text-5xl xl:text-5xl text-zinc-700">
-          Your personal AI Image Generator
+          Your personal <span className="inline-block px-2 py-2 relative text-white bg-model-teal rounded-[91%_9%_90%_10%_/_29%_82%_18%_71%]">AI Image</span> Generator
         </h1>
         <p className="text-base lg:text-lg xl:text-lg my-5 lg:w-[88%] xl:w-[80%]">
           Let AI design the perfect image for you. Just describe your image and get it in seconds.

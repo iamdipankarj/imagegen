@@ -53,7 +53,7 @@ export default function Home() {
       </section>
       <section id="examples" className="py-10 my-10">
         <div className="container mx-auto px-4">
-          <SectionHeader className="mb-10">Interior Designs by PhotoWorks.ai</SectionHeader>
+          <SectionHeader className="mb-10">Text-to-Image generations by PhotoWorks.ai</SectionHeader>
           <Gallery />
         </div>
       </section>
