@@ -99,7 +99,6 @@ export function RestoreDream({
               Download Restored Photo
             </button>
             <button onClick={handleNewPhoto} className="btn btn-md btn-info mx-auto flex-1 w-full">
-              {downloadLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <FilePlus className="h-4 w-4" />}
               New Photo
             </button>
           </div>
@@ -119,7 +118,7 @@ export function RestoreDream({
             <span className="loading loading-spinner text-primary loading-lg" />
           </div>
         ) : null}
-        {restoredImage ? (
+        {!loading && restoredImage ? (
           <div className="text-center">
             {sideBySideEnabled ? (
               <CompareSlider
@@ -137,7 +136,8 @@ export function RestoreDream({
               />
             )}
           </div>
-        ) : (
+        ) : null}
+        {!loading && !restoredImage ? (
           <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
             <h3 className="text-4xl font-semibold text-zinc-600 text-center">Restore your <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">photos</span> in seconds.</h3>
             <p className="text-zinc-500 text-center">
@@ -165,7 +165,7 @@ export function RestoreDream({
               </figure>
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   )

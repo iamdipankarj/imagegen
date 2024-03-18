@@ -9,7 +9,8 @@ const modelList: Record<string, string> = {
   restore: "9283608cc6b7be6b65a8e44983db012355fde4132009bf99d976b2f0896856a3",
   text2image: "ea1addaab376f4dc227f5368bbd8eff901820fd1cc14ed8cad63b29249e9d463",
   upscale: "660d922d33153019e8c263a3bba265de882e7f4f70396546b6c9c8f9d47a021a",
-  photomaker: "ddfc2b08d209f9fa8c1eca692712918bd449f695dabb4a958da31802a9570fe4"
+  photomaker: "ddfc2b08d209f9fa8c1eca692712918bd449f695dabb4a958da31802a9570fe4",
+  colorize: "0da600fab0c45a66211339f1c16b71345d22f26ef5fea3dca1bb90bb5711e950"
 };
 
 export async function POST(req: Request, ) {
@@ -80,6 +81,12 @@ export async function POST(req: Request, ) {
         img: imageUrl,
         version: "v1.4",
         scale: 2
+      }
+    } else if (model === "colorize") {
+      input = {
+        input_image: imageUrl,
+        model_name: "Stable",
+        render_factor: 35
       }
     } else if (model === "text2image") {
       input = {
