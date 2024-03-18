@@ -15,7 +15,7 @@ export function StyleBanner() {
           Transform <span className="highlighted">any image</span> with just one image.
         </h2>
         <p className="text-[#555F68] dark:text-dark-200 mb-8">
-          Optionally you can add more than one image. Having atleast 4 images will give you the best results.
+          Optionally you can add more than one image. The more you add, better the results.
         </p>
         <div>
           <Link href="/portrait" className="btn btn-success btn-lg">Try it now</Link>
