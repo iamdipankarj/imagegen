@@ -14,8 +14,8 @@ import { PromptBox } from "@/components/prompt-box";
 import { Select } from "@/components/select";
 
 const texts = [
-  "A mysterious forest cloaked in twilight.",
-  "A futuristic cityscape bustling with energy."
+  "A photo of a girl walking down the streets of NYC, surrounded by buildings.",
+  "A photo of a man sitting on a bench in a park, reading a book."
 ];
 
 const styleList = [
