@@ -11,6 +11,7 @@
   --model-purple: #9A15FF;
   --model-yellow: #FCBE0B;
   --model-orange: #ff7d0f;
+  --model-green: #299850;
   --model-sunny: #ffcd05;
   --model-red: #FB112E;
   --model-teal: #1CD087;
@@ -32,6 +33,12 @@ body, html {
     @apply text-white;
     --tw-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1)!important;
     @apply shadow-sm;
+  }
+
+  .highlighted {
+    @apply inline-block px-2 py-2 relative rounded-[91%_9%_90%_10%_/_29%_82%_18%_71%];
+    color: var(--model-green);
+    border: 2px solid;
   }
 
   body[data-menu="open"] #mobileMenu {

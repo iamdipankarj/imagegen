@@ -4,14 +4,15 @@ import { Banner } from "@/components/banner";
 import Link from "next/link";
 import { Gallery } from "@/components/gallery";
 import { SectionHeader } from "@/components/section-header";
+import { StyleBanner } from "@/components/style-banner";
 
 export default function Home() {
   return (
-    <main className="app-main justify-start">
+    <main className="app-main justify-start space-y-10">
       <section className="container px-4 mx-auto">
         <Banner />
       </section>
-      <section className="container px-4 mx-auto mt-10">
+      {/* <section className="container px-4 mx-auto mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr">
           <FeatureCard
             heading="Portraits"
@@ -50,14 +51,19 @@ export default function Home() {
             Restore your old photos. Upload a photo and hit Generate.
           </FeatureCard>
         </div>
+      </section> */}
+      <section id="styles" className="py-10">
+        <div className="container mx-auto px-4">
+          <StyleBanner />
+        </div>
       </section>
-      <section id="examples" className="py-10 my-10">
+      <section id="examples" className="py-10">
         <div className="container mx-auto px-4">
           <SectionHeader className="mb-10">Text-to-Image generations by PhotoWorks.ai</SectionHeader>
           <Gallery />
         </div>
       </section>
-      <section id="faq" className="mt-10">
+      <section id="faq" className="mt">
         <div className="container mx-auto px-4">
           <SectionHeader>Frequently Asked Questions</SectionHeader>
           <div className="flex flex-col md:flex-row content-stretch justify-center box-border w-full gap-8 mt-10">
