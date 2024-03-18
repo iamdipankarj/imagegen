@@ -130,8 +130,8 @@ export function PortraitDream({
             value={prompt}
             onPromptChange={handlePromptChange}
           />
-          <div className="text-xs leading-4 block mt-5">
-            Enter the text you want to generate an image from. You can enter a maximum of 1000 characters. <PromptGuide><p>Provide a clear and concise desription of the pose or action that you want the generated image photo to have.</p>
+          <div className="text-sm leading-5 block mt-5">
+            Enter the pose or action you apply to the generated image. <PromptGuide><p>Provide a clear and concise desription of the pose or action that you want the generated image photo to have.</p>
             <p><span className="font-semibold">Example:&nbsp;</span>A photo of a girl walking down the streets of NYC, surrounded by buildings.</p></PromptGuide>.
           </div>
         </div>
@@ -159,7 +159,7 @@ export function PortraitDream({
             onPhotoChange={(photoUrl) => setImage1(photoUrl)}
             onPhotoNameChange={(name) => setPhotoName(name)}
           />
-          <span className="text-xs leading-4 block mt-2">
+          <span className="text-sm leading-5 block mt-2">
             Original Photo. For example, a photo of your face.
           </span>
         </div>
@@ -171,7 +171,7 @@ export function PortraitDream({
             onPhotoChange={(photoUrl) => setImage2(photoUrl)}
             onPhotoNameChange={(name) => setPhotoName(name)}
           />
-          <span className="text-xs leading-4 block mt-2">
+          <span className="text-sm leading-5 block mt-2">
             Additional photo, for example in another angle or pose.
           </span>
         </div>
@@ -183,7 +183,7 @@ export function PortraitDream({
             onPhotoChange={(photoUrl) => setImage3(photoUrl)}
             onPhotoNameChange={(name) => setPhotoName(name)}
           />
-          <span className="text-xs leading-4 block mt-2">
+          <span className="text-sm leading-5 block mt-2">
             Additional photo, for example in another angle or pose.
           </span>
         </div>
@@ -195,7 +195,7 @@ export function PortraitDream({
             onPhotoChange={(photoUrl) => setImage4(photoUrl)}
             onPhotoNameChange={(name) => setPhotoName(name)}
           />
-          <span className="text-xs leading-4 block mt-2">
+          <span className="text-sm leading-5 block mt-2">
             Additional photo, for example in another angle or pose.
           </span>
         </div>

@@ -8,6 +8,19 @@ const imageList = [
   "/text-to-image/1.png",
   "/text-to-image/2.png",
   "/text-to-image/3.png",
+  "/text-to-image/4.png",
+  "/text-to-image/5.png",
+  "/text-to-image/6.png",
+  "/text-to-image/7.png",
+  "/text-to-image/8.png",
+  "/text-to-image/9.png",
+  "/text-to-image/10.png",
+  "/text-to-image/11.png",
+  "/text-to-image/12.png",
+  "/text-to-image/13.png",
+  "/text-to-image/14.png",
+  "/text-to-image/15.png",
+  "/text-to-image/16.png"
 ]
 
 export function Gallery() {

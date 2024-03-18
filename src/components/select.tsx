@@ -31,7 +31,7 @@ export function Select({
         ))}
       </select>
       <div className="label">
-        <span className="label-text-alt">
+        <span className="label-text-alt text-sm">
           {description}
         </span>
       </div>
