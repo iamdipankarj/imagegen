@@ -7,7 +7,7 @@ import { useScript } from "@/hooks/use-script";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 import { CreditInfo } from "@/components/credit-info";
-import PromptGuide from "@/components/prompt-guide";
+import { PromptGuide } from "@/components/prompt-guide";
 import { PromptBox } from "@/components/prompt-box";
 import { Select } from "@/components/select";
 
@@ -126,7 +126,8 @@ export function TextToImage({
             onPromptChange={handlePromptChange}
           />
           <div className="text-xs leading-4 block mt-5">
-            Enter the text you want to generate an image from. You can enter a maximum of 1000 characters. <PromptGuide />.
+            Enter the text you want to generate an image from. You can enter a maximum of 1000 characters. <PromptGuide>
+            <p>Provide a concise and clear description of the image you want generated. Include details such as objects, settings, actions, and any specific attributes you desire. Be as specific as possible in your description to guide the AI in generating the desired image accurately. Include relevant dimensions, colors, textures, and any other important visual elements.</p><p><span className="font-semibold">Example:&nbsp;</span>An Image depicting a serene lakeside cabin nestled in a dense forest during autumn. The cabin should be a cozy wooden structure with a stone chimney, surrounded by vibrant fall foliage in shades of red, orange, and yellow.</p></PromptGuide>.
           </div>
         </div>
         <Select
@@ -154,7 +155,7 @@ export function TextToImage({
         ) : null}
         {!loading && outputs.length === 0 ? (
           <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
-            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate an <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">image</span> in seconds.</h3>
+            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate an <span className="highlighted">image</span> in seconds.</h3>
             <p className="text-zinc-500 text-center">Write a prompt, choose your resolution, how many renders do you want to create and hit Generate when you are ready.</p>
             <div className="flex -space-x-4 !mt-8">
               <figure className="shadow-elevate rounded-md overflow-hidden rotate-[4.2deg]">

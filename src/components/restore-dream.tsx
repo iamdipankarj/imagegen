@@ -99,6 +99,7 @@ export function RestoreDream({
               Download Restored Photo
             </button>
             <button onClick={handleNewPhoto} className="btn btn-md btn-info mx-auto flex-1 w-full">
+              <FilePlus className="h-4 w-4" />
               New Photo
             </button>
           </div>
@@ -139,30 +140,18 @@ export function RestoreDream({
         ) : null}
         {!loading && !restoredImage ? (
           <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
-            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Restore your <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">photos</span> in seconds.</h3>
+            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Restore your <span className="highlighted">photos</span> in seconds.</h3>
             <p className="text-zinc-500 text-center">
               Upload a photo and hit Generate to restore it. You can also compare the original and restored image side by side a toggle that will be visible after the image is restored.
             </p>
             <div className="flex -space-x-4 !mt-8">
-              <figure className="shadow-elevate rounded-md overflow-hidden rotate-[4.2deg]">
-                <Image
-                  src="/samples/sample1.png"
-                  width={300}
-                  height={300}
-                  alt="Generate an image in seconds"
-                  className="w-48 h-48"
-                  priority
-                />
-              </figure>
-              <figure className="shadow-elevate rounded-md overflow-hidden rotate-[-4.2deg] translate-y-[0.5em]">
-                <Image
-                  src="/samples/sample2.png"
-                  width={300}
-                  height={300}
-                  alt="Generate an image in seconds"
-                  className="w-48 h-48"
-                />
-              </figure>
+              <Image
+                src="/restore.png"
+                width={1054}
+                height={760}
+                alt="Restore an image in seconds"
+                className="max-w-[500px]"
+              />
             </div>
           </div>
         ) : null}

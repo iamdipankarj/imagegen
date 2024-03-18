@@ -3,9 +3,11 @@
 import Image from 'next/image'
 import { Dialog, Transition } from '@headlessui/react'
 import { X } from 'lucide-react';
-import { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 
-export default function PromptGuide() {
+export function PromptGuide({
+  children
+}: React.PropsWithChildren<{}>) {
   let [isOpen, setIsOpen] = useState<boolean>(false)
 
   function closeModal() {
@@ -27,7 +29,6 @@ export default function PromptGuide() {
           See Prompt Tips
         </button>
       </div>
-
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-50" onClose={closeModal}>
           <Transition.Child
@@ -61,8 +62,7 @@ export default function PromptGuide() {
                     <X className="w-4 h-4" />
                   </button>
                   <div className="mt-2 space-y-2">
-                    <p>Provide a concise and clear description of the image you want generated. Include details such as objects, settings, actions, and any specific attributes you desire. Be as specific as possible in your description to guide the AI in generating the desired image accurately. Include relevant dimensions, colors, textures, and any other important visual elements.</p>
-                    <p><span className="font-semibold">Example:&nbsp;</span>An Image depicting a serene lakeside cabin nestled in a dense forest during autumn. The cabin should be a cozy wooden structure with a stone chimney, surrounded by vibrant fall foliage in shades of red, orange, and yellow.</p>
+                    {children}
                   </div>
 
                   <div className="mt-4 text-center">

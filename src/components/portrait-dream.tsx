@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 import { CreditInfo } from "@/components/credit-info";
 import { Dropzone } from "@/components/dropzone";
-import PromptGuide from "@/components/prompt-guide";
+import { PromptGuide } from "@/components/prompt-guide";
 import { PromptBox } from "@/components/prompt-box";
 import { Select } from "@/components/select";
 
@@ -131,7 +131,8 @@ export function PortraitDream({
             onPromptChange={handlePromptChange}
           />
           <div className="text-xs leading-4 block mt-5">
-            Enter the text you want to generate an image from. You can enter a maximum of 1000 characters. <PromptGuide />.
+            Enter the text you want to generate an image from. You can enter a maximum of 1000 characters. <PromptGuide><p>Provide a clear and concise desription of the pose or action that you want the generated image photo to have.</p>
+            <p><span className="font-semibold">Example:&nbsp;</span>A photo of a girl walking down the streets of NYC, surrounded by buildings.</p></PromptGuide>.
           </div>
         </div>
         {/* Style Name */}
@@ -209,28 +210,16 @@ export function PortraitDream({
         ) : null}
         {!loading && outputs.length === 0 ? (
           <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
-            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate your <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">beautiful portraits</span> in seconds.</h3>
-            <p className="text-zinc-500 text-center">Upload a photo, select a room type, how many renders do you want to create and hit Generate when you are ready.</p>
+            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate your <span className="highlighted">beautiful portraits</span> in seconds.</h3>
+            <p className="text-zinc-500 text-center">Upload a photo, write a prompt of an action or pose, select a style, choose how many renders do you want to create and hit Generate when you are ready.</p>
             <div className="flex -space-x-4 !mt-8">
-              <figure className="shadow-elevate rounded-md overflow-hidden rotate-[4.2deg]">
-                <Image
-                  src="/samples/sample1.png"
-                  width={300}
-                  height={300}
-                  alt="Generate an image in seconds"
-                  className="w-48 h-48"
-                  priority
-                />
-              </figure>
-              <figure className="shadow-elevate rounded-md overflow-hidden rotate-[-4.2deg] translate-y-[0.5em]">
-                <Image
-                  src="/samples/sample2.png"
-                  width={300}
-                  height={300}
-                  alt="Generate an image in seconds"
-                  className="w-48 h-48"
-                />
-              </figure>
+              <Image
+                src="/portrait/style2.png"
+                width={1054}
+                height={760}
+                alt="Restore an image in seconds"
+                className="max-w-[500px]"
+              />
             </div>
           </div>
         ) : null}
