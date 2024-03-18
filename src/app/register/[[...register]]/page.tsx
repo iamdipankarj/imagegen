@@ -8,5 +8,11 @@ export const metadata: Metadata = getMetaData({
 });
  
 export default function Page() {
-  return <SignUp />;
+  return (
+    <main className="app-main">
+      <div className="container mx-auto px-4 flex items-center justify-center">
+        <SignUp />
+      </div>
+    </main>
+  )
 }
