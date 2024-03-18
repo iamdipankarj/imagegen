@@ -9,15 +9,15 @@ datasource db {
 
 model User {
   id               String     @id @unique @default(cuid())
-  clerkId          String?
   name             String?
   email            String     @unique
   stripeCustomerId String?    @unique
-  lemonCustomerId  String?    @unique
-  rzpCustomerId    String?    @unique
-  paddleCustomerId String?    @unique
   credits          Int        @default(5)
   image            String?
+  clerkId          String?
+  lemonCustomerId  String?    @unique
+  paddleCustomerId String?    @unique
+  rzpCustomerId    String?    @unique
   purchases        Purchase[]
   rooms            Room[]
 
@@ -41,13 +41,13 @@ model Room {
 model Purchase {
   id              String   @id @unique @default(cuid())
   stripePaymentId String?  @unique
-  lemonPaymentId  String?  @unique
-  rzpPaymentId    String?  @unique
-  paddlePaymentId String?  @unique
   amount          Int
   creditsReceived Int
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   email           String
+  lemonPaymentId  String?  @unique
+  paddlePaymentId String?  @unique
+  rzpPaymentId    String?  @unique
   user            User     @relation(fields: [email], references: [id], onDelete: Cascade)
 }

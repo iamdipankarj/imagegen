@@ -50,7 +50,7 @@ export async function POST(request: Request) {
             email: emailAddress,
             name: fullName || null,
             clerkId: clerkUserId,
-            credits: 5 // Default Credits
+            credits: 3 // Default Credits
           }
         })
         return Response.json({

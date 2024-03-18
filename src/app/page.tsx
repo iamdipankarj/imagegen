@@ -59,7 +59,8 @@ export default function Home() {
       </section>
       <section id="examples" className="py-10">
         <div className="container mx-auto px-4">
-          <SectionHeader className="mb-10">Text-to-Image generations by PhotoWorks.ai</SectionHeader>
+          <SectionHeader className="mb-10">
+            Generate <Link href="/text-to-image" className="highlighted">Text-to-Image</Link> using PhotoWorks.ai</SectionHeader>
           <Gallery />
         </div>
       </section>
