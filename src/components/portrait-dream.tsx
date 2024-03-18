@@ -79,7 +79,7 @@ export function PortraitDream({
       toast.info("Please enter a prompt along with an image to continue.")
       return;
     }
-    if (!image1) {
+    if (!image1 && !image2 && !image3 && !image4) {
       toast.info("Please upload atleast one photo to continue.")
       return;
     }
@@ -92,9 +92,9 @@ export function PortraitDream({
         method: 'POST',
         body: JSON.stringify({
           prompt,
-          inputImage1: image1 || null,
-          inputImage2: image2 || null,
-          inputImage3: image3 || null,
+          inputImage1: image1 || image2 || image3 || image4 || null,
+          inputImage2: image2 || image3 || image4 || null,
+          inputImage3: image3 || image4 || null,
           inputImage4: image4 || null,
           styleName,
           model: "photomaker",

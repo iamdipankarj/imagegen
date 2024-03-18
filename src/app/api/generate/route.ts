@@ -39,8 +39,10 @@ export async function POST(req: Request, ) {
       }
     });
 
-    // Check if user has any credits left
-    if (user?.credits === 0) {
+    const creditCount = user?.credits || 0
+
+    // Check if user has any credits left: Negative is added for edge case handling
+    if (creditCount === 0 || creditCount < 1) {
       return NextResponse.json(
         { message: "no_credits" },
         { status: 400 }

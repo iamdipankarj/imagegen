@@ -102,7 +102,9 @@ export function TextToImage({
   
       if (response.status !== 200) {
         setLoading(false);
-        toast.error("Failed to initiate AI. Please try again.")
+        const body = await response.json();
+        const errorMessage = body.message === "no_credits" ? "No Credits Left. Buy More to generate new images." : "Failed to initiate AI. Please try again."
+        toast.error(errorMessage)
         return;
       }
   
