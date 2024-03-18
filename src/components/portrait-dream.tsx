@@ -83,6 +83,7 @@ export function PortraitDream({
       toast.info("Please upload atleast one photo to continue.")
       return;
     }
+    window.scrollTo(0, 0);
     setLoading(true);
     setOutputs([]);
     try {

@@ -81,7 +81,7 @@ export function Dropzone({
   return (
     <div id="uploader" className={cn("rounded-md overflow-hidden w-full max-w-5xl flex flex-col items-center justify-center mb-2", className)} {...props}>
       {photo ? (
-        <div className="relative inline-flex">
+        <div className="relative inline-flex my-2">
           <Image
             alt="original photo"
             src={photo}
