@@ -6,24 +6,20 @@ export default authMiddleware({
     '/',
     '/login',
     '/register',
-    '/pricing',
     '/privacy-policy',
     '/refund-policy',
     '/terms-of-service',
+    "/api/lemonsqueezy/capture",
+    '/api/clerk/capture'
   ],
+  publishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
   // Routes that can always be accessed, and have
   // no authentication information
   ignoredRoutes: [
     '/',
-    //--------- @TODO Remove the next 4 lines when ready for launch ---------
-    '/interior',
-    '/upscale',
-    '/restore',
-    '/text-to-image',
-    // --------- END @TODO ---------------
     '/privacy-policy',
+    "/api/lemonsqueezy/capture",
     '/refund-policy',
-    '/pricing',
     '/terms-of-service'
   ]
 });

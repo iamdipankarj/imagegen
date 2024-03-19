@@ -1,3 +1,11 @@
+import { getMetaData } from "@/lib/seo";
+import { Metadata } from "next";
+
+export const metadata: Metadata = getMetaData({
+  title: "Privacy Policy | PhotoWorks.ai",
+  description: "Privacy policy for PhotoWorks.ai."
+});
+
 export default async function PrivacyPolicyPage() {
   return (
     <section id="privacy">

@@ -1,13 +1,17 @@
-// import { RestoreDream } from "@/components/restore-dream";
+import { Metadata } from "next";
+import { RestoreDream } from "@/components/restore-dream";
+import { getMetaData } from "@/lib/seo";
 
-import { ComingSoon } from "@/components/coming-soon";
+export const metadata: Metadata = getMetaData({
+  title: "Restore Photos | PhotoWorks.ai",
+  description: "Restore old photos with AI."
+});
 
 export default function RestorePage() {
   return (
     <main className="app-main">
       <section className="container px-4 mx-auto">
-        <ComingSoon />
-        {/* <RestoreDream /> */}
+        <RestoreDream />
       </section>
     </main>
   )

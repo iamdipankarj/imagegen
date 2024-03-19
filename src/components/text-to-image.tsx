@@ -2,12 +2,14 @@
 import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { toast } from "sonner";
-import { useTypingEffect } from "@/hooks/use-typing-effect";
 import { ImagePreview } from "@/components/image-preview";
 import { useScript } from "@/hooks/use-script";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 import { CreditInfo } from "@/components/credit-info";
+import { PromptGuide } from "@/components/prompt-guide";
+import { PromptBox } from "@/components/prompt-box";
+import { Select } from "@/components/select";
 
 const texts = [
   "A mysterious forest cloaked in twilight.",
@@ -81,6 +83,7 @@ export function TextToImage({
       toast.info("Please enter a prompt with at least 10 characters.")
       return;
     }
+    setOutputs([]);
     setLoading(true)
     try {
       setLoading(true)
@@ -99,7 +102,9 @@ export function TextToImage({
   
       if (response.status !== 200) {
         setLoading(false);
-        toast.error("Failed to initiate AI. Please try again.")
+        const body = await response.json();
+        const errorMessage = body.message === "no_credits" ? "No Credits Left. Buy More to generate new images." : "Failed to initiate AI. Please try again."
+        toast.error(errorMessage)
         return;
       }
   
@@ -113,64 +118,34 @@ export function TextToImage({
     }
   }
 
-  const { textToShow } = useTypingEffect({
-    isTypeByLetter: true,
-    duration: 50,
-    texts
-  });
-
   return (
     <div className={cn("flex flex-col md:flex-row items-start gap-6", className)} {...props}>
       <div className="space-y-4 w-full md:basis-1/3">
         <div>
-          <div className="w-full relative bg-base-transparent group">
-            <span className="absolute inset-1 bg-gradient-glow opacity-40 group-focus-within:opacity-80 group-focus-within:inset-0 group-hover:opacity-80 group-hover:inset-0 blur-lg duration-300 -z-1" />
-            <div className="relative bg-base-100 p-2 rounded-2xl outline outline-base-content/0 group-focus-within:outline-gray-300/50">
-              <textarea
-                className="input px-2 !text-lg w-full border-none focus:outline-none min-h-[100px]"
-                placeholder={textToShow}
-                minLength={10}
-                maxLength={1000}
-                value={prompt}
-                rows={6}
-                onChange={handlePromptChange}
-              />
-            </div>
+          <PromptBox
+            placeholderList={texts}
+            value={prompt}
+            onPromptChange={handlePromptChange}
+          />
+          <div className="text-xs leading-4 block mt-5">
+            Enter the text you want to generate an image from. You can enter a maximum of 1000 characters. <PromptGuide>
+            <p>Provide a concise and clear description of the image you want generated. Include details such as objects, settings, actions, and any specific attributes you desire. Be as specific as possible in your description to guide the AI in generating the desired image accurately. Include relevant dimensions, colors, textures, and any other important visual elements.</p><p><span className="font-semibold">Example:&nbsp;</span>An Image depicting a serene lakeside cabin nestled in a dense forest during autumn. The cabin should be a cozy wooden structure with a stone chimney, surrounded by vibrant fall foliage in shades of red, orange, and yellow.</p></PromptGuide>.
           </div>
-          <span className="text-xs leading-4 block mt-5">
-            Enter the text you want to generate an image from. You can enter a maximum of 1000 characters.
-          </span>
         </div>
-        <label className="form-control w-full">
-          <div className="label">
-            <span className="label-text font-semibold">Select Resolution</span>
-          </div>
-          <select value={resolution} onChange={handleResolution} className="select select-bordered disabled:bg-zinc-200 disabled:border-none" disabled={loading}>
-            {imageResolutions.map((resolution, index) => (
-              <option value={resolution} key={index}>{resolution}x{resolution}</option>
-            ))}
-          </select>
-          <div className="label">
-            <span className="label-text-alt">
-              Choose the resolution of the image you want to generate. Note that, higher resolution images will take longer to generate.
-            </span>
-          </div>
-        </label>
-        <label className="form-control w-full">
-          <div className="label">
-            <span className="label-text font-semibold">Number of renders</span>
-          </div>
-          <select value={renderCount} onChange={handleRenderCount} className="select select-bordered disabled:bg-zinc-200 disabled:border-none" disabled={loading}>
-            {[1, 2, 3, 4].map((count, index) => (
-              <option value={count} key={index}>{count}</option>
-            ))}
-          </select>
-          <div className="label">
-            <span className="label-text-alt">
-              Choose the number of renders you want to generate. Note that, more renders will take longer to generate. This option is provided in case you want to generate multiple variations of the same prompt.
-            </span>
-          </div>
-        </label>
+        <Select
+          label="Select Resolution"
+          value={resolution}
+          onValueChange={handleResolution}
+          options={imageResolutions}
+          description="Choose the resolution of the image you want to generate. Note that, higher resolution images will take longer to generate."
+        />
+        <Select
+          label="Number of renders"
+          value={renderCount}
+          onValueChange={handleRenderCount}
+          options={[1, 2, 3, 4]}
+          description="Choose the number of renders you want to generate. Note that, more renders will take longer to generate. This option is provided in case you want to generate multiple variations of the same prompt."
+        />
         <GenerateButton onClick={handleSubmit} loading={loading} />
         <CreditInfo />
       </div>
@@ -182,7 +157,7 @@ export function TextToImage({
         ) : null}
         {!loading && outputs.length === 0 ? (
           <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
-            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate an <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">image</span> in seconds.</h3>
+            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate an <span className="highlighted">image</span> in seconds.</h3>
             <p className="text-zinc-500 text-center">Write a prompt, choose your resolution, how many renders do you want to create and hit Generate when you are ready.</p>
             <div className="flex -space-x-4 !mt-8">
               <figure className="shadow-elevate rounded-md overflow-hidden rotate-[4.2deg]">
@@ -192,6 +167,7 @@ export function TextToImage({
                   height={300}
                   alt="Generate an image in seconds"
                   className="w-48 h-48"
+                  priority
                 />
               </figure>
               <figure className="shadow-elevate rounded-md overflow-hidden rotate-[-4.2deg] translate-y-[0.5em]">
@@ -207,12 +183,14 @@ export function TextToImage({
           </div>
         ) : null}
         {outputs.length > 0 ? (
-          <div className="flex flex-wrap gap-2 md:gap-4 mx-auto md:max-w-4xl justify-center">
+          <div className="grid-container">
             {outputs.map((outputImage, index) => (
               <ImagePreview
                 key={index}
                 src={outputImage}
                 loading={loading}
+                imageWidth={Number(resolution)}
+                imageHeight={Number(resolution)}
                 photoName={`photoworksai_output_${index + 1}.png`}
                 className="flex-1"
               />

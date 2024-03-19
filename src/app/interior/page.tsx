@@ -1,6 +1,12 @@
+import { Metadata } from "next";
+import { getMetaData } from "@/lib/seo";
 // import { InteriorDream } from "@/components/interior-dream";
-
 import { ComingSoon } from "@/components/coming-soon";
+
+export const metadata: Metadata = getMetaData({
+  title: "Interior Design | PhotoWorks.ai",
+  description: "Create beautiful interior designs with AI"
+});
 
 export default function InteriorPage() {
   return (

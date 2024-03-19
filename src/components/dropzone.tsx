@@ -13,17 +13,17 @@ import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
 interface DropzoneProps extends React.HTMLAttributes<HTMLDivElement> {
-  originalPhoto: string | null;
+  photo: string | null;
   photoName: string | null;
-  onOriginalPhotoChange: (originalPhoto: string | null) => void;
+  onPhotoChange: (photo: string | null) => void;
   onPhotoNameChange: (photoName: string | null) => void;
 }
 
 export function Dropzone({
-  originalPhoto,
+  photo,
   photoName,
   onPhotoNameChange,
-  onOriginalPhotoChange,
+  onPhotoChange,
   className,
   ...props
 }: DropzoneProps) {
@@ -35,7 +35,7 @@ export function Dropzone({
   const options: UploadWidgetConfig = {
     apiKey: process.env.NEXT_PUBLIC_BYTESCALE_API_KEY!,
     maxFileCount: 1,
-    mimeTypes: ['image/jpeg', 'image/png', 'image/jpg'],
+    mimeTypes: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'],
     editor: { images: { crop: false } },
     styles: { colors: { primary: '#299850' } },
     onPreUpload: async (
@@ -53,15 +53,15 @@ export function Dropzone({
       if (!isSafe) {
         return { errorMessage: 'Detected a NSFW image which is not allowed.' };
       }
-      // if (data.credits === 0) {
-      //   return { errorMessage: 'No Credits Left. Buy Credits to create more images.' };
-      // }
+      if (data.credits === 0) {
+        return { errorMessage: 'No Credits Left. Buy Credits to create more images.' };
+      }
       return undefined;
     }
   };
 
   const onTrashClick = () => {
-    onOriginalPhotoChange(null);
+    onPhotoChange(null);
     onPhotoNameChange(null);
     fetch('/api/remove-image', {
       method: 'POST',
@@ -79,12 +79,12 @@ export function Dropzone({
   }
 
   return (
-    <div id="uploader" className={cn("rounded-md overflow-hidden w-full max-w-5xl flex flex-col items-center justify-center mb-5", className)} {...props}>
-      {originalPhoto ? (
-        <div className="relative inline-flex">
+    <div id="uploader" className={cn("rounded-md overflow-hidden w-full max-w-5xl flex flex-col items-center justify-center mb-2", className)} {...props}>
+      {photo ? (
+        <div className="relative inline-flex my-2">
           <Image
             alt="original photo"
-            src={originalPhoto}
+            src={photo}
             className="rounded-2xl h-96 block"
             placeholder="blur"
             blurDataURL={rgbDataURL(237, 181, 6)}
@@ -117,7 +117,7 @@ export function Dropzone({
               });
               onPhotoNameChange(imageName);
               setRelativeFilePath(image.filePath);
-              onOriginalPhotoChange(imageUrl);
+              onPhotoChange(imageUrl);
             }
           }}
           className="w-2"
@@ -125,9 +125,9 @@ export function Dropzone({
           height="250px"
         />
       )}
-      {!originalPhoto ? (
+      {/* {!originalPhoto ? (
         <span className="label-text-alt">Accepted file types: .jpg, .png</span>
-      ) : null}
+      ) : null} */}
     </div>
   )
 }

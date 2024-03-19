@@ -82,9 +82,9 @@ export function UpscaleDream({
     <div className={cn("flex flex-col md:flex-row items-start gap-6", className)} {...props}>
       <div className="space-y-4 w-full md:basis-1/3">
         <Dropzone
-          originalPhoto={originalPhoto}
+          photo={originalPhoto}
           photoName={photoName}
-          onOriginalPhotoChange={(photoUrl) => setOriginalPhoto(photoUrl)}
+          onPhotoChange={(photoUrl) => setOriginalPhoto(photoUrl)}
           onPhotoNameChange={(name) => setPhotoName(name)}
         />
         {restoredImage ? (
@@ -99,7 +99,7 @@ export function UpscaleDream({
               Download Upscaled Photo
             </button>
             <button onClick={handleNewPhoto} className="btn btn-md btn-info mx-auto flex-1 w-full">
-              {downloadLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <FilePlus className="h-4 w-4" />}
+              <FilePlus className="h-4 w-4" />
               New Photo
             </button>
           </div>
@@ -119,7 +119,7 @@ export function UpscaleDream({
             <span className="loading loading-spinner text-primary loading-lg" />
           </div>
         ) : null}
-        {restoredImage ? (
+        {!loading && restoredImage ? (
           <div className="text-center">
             {sideBySideEnabled ? (
               <CompareSlider
@@ -137,34 +137,24 @@ export function UpscaleDream({
               />
             )}
           </div>
-        ) : (
+        ) : null}
+        {!loading && !restoredImage ? (
           <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
-            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Upscale your <span className="bg-gradient-glow font-semibold bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">photos</span> in seconds.</h3>
+            <h3 className="text-4xl font-semibold text-zinc-600 text-center">Upscale your <span className="highlighted">photos</span> in seconds.</h3>
             <p className="text-zinc-500 text-center">
               Upload a photo and hit Generate to upscale it. You can also compare the original and upscaled image side by side a toggle that will be visible after the image is upscaled.
             </p>
             <div className="flex -space-x-4 !mt-8">
-              <figure className="shadow-elevate rounded-md overflow-hidden rotate-[4.2deg]">
-                <Image
-                  src="/samples/sample1.png"
-                  width={300}
-                  height={300}
-                  alt="Generate an image in seconds"
-                  className="w-48 h-48"
-                />
-              </figure>
-              <figure className="shadow-elevate rounded-md overflow-hidden rotate-[-4.2deg] translate-y-[0.5em]">
-                <Image
-                  src="/samples/sample2.png"
-                  width={300}
-                  height={300}
-                  alt="Generate an image in seconds"
-                  className="w-48 h-48"
-                />
-              </figure>
+              <Image
+                src="/upscale.png"
+                width={1054}
+                height={760}
+                alt="Restore an image in seconds"
+                className="max-w-[500px]"
+              />
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   )

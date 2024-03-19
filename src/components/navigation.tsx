@@ -5,8 +5,8 @@ export function Navigation() {
   return (
     <>
       <nav className="flex-col md:flex-row items-center gap-4 md:gap-8 flex">
-        <Link href="/interior" className="link font-semibold text-neutral whitespace-nowrap">
-          Interior Design
+        <Link href="/portrait" className="link font-semibold text-neutral whitespace-nowrap">
+          Portraits
         </Link>
         <Link href="/restore" className="link font-semibold text-neutral whitespace-nowrap">
           Restore Photos
@@ -17,11 +17,14 @@ export function Navigation() {
         <Link href="/text-to-image" className="link font-semibold text-neutral whitespace-nowrap">
           Text To Image
         </Link>
+        <Link href="/pricing" className="link font-semibold text-neutral whitespace-nowrap">
+          Pricing
+        </Link>
         <Link href="#faq" className="link font-semibold text-neutral whitespace-nowrap">
           FAQ
         </Link>
       </nav>
-      {/* <NavAction className="md:ml-6" /> */}
+      <NavAction className="md:ml-6" />
     </>
   )
 }

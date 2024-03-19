@@ -9,12 +9,15 @@ import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 import { CreditInfo } from "@/components/credit-info";
 import { Dropzone } from "@/components/dropzone";
+import { RoomTypes } from "@/lib/data";
 
 export function InteriorDream({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [renderCount, setRenderCount] = useState<string>("1");
+  const [roomStyle, setRoomStyle] = useState<string>("Modern");
+  const [roomType, setRoomType] = useState<string>("Living Room");
   const [loading, setLoading] = useState<boolean>(false);
   const [outputs, setOutputs] = useState<Array<string>>([]);
   const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
@@ -36,15 +39,22 @@ export function InteriorDream({
     setRenderCount(event.target.value as string);
   }
 
+  const handleRoomStyle = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setRoomStyle(event.target.value as string);
+  }
+
+  const handleRoomType = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setRoomType(event.target.value as string);
+  }
+
   async function handleSubmit(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
-    setLoading(true);
-    return
     if (!originalPhoto) {
       toast.info("Please upload a photo to continue.")
       return;
     }
-    setLoading(true)
+    setLoading(true);
+    setOutputs([]);
     try {
       setLoading(true)
       const response = await fetch('/api/generate', {
@@ -80,15 +90,32 @@ export function InteriorDream({
       <div className="space-y-4 w-full md:basis-1/3">
         <div>
           <Dropzone
-            originalPhoto={originalPhoto}
+            photo={originalPhoto}
             photoName={photoName}
-            onOriginalPhotoChange={(photoUrl) => setOriginalPhoto(photoUrl)}
+            onPhotoChange={(photoUrl) => setOriginalPhoto(photoUrl)}
             onPhotoNameChange={(name) => setPhotoName(name)}
           />
           <span className="text-xs leading-4 block mt-5">
             Upload a photo of your current room. For best results, make sure it shows the entire room and is well lit. Although the model can handle angled pics, it&apos;s better to have a straight-on view. Try to upload an image in a 90-degree angle facing a wall or a window.
           </span>
         </div>
+        {/* Room Type */}
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text font-semibold">Room Type</span>
+          </div>
+          <select value={roomType} onChange={handleRoomType} className="select select-bordered disabled:bg-zinc-200 disabled:border-none" disabled={loading}>
+            {Object.keys(RoomTypes).map((count, index) => (
+              <option value={count} key={index}>{count}</option>
+            ))}
+          </select>
+          <div className="label">
+            <span className="label-text-alt">
+              Choose the type of room you want to generate. The model will generate the interior based on the room type you select.
+            </span>
+          </div>
+        </label>
+        {/* Render Count */}
         <label className="form-control w-full">
           <div className="label">
             <span className="label-text font-semibold">Number of renders</span>
@@ -125,6 +152,7 @@ export function InteriorDream({
                   height={300}
                   alt="Generate an image in seconds"
                   className="w-48 h-48"
+                  priority
                 />
               </figure>
               <figure className="shadow-elevate rounded-md overflow-hidden rotate-[-4.2deg] translate-y-[0.5em]">
@@ -140,7 +168,7 @@ export function InteriorDream({
           </div>
         ) : null}
         {outputs.length > 0 ? (
-          <div className="flex flex-wrap gap-2 md:gap-4 mx-auto md:max-w-4xl justify-center">
+          <div className="grid-container">
             {outputs.map((outputImage, index) => (
               <ImagePreview
                 key={index}

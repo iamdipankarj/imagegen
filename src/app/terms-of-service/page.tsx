@@ -1,3 +1,11 @@
+import { getMetaData } from "@/lib/seo";
+import { Metadata } from "next";
+
+export const metadata: Metadata = getMetaData({
+  title: "Terms of Service | PhotoWorks.ai",
+  description: "Terms of Service for PhotoWorks.ai."
+});
+
 export default async function TermsOfServicePage() {
   return (
     <section id="tos">
@@ -14,7 +22,7 @@ export default async function TermsOfServicePage() {
         <p>This Agreement takes effect on the date on which you first use the PhotoWorks.ai application.</p>
 
         <h2>3. Unlimited Access Software License with Termination Rights</h2>
-        <p>The PhotoWorks.ai Software License facilitates the acquisition of PhotoWorks.ai software through a single purchase, granting users unrestricted and perpetual access to its comprehensive functionalities. Tailored for interior designers, decorators, and homeowners, PhotoWorks.ai empowers users to generate AI-based interior design suggestions based on their inputs.</p>
+        <p>The PhotoWorks.ai Software License facilitates the acquisition of PhotoWorks.ai software through a single purchase, granting users unrestricted and perpetual access to its comprehensive functionalities. Tailored for interior designers, decorators, and homeowners, PhotoWorks.ai empowers users to generate AI-based photo suggestions based on their inputs.</p>
         <p>This license entails a straightforward and flexible arrangement, exempting users from recurring fees or subscriptions. However, it is important to acknowledge that the licensor retains the right to terminate the license without conditions or prerequisites. This termination provision enables the licensor to exercise control over software distribution and utilization.</p>
         <p>Opting for the PhotoWorks.ai Software License enables users to enjoy the benefits of the software while recognizing the licensor&apos;s unrestricted termination rights, which provide adaptability and address potential unforeseen circumstances.</p>
 

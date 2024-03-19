@@ -11,11 +11,17 @@
   --model-purple: #9A15FF;
   --model-yellow: #FCBE0B;
   --model-orange: #ff7d0f;
+  --model-green: #299850;
   --model-sunny: #ffcd05;
   --model-red: #FB112E;
   --model-teal: #1CD087;
   --model-blue: #6B61F6;
   --model-dark-blue: #291B81
+}
+
+::selection {
+  color: #fff;
+  background: #27ae60;
 }
 
 body, html {
@@ -29,12 +35,22 @@ body, html {
     @apply shadow-sm;
   }
 
+  .highlighted {
+    @apply inline-block px-2 py-2 relative rounded-[91%_9%_90%_10%_/_29%_82%_18%_71%];
+    color: var(--model-green);
+    border: 2px solid;
+  }
+
   body[data-menu="open"] #mobileMenu {
     @apply scale-y-100;
   }
 
   .app-main {
     @apply flex flex-col flex-1 items-stretch justify-center py-10;
+  }
+
+  .grid-container {
+    @apply grid gap-2 md:gap-4 grid-rows-[repeat(2,auto)] grid-cols-[repeat(2,auto)] mx-auto md:max-w-4xl
   }
 
   #uploader {
