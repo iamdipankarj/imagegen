@@ -1,18 +1,18 @@
 {
   "functions": {
-    "api/clerk/capture": {
+    "src/api/clerk/capture": {
       "maxDuration": 300
     },
-    "api/credits": {
+    "src/api/credits": {
       "maxDuration": 300
     },
-    "api/generate": {
+    "src/api/generate": {
       "maxDuration": 300
     },
-    "api/lemonsqueezy/capture": {
+    "src/api/lemonsqueezy/capture": {
       "maxDuration": 300
     },
-    "api/remove-image": {
+    "src/api/remove-image": {
       "maxDuration": 300
     }
   }
