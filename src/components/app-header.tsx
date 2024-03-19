@@ -3,7 +3,6 @@ import { Hamburger } from "@/components/hamburger";
 import { Logo } from '@/components/logo';
 import { cn } from "@/lib/utils";
 import { Navigation } from "@/components/navigation";
-// import { UserNav } from "@/components/user-nav";
 
 export function AppHeader({
   className,

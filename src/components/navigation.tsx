@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { SignedIn } from "@clerk/nextjs";
 import { NavAction } from "@/components/nav-action";
 
 export function Navigation() {
@@ -17,9 +20,11 @@ export function Navigation() {
         <Link href="/text-to-image" className="link font-semibold text-neutral whitespace-nowrap">
           Text To Image
         </Link>
-        <Link href="/pricing" className="link font-semibold text-neutral whitespace-nowrap">
-          Pricing
-        </Link>
+        <SignedIn>
+          <Link href="/pricing" className="link font-semibold text-neutral whitespace-nowrap">
+            Pricing
+          </Link>
+        </SignedIn>
         <Link href="#faq" className="link font-semibold text-neutral whitespace-nowrap">
           FAQ
         </Link>
