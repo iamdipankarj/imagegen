@@ -4,6 +4,8 @@ import { currentUser, auth } from "@clerk/nextjs";
 import prisma from "@/lib/db";
 import { getFormattedError } from "@/lib/errorHandler";
 
+export const maxDuration = 300;
+
 export const dynamic = 'force-dynamic'
 
 export async function GET(req: Request, _: NextApiResponse) {

@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs";
 import { getFormattedError } from "@/lib/errorHandler";
 
+export const maxDuration = 300;
+
 export const dynamic = 'force-dynamic'
 
 export async function POST(req: Request, _: NextApiResponse) {

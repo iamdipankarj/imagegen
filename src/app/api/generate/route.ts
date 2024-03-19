@@ -3,6 +3,8 @@ import { getFormattedError } from "@/lib/errorHandler";
 import { auth, currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
+export const maxDuration = 300;
+
 export const dynamic = 'force-dynamic'
 
 const modelList: Record<string, string> = {

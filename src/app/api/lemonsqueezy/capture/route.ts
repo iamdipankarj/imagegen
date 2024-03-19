@@ -5,6 +5,8 @@ import { getFormattedError } from "@/lib/errorHandler";
 import { creditMap } from "@/lib/credits";
 // import crypto from 'crypto';
 
+export const maxDuration = 300;
+
 export const dynamic = 'force-dynamic'
 
 export async function POST(req: Request, _: NextApiResponse) {

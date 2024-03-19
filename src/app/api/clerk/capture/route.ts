@@ -3,6 +3,8 @@ import prisma from "@/lib/db";
 import { headers } from 'next/headers'
 import { Webhook } from "svix";
 
+export const maxDuration = 300;
+
 export const dynamic = 'force-dynamic'
 
 const webhookSecret = process.env.CLERK_WEBHOOK_SECRET || ``;
