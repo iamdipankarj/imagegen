@@ -1,18 +1,18 @@
 {
   "functions": {
-    "api/clerk/capture/route.ts": {
+    "api/clerk/capture": {
       "maxDuration": 300
     },
-    "api/credits/route.ts": {
+    "api/credits": {
       "maxDuration": 300
     },
-    "api/generate/route.ts": {
+    "api/generate": {
       "maxDuration": 300
     },
-    "api/lemonsqueezy/capture/route.ts": {
+    "api/lemonsqueezy/capture": {
       "maxDuration": 300
     },
-    "api/remove-image/route.ts": {
+    "api/remove-image": {
       "maxDuration": 300
     }
   }
