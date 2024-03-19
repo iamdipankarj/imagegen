@@ -14,19 +14,19 @@ export function PricingComponent() {
 
   const handleStarterLink = (e: any) => {
     if (clerkUser && userEmail) {
-      router.push(`https://photoworksai.lemonsqueezy.com/buy/a5bc9402-5aee-4e7c-bd61-1662ed373a68?checkout[custom][clerk_user_id]=${clerkUser.id}&checkout[custom][price_id]=${STARTER_PRICE_ID}&checkout[custom][user_email]=${userEmail}`);
+      router.push(`https://photoworksai.lemonsqueezy.com/buy/${process.env.NEXT_PUBLIC_LEMONSQUEEZY_STARTER_PRODUCT_ID}?checkout[custom][clerk_user_id]=${clerkUser.id}&checkout[custom][price_id]=${STARTER_PRICE_ID}&checkout[custom][user_email]=${userEmail}`);
     }
   }
 
   const handlePlusLink = (e: any) => {
     if (clerkUser && userEmail) {
-      router.push(`https://photoworksai.lemonsqueezy.com/buy/70258e49-d508-4e70-8689-bbcfddffb8f7?checkout[custom][clerk_user_id]=${clerkUser.id}&checkout[custom][price_id]=${PLUS_PRICE_ID}&checkout[custom][user_email]=${userEmail}`)
+      router.push(`https://photoworksai.lemonsqueezy.com/buy/${process.env.NEXT_PUBLIC_LEMONSQUEEZY_PLUS_PRODUCT_ID}?checkout[custom][clerk_user_id]=${clerkUser.id}&checkout[custom][price_id]=${PLUS_PRICE_ID}&checkout[custom][user_email]=${userEmail}`)
     }
   }
 
   const handleProLink = (e: any) => {
     if (clerkUser && userEmail) {
-      router.push(`https://photoworksai.lemonsqueezy.com/buy/b4ae4c3d-1eed-44a5-8820-83d24ce27c30?checkout[custom][clerk_user_id]=${clerkUser.id}&checkout[custom][price_id]=${PRO_PRICE_ID}&checkout[custom][user_email]=${userEmail}`)
+      router.push(`https://photoworksai.lemonsqueezy.com/buy/${process.env.NEXT_PUBLIC_LEMONSQUEEZY_PRO_PRODUCT_ID}?checkout[custom][clerk_user_id]=${clerkUser.id}&checkout[custom][price_id]=${PRO_PRICE_ID}&checkout[custom][user_email]=${userEmail}`)
     }
   }
 
