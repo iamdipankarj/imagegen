@@ -40,7 +40,7 @@ export function Banner() {
           </Link>
         </div>
       </div>
-      <div className="hero-examples hidden lg:block w-1/3">
+      <div className="hero-examples w-full px-8 md:w-1/3">
       <div className="flex -space-x-4 !mt-8">
         <figure className="shadow-elevate rounded-md overflow-hidden rotate-[4.2deg]">
           <Image
@@ -48,7 +48,6 @@ export function Banner() {
             width={300}
             height={300}
             alt="Generate an image in seconds"
-            className="w-48 h-48"
             priority
           />
         </figure>
@@ -58,7 +57,6 @@ export function Banner() {
             width={300}
             height={300}
             alt="Generate an image in seconds"
-            className="w-48 h-48"
           />
         </figure>
       </div>

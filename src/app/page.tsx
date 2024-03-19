@@ -8,7 +8,7 @@ import { StyleBanner } from "@/components/style-banner";
 
 export default function Home() {
   return (
-    <main className="app-main justify-start space-y-10">
+    <main className="app-main justify-start space-y-6 md:space-y-10">
       <section className="container px-4 mx-auto">
         <Banner />
       </section>
