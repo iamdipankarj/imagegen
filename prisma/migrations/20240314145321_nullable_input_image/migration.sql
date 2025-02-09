@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Room" ALTER COLUMN "inputImage" DROP NOT NULL,
-ALTER COLUMN "outputImage" DROP NOT NULL;

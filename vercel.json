@@ -3,13 +3,7 @@
     "app/api/clerk/capture/route.ts": {
       "maxDuration": 300
     },
-    "app/api/credits/route.ts": {
-      "maxDuration": 300
-    },
     "app/api/generate/route.ts": {
-      "maxDuration": 300
-    },
-    "app/api/lemonsqueezy/capture/route.ts": {
       "maxDuration": 300
     },
     "app/api/remove-image/route.ts": {

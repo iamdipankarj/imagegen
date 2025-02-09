@@ -1,5 +1,4 @@
 import { WebhookEvent } from "@clerk/nextjs/server";
-import prisma from "@/lib/db";
 import { headers } from 'next/headers'
 import { Webhook } from "svix";
 
@@ -42,30 +41,6 @@ export async function POST(request: Request) {
         fullName = lastName
       } else {
         fullName = null
-      }
-
-      if (emailAddress) {
-        await prisma.user.upsert({
-          where: { email: emailAddress },
-          update: {},
-          create: {
-            email: emailAddress,
-            name: fullName || null,
-            clerkId: clerkUserId,
-            credits: 3 // Default Credits
-          }
-        })
-        return Response.json({
-          message: "Received"
-        }, {
-          status: 200
-        })
-      } else {
-        return Response.json({
-          message: "No email address found"
-        }, {
-          status: 400
-        });
       }
     } else {
       return Response.json({

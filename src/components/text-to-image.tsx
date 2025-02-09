@@ -6,7 +6,6 @@ import { ImagePreview } from "@/components/image-preview";
 import { useScript } from "@/hooks/use-script";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
-import { CreditInfo } from "@/components/credit-info";
 import { PromptGuide } from "@/components/prompt-guide";
 import { PromptBox } from "@/components/prompt-box";
 import { Select } from "@/components/select";
@@ -102,16 +101,13 @@ export function TextToImage({
   
       if (response.status !== 200) {
         setLoading(false);
-        const body = await response.json();
-        const errorMessage = body.message === "no_credits" ? "No Credits Left. Buy More to generate new images." : "Failed to initiate AI. Please try again."
-        toast.error(errorMessage)
+        toast.error("Failed to initiate AI. Please try again.")
         return;
       }
   
       const { outputs } = await response.json();
       setOutputs(outputs);
       setLoading(false);
-      window.dispatchEvent(new CustomEvent("creditsUpdated"));
     } catch (e) {
       setLoading(false);
       toast.error(JSON.stringify(e) || "Failed to initiate AI. Please try again.")
@@ -147,7 +143,6 @@ export function TextToImage({
           description="Choose the number of renders you want to generate. Note that, more renders will take longer to generate. This option is provided in case you want to generate multiple variations of the same prompt."
         />
         <GenerateButton onClick={handleSubmit} loading={loading} />
-        <CreditInfo />
       </div>
       <div className="w-full md:basis-2/3">
         {loading ? (
