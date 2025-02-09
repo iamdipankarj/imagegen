@@ -6,7 +6,6 @@ import { UrlBuilder } from "@bytescale/sdk";
 import Image from "next/image";
 import { Trash } from 'lucide-react';
 import { toast } from "sonner";
-import NSFWFilter from 'nsfw-filter';
 import { UploadWidgetConfig, UploadWidgetOnPreUploadResult } from '@bytescale/upload-widget';
 import { rgbDataURL } from "@/lib/blurImage";
 import { cn } from '@/lib/utils';
@@ -33,24 +32,7 @@ export function Dropzone({
     maxFileCount: 1,
     mimeTypes: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'],
     editor: { images: { crop: false } },
-    styles: { colors: { primary: '#299850' } },
-    onPreUpload: async (
-      file: File
-    ): Promise<UploadWidgetOnPreUploadResult | undefined> => {
-      let isSafe = false;
-      try {
-        isSafe = await NSFWFilter.isSafe(file);
-        if (!isSafe) {
-          toast.error("NSFW Image detected. Please use a different image.")
-        }
-      } catch (error) {
-        console.error('NSFW predictor threw an error', error);
-      }
-      if (!isSafe) {
-        return { errorMessage: 'Detected a NSFW image which is not allowed.' };
-      }
-      return undefined;
-    }
+    styles: { colors: { primary: '#299850' } }
   };
 
   const onTrashClick = () => {
