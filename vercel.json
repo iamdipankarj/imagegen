@@ -1,13 +1,13 @@
 {
   "functions": {
     "app/api/clerk/capture/route.ts": {
-      "maxDuration": 300
+      "maxDuration": 60
     },
     "app/api/generate/route.ts": {
-      "maxDuration": 300
+      "maxDuration": 60
     },
     "app/api/remove-image/route.ts": {
-      "maxDuration": 300
+      "maxDuration": 60
     }
   }
 }
