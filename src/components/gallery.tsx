@@ -46,7 +46,7 @@ export function Gallery() {
                 src={image}
                 width={300}
                 height={200}
-                alt="PhotoWorks.ai"
+                alt="imagegen"
                 className="w-full h-[auto]"
               />
             </a>

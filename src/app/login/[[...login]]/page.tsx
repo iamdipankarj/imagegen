@@ -3,8 +3,8 @@ import { SignIn } from "@clerk/nextjs";
 import { getMetaData } from "@/lib/seo";
 
 export const metadata: Metadata = getMetaData({
-  title: "Login | PhotoWorks.ai",
-  description: "Login to PhotoWorks.ai."
+  title: "Login | imagegen",
+  description: "Login to imagegen."
 });
  
 export default function Page() {

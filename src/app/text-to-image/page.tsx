@@ -3,7 +3,7 @@ import { getMetaData } from "@/lib/seo";
 import { TextToImage } from "@/components/text-to-image";
 
 export const metadata: Metadata = getMetaData({
-  title: "Text to Image | PhotoWorks.ai",
+  title: "Text to Image | imagegen",
   description: "Create beautiful images from text with AI."
 });
 

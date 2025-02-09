@@ -3,7 +3,7 @@ import { UpscaleDream } from "@/components/upscale-dream";
 import { getMetaData } from "@/lib/seo";
 
 export const metadata: Metadata = getMetaData({
-  title: "Upscale Images | PhotoWorks.ai",
+  title: "Upscale Images | imagegen",
   description: "Upscale images with AI."
 });
 

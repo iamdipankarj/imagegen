@@ -9,12 +9,12 @@ export function Logo({
     <div className={cn("flex items-center space-x-2", className)} {...props}>
       <Image
         src="/logo.png"
-        alt="PhotoWorks.ai"
+        alt="imagegen"
         width={30}
         height={30}
         priority
       />
-      <span className="text-base font-bold">PhotoWorks.ai</span>
+      <span className="text-base font-bold">imagegen</span>
     </div>
   )
 }
