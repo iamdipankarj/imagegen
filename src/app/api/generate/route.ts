@@ -1,4 +1,3 @@
-import prisma from "@/lib/db";
 import { getFormattedError } from "@/lib/errorHandler";
 import { auth, currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
@@ -30,39 +29,6 @@ export async function POST(req: Request, ) {
   const userEmail = clerkUser?.emailAddresses[0]?.emailAddress;
   
   try {
-
-    // Get user from DB
-    const user = await prisma.user.findUnique({
-      where: {
-        email: userEmail
-      },
-      select: {
-        credits: true
-      }
-    });
-
-    const creditCount = user?.credits || 0
-
-    // Check if user has any credits left: Negative is added for edge case handling
-    if (creditCount === 0 || creditCount < 1) {
-      return NextResponse.json(
-        { message: "no_credits" },
-        { status: 400 }
-      )
-    }
-
-    // If they have credits, decrease their credits by one and continue
-    await prisma.user.update({
-      where: {
-        email: userEmail
-      },
-      data: {
-        credits: {
-          decrement: 1
-        }
-      }
-    });
-
     // Do the magic here
     const payload = await req.json();
     const {
@@ -179,22 +145,6 @@ export async function POST(req: Request, ) {
       }
     }
 
-    if (outputs && outputs.length > 0) {
-      await prisma.room.create({
-        data: {
-          replicateId: roomId,
-          user: {
-            connect: {
-              email: userEmail
-            }
-          },
-          inputImage: originalImage,
-          outputImage: outputs.join("||"),
-          prompt: prompt || "Not Applicable",
-        },
-      });
-    }
-
     if (outputs) {
       return NextResponse.json(
         { originalImage, outputs },
@@ -207,16 +157,6 @@ export async function POST(req: Request, ) {
       )
     }
   } catch (error) {
-    await prisma.user.update({
-      where: {
-        email: userEmail
-      },
-      data: {
-        credits: {
-          increment: 1,
-        },
-      },
-    });
     return NextResponse.json(
       { message: getFormattedError(error) },
       { status: 500 }

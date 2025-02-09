@@ -7,7 +7,6 @@ import { ImagePreview } from "@/components/image-preview";
 import { useScript } from "@/hooks/use-script";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
-import { CreditInfo } from "@/components/credit-info";
 import { Dropzone } from "@/components/dropzone";
 import { PromptGuide } from "@/components/prompt-guide";
 import { PromptBox } from "@/components/prompt-box";
@@ -114,7 +113,6 @@ export function PortraitDream({
       const { outputs } = await response.json();
       setOutputs(outputs);
       setLoading(false);
-      window.dispatchEvent(new CustomEvent("creditsUpdated"));
     } catch (e) {
       setLoading(false);
       toast.error(JSON.stringify(e) || "Failed to initiate AI. Please try again.")
@@ -200,7 +198,6 @@ export function PortraitDream({
           </span>
         </div>
         <GenerateButton onClick={handleSubmit} loading={loading} />
-        <CreditInfo />
       </div>
       <div className="w-full md:basis-2/3">
         {loading ? (

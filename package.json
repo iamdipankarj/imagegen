@@ -1,20 +1,13 @@
 {
-  "name": "photoworks",
+  "name": "imagegen",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "rm -rf ./next && rm -rf ./node_modules/.cache && next dev",
     "build": "NODE_ENV=production next build",
     "start": "NODE_ENV=production next start",
-    "postinstall": "dotenv -e .env.production -- npx prisma generate",
     "lint": "next lint",
-    "tsc": "tsc --noEmit",
-    "prisma:pull:dev": "dotenv -e .env.development -- npx prisma db pull",
-    "prisma:pull:prod": "dotenv -e .env.production -- npx prisma db pull",
-    "prisma:generate:dev": "dotenv -e .env.development -- npx prisma generate",
-    "prisma:generate:prod": "dotenv -e .env.production -- npx prisma generate",
-    "prisma:migrate:dev": "dotenv -e .env.development -- npx prisma migrate dev",
-    "prisma:migrate:prod": "dotenv -e .env.production -- npx prisma migrate dev"
+    "tsc": "tsc --noEmit"
   },
   "browserslist": [
     "last 2 versions",
@@ -26,7 +19,6 @@
     "@bytescale/upload-widget-react": "^4.18.0",
     "@clerk/nextjs": "^4.29.9",
     "@headlessui/react": "^1.7.18",
-    "@prisma/client": "^5.11.0",
     "clsx": "^2.1.0",
     "embla-carousel-autoplay": "^8.0.0",
     "embla-carousel-react": "^8.0.0",
@@ -56,8 +48,8 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.2",
     "postcss": "^8",
-    "prisma": "^5.11.0",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

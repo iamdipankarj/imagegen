@@ -9,7 +9,6 @@ import { CompareSlider } from "@/components/compare-slider";
 import { appendNewToName, downloadPhoto } from "@/lib/downloadPhoto";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
-import { CreditInfo } from "@/components/credit-info";
 import { Dropzone } from "@/components/dropzone";
 
 export function UpscaleDream({
@@ -50,7 +49,6 @@ export function UpscaleDream({
       const { outputs } = await response.json();
       setRestoredImage(outputs[0]);
       setLoading(false);
-      window.dispatchEvent(new CustomEvent("creditsUpdated"));
     } catch (e) {
       setLoading(false);
       toast.error(JSON.stringify(e) || "Failed to initiate AI. Please try again.")
@@ -104,13 +102,10 @@ export function UpscaleDream({
             </button>
           </div>
         ) : (
-          <>
-            <GenerateButton
-              onClick={handleSubmit}
-              loading={loading}
-            />
-            <CreditInfo />
-          </>
+          <GenerateButton
+            onClick={handleSubmit}
+            loading={loading}
+          />
         )}
       </div>
       <div className="w-full md:basis-2/3">

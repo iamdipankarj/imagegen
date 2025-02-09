@@ -1,16 +1,15 @@
 "use client";
 
+import { useState } from 'react';
 import { UploadDropzone } from '@bytescale/upload-widget-react';
 import { UrlBuilder } from "@bytescale/sdk";
 import Image from "next/image";
-import useSWR from 'swr';
 import { Trash } from 'lucide-react';
 import { toast } from "sonner";
 import NSFWFilter from 'nsfw-filter';
 import { UploadWidgetConfig, UploadWidgetOnPreUploadResult } from '@bytescale/upload-widget';
 import { rgbDataURL } from "@/lib/blurImage";
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
 
 interface DropzoneProps extends React.HTMLAttributes<HTMLDivElement> {
   photo: string | null;
@@ -28,9 +27,6 @@ export function Dropzone({
   ...props
 }: DropzoneProps) {
   const [relativeFilePath, setRelativeFilePath] = useState<string | null>(null);
-
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const { data } = useSWR('/api/credits', fetcher);
 
   const options: UploadWidgetConfig = {
     apiKey: process.env.NEXT_PUBLIC_BYTESCALE_API_KEY!,
@@ -52,9 +48,6 @@ export function Dropzone({
       }
       if (!isSafe) {
         return { errorMessage: 'Detected a NSFW image which is not allowed.' };
-      }
-      if (data.credits === 0) {
-        return { errorMessage: 'No Credits Left. Buy Credits to create more images.' };
       }
       return undefined;
     }

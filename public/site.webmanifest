@@ -1,6 +1,6 @@
 {
-  "name": "PhotoWorks.ai",
-  "short_name": "PhotoWorks.ai",
+  "name": "imagegen",
+  "short_name": "imagegen",
   "start_url": "/",
   "description": "Let AI design the perfect image for you. Just describe your image and get it in seconds, create inteiors, headshots, restore old photographs, upscale images and more.",
   "icons": [

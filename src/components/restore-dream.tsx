@@ -9,7 +9,6 @@ import { CompareSlider } from "@/components/compare-slider";
 import { appendNewToName, downloadPhoto } from "@/lib/downloadPhoto";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
-import { CreditInfo } from "@/components/credit-info";
 import { Dropzone } from "@/components/dropzone";
 
 export function RestoreDream({
@@ -50,7 +49,6 @@ export function RestoreDream({
       const { outputs } = await response.json();
       setRestoredImage(outputs[0]);
       setLoading(false);
-      window.dispatchEvent(new CustomEvent("creditsUpdated"));
     } catch (e) {
       setLoading(false);
       toast.error(JSON.stringify(e) || "Failed to initiate AI. Please try again.")
@@ -109,7 +107,6 @@ export function RestoreDream({
               onClick={handleSubmit}
               loading={loading}
             />
-            <CreditInfo />
           </>
         )}
       </div>

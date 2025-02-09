@@ -20,11 +20,6 @@ export function Navigation() {
         <Link href="/text-to-image" className="link font-semibold text-neutral whitespace-nowrap">
           Text To Image
         </Link>
-        <SignedIn>
-          <Link href="/pricing" className="link font-semibold text-neutral whitespace-nowrap">
-            Pricing
-          </Link>
-        </SignedIn>
         <Link href="#faq" className="link font-semibold text-neutral whitespace-nowrap">
           FAQ
         </Link>

@@ -2,8 +2,8 @@ import { getMetaData } from "@/lib/seo";
 import { Metadata } from "next";
 
 export const metadata: Metadata = getMetaData({
-  title: "Privacy Policy | PhotoWorks.ai",
-  description: "Privacy policy for PhotoWorks.ai."
+  title: "Privacy Policy | imagegen",
+  description: "Privacy policy for imagegen."
 });
 
 export default async function PrivacyPolicyPage() {
@@ -36,7 +36,7 @@ export default async function PrivacyPolicyPage() {
           </li>
           <li>
             <p>
-              <strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to PhotoWorks.ai.
+              <strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to imagegen.
             </p>
           </li>
           <li>
@@ -81,7 +81,7 @@ export default async function PrivacyPolicyPage() {
           </li>
           <li>
             <p>
-              <strong>Website</strong> refers to PhotoWorks.ai, accessible from <a href="https://photoworks.ai" rel="external nofollow noopener" target="_blank">https://photoworks.ai</a>
+              <strong>Website</strong> refers to imagegen, accessible from <a href="https://imagegen" rel="external nofollow noopener" target="_blank">https://imagegen</a>
             </p>
           </li>
           <li>
@@ -273,7 +273,7 @@ export default async function PrivacyPolicyPage() {
             <p>By email: photoworkshq@gmail.com</p>
           </li>
           <li>
-            <p>By visiting this page on our website: <a href="https://photoworks.ai/privacy-policy" rel="external nofollow noopener" target="_blank">https://photoworks.ai/privacy-policy</a>
+            <p>By visiting this page on our website: <a href="https://imagegen/privacy-policy" rel="external nofollow noopener" target="_blank">https://imagegen/privacy-policy</a>
             </p>
           </li>
         </ul>

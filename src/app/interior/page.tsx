@@ -4,7 +4,7 @@ import { getMetaData } from "@/lib/seo";
 import { ComingSoon } from "@/components/coming-soon";
 
 export const metadata: Metadata = getMetaData({
-  title: "Interior Design | PhotoWorks.ai",
+  title: "Interior Design | imagegen",
   description: "Create beautiful interior designs with AI"
 });
 

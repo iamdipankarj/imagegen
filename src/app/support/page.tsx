@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { getMetaData } from "@/lib/seo";
 
 export const metadata: Metadata = getMetaData({
-  title: "Restore Photos | PhotoWorks.ai",
+  title: "Restore Photos | imagegen",
   description: "Restore old photos with AI."
 });
 
