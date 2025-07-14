@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { SignedIn } from "@clerk/nextjs";
 import { NavAction } from "@/components/nav-action";
 
 export function Navigation() {

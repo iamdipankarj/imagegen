@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { AppHeader } from "@/components/app-header";
 import { Footer } from "@/components/footer";
 import { getMetaData, getStructuredData } from "@/lib/seo";
-import SessionProvider from "@/app/session-provider";
 import ProgressProvider from "@/components/progress-provider";
 
 declare global {
@@ -40,18 +39,16 @@ export default async function RootLayout({
         />
       </head>
       <body className={cn("min-h-screen font-sans flex flex-col antialiased", fontSans.variable)}>
-        <SessionProvider>
-          <ProgressProvider>
-            <AppHeader />
-            {children}
-            <Footer />
-            <Toaster
-              toastOptions={{ className: 'font-sans !text-sm' }}
-              position="top-center"
-              richColors
-            />
-          </ProgressProvider>
-        </SessionProvider>
+        <ProgressProvider>
+          <AppHeader />
+          {children}
+          <Footer />
+          <Toaster
+            toastOptions={{ className: 'font-sans !text-sm' }}
+            position="top-center"
+            richColors
+          />
+        </ProgressProvider>
       </body>
     </html>
   );
