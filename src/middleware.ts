@@ -7,8 +7,7 @@ const isPublic = createRouteMatcher([
   '/register',
   '/privacy-policy',
   '/refund-policy',
-  '/terms-of-service',
-  '/api/clerk/capture',
+  '/terms-of-service'
 ]);
 
 const isApiOpen = createRouteMatcher([
@@ -18,7 +17,6 @@ const isApiOpen = createRouteMatcher([
 
 const isIgnored = createRouteMatcher([
   '/',
-  '/api/clerk/capture',
   '/privacy-policy',
   '/refund-policy',
   '/terms-of-service',
