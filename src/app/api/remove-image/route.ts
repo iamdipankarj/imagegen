@@ -1,16 +1,16 @@
 import { NextApiResponse } from "next";
 import { NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs";
+import { auth } from '@clerk/nextjs/server'
 import { getFormattedError } from "@/lib/errorHandler";
 
 export const maxDuration = 300;
 
 export const dynamic = 'force-dynamic'
 
-export async function POST(req: Request, _: NextApiResponse) {
-  const { userId } = auth();
+export async function POST(req: Request) {
+  const { isAuthenticated } = await auth()
 
-  if (!userId) {
+  if (!isAuthenticated) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
   

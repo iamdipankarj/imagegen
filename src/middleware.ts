@@ -1,35 +1,47 @@
-import { authMiddleware } from "@clerk/nextjs";
- 
-export default authMiddleware({
-  // Routes that can be accessed while signed out
-  publicRoutes: [
-    '/',
-    '/login',
-    '/register',
-    '/privacy-policy',
-    '/refund-policy',
-    '/terms-of-service',
-    '/api/clerk/capture'
-  ],
-  publishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
-  // Routes that can always be accessed, and have
-  // no authentication information
-  apiRoutes: [
-    '/api/generate',
-    '/api/remove-image'
-  ],
-  ignoredRoutes: [
-    '/',
-    '/api/clerk/capture',
-    '/privacy-policy',
-    '/refund-policy',
-    '/terms-of-service'
-  ]
+import { NextResponse } from 'next/server';
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+
+const isPublic = createRouteMatcher([
+  '/',
+  '/login',
+  '/register',
+  '/privacy-policy',
+  '/refund-policy',
+  '/terms-of-service',
+  '/api/clerk/capture',
+]);
+
+const isApiOpen = createRouteMatcher([
+  '/api/generate',
+  '/api/remove-image',
+]);
+
+const isIgnored = createRouteMatcher([
+  '/',
+  '/api/clerk/capture',
+  '/privacy-policy',
+  '/refund-policy',
+  '/terms-of-service',
+]);
+
+export default clerkMiddleware(async (auth, req) => {
+  // Skip everything for ignored routes
+  if (isIgnored(req)) return NextResponse.next();
+
+  // Allow public pages and specific open API routes
+  if (isPublic(req) || isApiOpen(req)) return NextResponse.next();
+
+  // Everything else requires auth
+  await auth.protect();
+
+  return NextResponse.next();
 });
- 
+
 export const config = {
-  // Protects all routes, including api/trpc.
-  // See https://clerk.com/docs/references/nextjs/auth-middleware
-  // for more information about configuring your Middleware
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
-};
+  matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
+  ],
+}
