@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Download, FilePlus, Loader2 } from "lucide-react";
 import { SwitchToggle } from "@/components/switch-toggle";
 import { CompareSlider } from "@/components/compare-slider";
-import { appendNewToName, downloadPhoto } from "@/lib/downloadPhoto";
+import { downloadPhoto } from "@/lib/downloadPhoto";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 import { Dropzone } from "@/components/dropzone";
