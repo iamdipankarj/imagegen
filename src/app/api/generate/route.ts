@@ -1,5 +1,5 @@
 import { getFormattedError } from "@/lib/errorHandler";
-import { auth, currentUser } from "@clerk/nextjs";
+import { auth, currentUser } from '@clerk/nextjs/server'
 import { NextResponse } from "next/server";
 
 export const maxDuration = 300;
@@ -14,11 +14,11 @@ const modelList: Record<string, string> = {
   colorize: "0da600fab0c45a66211339f1c16b71345d22f26ef5fea3dca1bb90bb5711e950"
 };
 
-export async function POST(req: Request, ) {
-  const { userId } = auth();
+export async function POST(req: Request) {
+  const { isAuthenticated } = await auth()
 
   // Check if user is logged in
-  if (!userId) {
+  if (!isAuthenticated) {
     return NextResponse.json(
       { message: "unauthorized" },
       { status: 401 }
@@ -26,7 +26,6 @@ export async function POST(req: Request, ) {
   }
 
   const clerkUser = await currentUser();
-  const userEmail = clerkUser?.emailAddresses[0]?.emailAddress;
   
   try {
     // Do the magic here

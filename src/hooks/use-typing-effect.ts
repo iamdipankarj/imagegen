@@ -31,7 +31,6 @@ export function useTypingEffect({
     return () => {
       clearInterval(intervalId);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
