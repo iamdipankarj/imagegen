@@ -1,9 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from 'react';
-import Image from "next/image";
-import { Trash } from 'lucide-react';
-import { toast } from "sonner";
+import { useMemo, useRef } from 'react';
 
 import { FilePondFile } from 'filepond';
 import { FilePond, FilePondProps, registerPlugin } from 'react-filepond'
@@ -18,7 +15,6 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 
-import { rgbDataURL } from "@/lib/blurImage";
 import { cn } from '@/lib/utils';
 
 registerPlugin(
@@ -29,8 +25,6 @@ registerPlugin(
 )
 
 interface DropzoneProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Auth token for your API, if required */
-  authToken?: string;
   /** Allow multiple files */
   allowMultiple?: boolean;
   /** Max files when multiple */
@@ -55,23 +49,15 @@ interface DropzoneProps extends React.HTMLAttributes<HTMLDivElement> {
   hideCredits?: boolean;
 };
 
-// interface DropzoneProps extends React.HTMLAttributes<HTMLDivElement> {
-//   photo: string | null;
-//   photoName: string | null;
-//   onPhotoChange: (photo: string | null) => void;
-//   onPhotoNameChange: (photoName: string | null) => void;
-// }
-
 export function Dropzone({
-  authToken,
   allowMultiple = true,
   maxFiles = 5,
   maxFileSize = '15MB',
   acceptedFileTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/avif'],
   onUploaded,
   onRemoved,
-  processUrl = '/api/photoworks/upload-image',
-  revertUrl, // optional: e.g. '/api/photoworks/upload-image'
+  processUrl = '/api/upload-image',
+  revertUrl = '/api/remove-image',
   fieldName = 'file',
   hideCredits = true,
   className,
@@ -85,11 +71,9 @@ export function Dropzone({
       process: {
         url: processUrl,
         method: 'POST',
-        headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
         // FilePond sends the file under the "name" prop on the component (see below).
         ondata: (formData) => {
           // Add any extra fields if you want
-          formData.append('source', 'filepond');
           return formData;
         },
         // Convert the response to the serverId string FilePond needs to store internally
@@ -116,45 +100,33 @@ export function Dropzone({
         timeout: 0,
       },
 
-      // Optional delete hook if you support it in your API
-      revert: revertUrl
-        ? {
-            url: revertUrl,
-            method: 'DELETE',
-            headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined,
-            // If your API needs JSON body, FilePond’s revert URL style hits without a body.
-            // In that case, consider using a custom "process" function variant instead,
-            // or encode the id in the URL (e.g., `${revertUrl}?id=...`) by using server hooks.
-            onload: () => '',
-            onerror: (res) => res,
-          }
-        : undefined,
-
-      // You can also wire load/restore/fetch if you show existing files by id/url.
-      // load: '/api/...',
-      // restore: '/api/...',
-      // fetch: '/api/...',
+      revert: (
+        uniqueFileId,
+        load,
+        error
+      ) => {
+        fetch(revertUrl, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ fileName: uniqueFileId.split('/').pop() }),
+        })
+          .then(async (res) => {
+            if (res.ok) {
+              load(); // tells FilePond the delete succeeded
+            } else {
+              const t = await res.text();
+              error(t || "Failed to remove image");
+            }
+          })
+          .catch((e) => {
+            error(e?.message || "Failed to remove image");
+          });
+      },
     }),
-    [authToken, onUploaded, processUrl, revertUrl]
+    [onUploaded, processUrl, revertUrl]
   );
-
-  // const onTrashClick = () => {
-  //   onPhotoChange(null);
-  //   onPhotoNameChange(null);
-  //   fetch('/api/remove-image', {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       filePath: relativeFilePath
-  //     }),
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   }).then((response) => response.json()).then((_: any) => {
-  //     toast.info("Photo removed successfully.")
-  //   }).catch((error: any) => {
-  //     toast.error(JSON.stringify(error) || "Failed to initiate AI. Please try again.")
-  //   })
-  // }
 
   return (
     <div id="uploader" className={cn("mt-2", className)} {...props}>
@@ -173,54 +145,6 @@ export function Dropzone({
         labelIdle='Drag & Drop images or <span class="filepond--label-action">Browse</span>'
         onremovefile={(_, file) => onRemoved?.(file)}
       />
-      {/* {photo ? (
-        <div className="relative inline-flex my-2">
-          <Image
-            alt="original photo"
-            src={photo}
-            className="rounded-2xl h-96 block"
-            placeholder="blur"
-            blurDataURL={rgbDataURL(237, 181, 6)}
-            width={300}
-            height={300}
-            style={{
-              width: 300,
-              height: 'auto'
-            }}
-          />
-          <button onClick={onTrashClick} className="absolute top-2 right-2 btn btn-sm btn-circle btn-neutral">
-            <Trash className="h-4 w-4" />
-          </button>
-        </div>
-      ) : (
-        <UploadDropzone
-          options={options}
-          minWidth="100%"
-          onUpdate={({ uploadedFiles }) => {
-            if (uploadedFiles.length !== 0) {
-              const image = uploadedFiles[0];
-              const imageName = image.originalFile.originalFileName;
-              const imageUrl = UrlBuilder.url({
-                accountId: image.accountId,
-                filePath: image.filePath,
-                options: {
-                  transformation: "preset",
-                  transformationPreset: "thumbnail"
-                }
-              });
-              onPhotoNameChange(imageName);
-              setRelativeFilePath(image.filePath);
-              onPhotoChange(imageUrl);
-            }
-          }}
-          className="w-2"
-          width="670px"
-          height="250px"
-        />
-      )} */}
-      {/* {!originalPhoto ? (
-        <span className="label-text-alt">Accepted file types: .jpg, .png</span>
-      ) : null} */}
     </div>
   )
 }

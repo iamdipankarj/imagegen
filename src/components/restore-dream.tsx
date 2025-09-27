@@ -78,7 +78,10 @@ export function RestoreDream({
     <div className={cn("flex flex-col md:flex-row items-start gap-6", className)} {...props}>
       <div className="space-y-4 w-full md:basis-1/3">
         <Dropzone
-          onUploaded={(photoUrl) => setOriginalPhoto(photoUrl)}
+          onUploaded={(photoUrl) => {
+            console.log({photoUrl})
+            setOriginalPhoto(photoUrl)
+          }}
           onRemoved={() => setOriginalPhoto(null)}
         />
         {restoredImage ? (
