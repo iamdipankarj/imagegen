@@ -46,8 +46,6 @@ export function PortraitDream({
   const [image3, setImage3] = useState<string | null>(null);
   const [image4, setImage4] = useState<string | null>(null);
 
-  const [photoName, setPhotoName] = useState<string | null>(null);
-
   const { ready: lightboxReady } = useScript('https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js')
 
   useEffect(() => {
@@ -152,10 +150,8 @@ export function PortraitDream({
         <div>
           <span className="label-text font-semibold">Input Photo 1</span>
           <Dropzone
-            photo={image1}
-            photoName={photoName}
-            onPhotoChange={(photoUrl) => setImage1(photoUrl)}
-            onPhotoNameChange={(name) => setPhotoName(name)}
+            onUploaded={(photoUrl) => setImage1(photoUrl)}
+            onRemoved={() => setImage1(null)}
           />
           <span className="text-sm leading-5 block mt-2">
             Original Photo. For example, a photo of your face.
@@ -164,10 +160,8 @@ export function PortraitDream({
         <div>
           <span className="label-text font-semibold">Input Photo 2</span>
           <Dropzone
-            photo={image2}
-            photoName={photoName}
-            onPhotoChange={(photoUrl) => setImage2(photoUrl)}
-            onPhotoNameChange={(name) => setPhotoName(name)}
+            onUploaded={(photoUrl) => setImage2(photoUrl)}
+            onRemoved={() => setImage2(null)}
           />
           <span className="text-sm leading-5 block mt-2">
             Additional photo, for example in another angle or pose.
@@ -176,10 +170,8 @@ export function PortraitDream({
         <div>
           <span className="label-text font-semibold">Input Photo 3</span>
           <Dropzone
-            photo={image3}
-            photoName={photoName}
-            onPhotoChange={(photoUrl) => setImage3(photoUrl)}
-            onPhotoNameChange={(name) => setPhotoName(name)}
+            onUploaded={(photoUrl) => setImage3(photoUrl)}
+            onRemoved={() => setImage3(null)}
           />
           <span className="text-sm leading-5 block mt-2">
             Additional photo, for example in another angle or pose.
@@ -188,10 +180,8 @@ export function PortraitDream({
         <div>
           <span className="label-text font-semibold">Input Photo 4</span>
           <Dropzone
-            photo={image4}
-            photoName={photoName}
-            onPhotoChange={(photoUrl) => setImage4(photoUrl)}
-            onPhotoNameChange={(name) => setPhotoName(name)}
+            onUploaded={(photoUrl) => setImage4(photoUrl)}
+            onRemoved={() => setImage4(null)}
           />
           <span className="text-sm leading-5 block mt-2">
             Additional photo, for example in another angle or pose.

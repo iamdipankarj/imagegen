@@ -16,7 +16,6 @@ export function RestoreDream({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
-  const [photoName, setPhotoName] = useState<string | null>(null);
   const [restoredImage, setRestoredImage] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [sideBySideEnabled, setSideBySideEnabled] = useState<boolean>(false);
@@ -58,7 +57,6 @@ export function RestoreDream({
   const handleNewPhoto = (e: FormEvent) => {
     e.preventDefault();
     setOriginalPhoto(null);
-    setPhotoName(null);
     setRestoredImage(null);
   }
 
@@ -68,7 +66,7 @@ export function RestoreDream({
     setTimeout(() => {
       downloadPhoto(
         restoredImage!,
-        appendNewToName(photoName!)
+        'output'
       );
     }, 500);
     setTimeout(() => {
@@ -80,10 +78,8 @@ export function RestoreDream({
     <div className={cn("flex flex-col md:flex-row items-start gap-6", className)} {...props}>
       <div className="space-y-4 w-full md:basis-1/3">
         <Dropzone
-          photo={originalPhoto}
-          photoName={photoName}
-          onPhotoChange={(photoUrl) => setOriginalPhoto(photoUrl)}
-          onPhotoNameChange={(name) => setPhotoName(name)}
+          onUploaded={(photoUrl) => setOriginalPhoto(photoUrl)}
+          onRemoved={() => setOriginalPhoto(null)}
         />
         {restoredImage ? (
           <SwitchToggle enabled={sideBySideEnabled} onChange={(value: boolean) => {

@@ -1,4 +1,3 @@
-import { NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 import { auth } from '@clerk/nextjs/server'
 import { getFormattedError } from "@/lib/errorHandler";
