@@ -41,10 +41,7 @@ export function PortraitDream({
   const [outputs, setOutputs] = useState<Array<string>>([]);
 
   const [styleName, setStyleName] = useState<string>(styleList[1]);
-  const [image1, setImage1] = useState<string | null>(null);
-  const [image2, setImage2] = useState<string | null>(null);
-  const [image3, setImage3] = useState<string | null>(null);
-  const [image4, setImage4] = useState<string | null>(null);
+  const [images, setImages] = useState<Array<string>>([]);
 
   const { ready: lightboxReady } = useScript('https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js')
 
@@ -76,7 +73,7 @@ export function PortraitDream({
       toast.info("Please enter a prompt along with an image to continue.")
       return;
     }
-    if (!image1 && !image2 && !image3 && !image4) {
+    if (images.length === 0) {
       toast.info("Please upload atleast one photo to continue.")
       return;
     }
@@ -89,10 +86,7 @@ export function PortraitDream({
         method: 'POST',
         body: JSON.stringify({
           prompt,
-          inputImage1: image1 || image2 || image3 || image4 || null,
-          inputImage2: image2 || image3 || image4 || null,
-          inputImage3: image3 || image4 || null,
-          inputImage4: image4 || null,
+          images,
           styleName,
           model: "photomaker",
           renderCount
@@ -120,6 +114,16 @@ export function PortraitDream({
   return (
     <div className={cn("flex flex-col md:flex-row items-start gap-6", className)} {...props}>
       <div className="space-y-4 w-full md:basis-1/3">
+        <Dropzone
+          onUploaded={(photoUrl) => {
+            setImages((prev) => [...prev, photoUrl])
+          }}
+          onRemoved={(file) => {
+            setImages((prev) => prev.filter((url) => url !== file?.getMetadata("url")))
+          }}
+          allowMultiple
+          maxFiles={4}
+        />
         <div>
           <PromptBox
             placeholderList={texts}
@@ -147,46 +151,6 @@ export function PortraitDream({
           options={[1, 2, 3, 4]}
           description="Choose the number of renders you want to generate. Note that, more renders will take longer to generate. This option is provided in case you want to generate multiple variations of the same prompt."
         />
-        <div>
-          <span className="label-text font-semibold">Input Photo 1</span>
-          <Dropzone
-            onUploaded={(photoUrl) => setImage1(photoUrl)}
-            onRemoved={() => setImage1(null)}
-          />
-          <span className="text-sm leading-5 block mt-2">
-            Original Photo. For example, a photo of your face.
-          </span>
-        </div>
-        <div>
-          <span className="label-text font-semibold">Input Photo 2</span>
-          <Dropzone
-            onUploaded={(photoUrl) => setImage2(photoUrl)}
-            onRemoved={() => setImage2(null)}
-          />
-          <span className="text-sm leading-5 block mt-2">
-            Additional photo, for example in another angle or pose.
-          </span>
-        </div>
-        <div>
-          <span className="label-text font-semibold">Input Photo 3</span>
-          <Dropzone
-            onUploaded={(photoUrl) => setImage3(photoUrl)}
-            onRemoved={() => setImage3(null)}
-          />
-          <span className="text-sm leading-5 block mt-2">
-            Additional photo, for example in another angle or pose.
-          </span>
-        </div>
-        <div>
-          <span className="label-text font-semibold">Input Photo 4</span>
-          <Dropzone
-            onUploaded={(photoUrl) => setImage4(photoUrl)}
-            onRemoved={() => setImage4(null)}
-          />
-          <span className="text-sm leading-5 block mt-2">
-            Additional photo, for example in another angle or pose.
-          </span>
-        </div>
         <GenerateButton onClick={handleSubmit} loading={loading} />
       </div>
       <div className="w-full md:basis-2/3">

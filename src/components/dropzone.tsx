@@ -50,7 +50,7 @@ interface DropzoneProps extends React.HTMLAttributes<HTMLDivElement> {
 };
 
 export function Dropzone({
-  allowMultiple = true,
+  allowMultiple = false,
   maxFiles = 5,
   maxFileSize = '15MB',
   acceptedFileTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/avif'],

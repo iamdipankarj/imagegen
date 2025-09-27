@@ -46,7 +46,7 @@ body, html {
   }
 
   .app-main {
-    @apply flex flex-col flex-1 items-stretch justify-center py-6 md:py-10;
+    @apply flex flex-col flex-1 items-stretch py-6 md:py-10;
   }
 
   .grid-container {
