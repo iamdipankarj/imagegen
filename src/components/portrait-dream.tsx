@@ -18,20 +18,6 @@ const texts = [
   "A photo of a man sitting on a bench in a park, reading a book."
 ];
 
-const styleList = [
-  "(No style)",
-  "Cinematic",
-  "Disney Charactor",
-  "Digital Art",
-  "Photographic (Default)",
-  "Fantasy art",
-  "Neonpunk",
-  "Enhance",
-  "Comic book",
-  "Lowpoly",
-  "Line art"
-]
-
 export function PortraitDream({
   className,
   ...props
@@ -40,8 +26,6 @@ export function PortraitDream({
   const [renderCount, setRenderCount] = useState<string>("1");
   const [loading, setLoading] = useState<boolean>(false);
   const [outputs, setOutputs] = useState<Array<OutputImage>>([]);
-
-  const [styleName, setStyleName] = useState<string>(styleList[1]);
   const [images, setImages] = useState<Array<string>>([]);
 
   const { ready: lightboxReady } = useScript('https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js')
@@ -64,10 +48,6 @@ export function PortraitDream({
     setRenderCount(event.target.value as string);
   }
 
-  const handleStyleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setStyleName(event.target.value as string);
-  }
-
   async function handleSubmit(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (!prompt) {
@@ -88,7 +68,6 @@ export function PortraitDream({
         body: JSON.stringify({
           prompt,
           images,
-          styleName,
           model: "photomaker",
           renderCount
         }),
@@ -136,14 +115,6 @@ export function PortraitDream({
             <p><span className="font-semibold">Example:&nbsp;</span>A photo of a girl walking down the streets of NYC, surrounded by buildings.</p></PromptGuide>.
           </div>
         </div>
-        {/* Style Name */}
-        <Select
-          label="Style"
-          value={styleName}
-          onValueChange={handleStyleChange}
-          options={styleList}
-          description="Choose the style you want to apply to the generated image. This option is provided in case you want to generate the same prompt with different styles."
-        />
         {/* Render Count */}
         <Select
           label="Number of renders"
