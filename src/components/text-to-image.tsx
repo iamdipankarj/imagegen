@@ -9,6 +9,7 @@ import { GenerateButton } from "@/components/generate-button";
 import { PromptGuide } from "@/components/prompt-guide";
 import { PromptBox } from "@/components/prompt-box";
 import { Select } from "@/components/select";
+import { OutputImage } from "@/lib/types";
 
 const texts = [
   "A mysterious forest cloaked in twilight.",
@@ -43,11 +44,7 @@ export function TextToImage({
   const [aspectRatio, setAspectRatio] = useState<string>("1:1");
   const [renderCount, setRenderCount] = useState<string>("1");
   const [loading, setLoading] = useState<boolean>(false);
-  const [outputs, setOutputs] = useState<Array<{
-    width: number;
-    height: number;
-    url: string;
-  }>>([]);
+  const [outputs, setOutputs] = useState<Array<OutputImage>>([]);
 
   const { ready: lightboxReady } = useScript('https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js')
 

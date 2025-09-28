@@ -41,18 +41,24 @@ export async function POST(req: Request) {
       images
     } = payload;
 
+    const input = {
+      prompt,
+      guidance_scale: 3.5,
+      num_inference_steps: 28,
+      num_images: parseInt(renderCount, 10),
+      output_format: "png",
+      safety_tolerance: "6",
+      enable_safety_checker: true,
+      aspect_ratio: aspectRatio,
+      image_url: imageUrl
+    } as Record<string, any>;
+
+    if (model === "upscale") {
+      input.upscale_factor = 2
+    }
+
     const response = await fal.subscribe(modelList[model], {
-      input: {
-        prompt,
-        guidance_scale: 3.5,
-        num_inference_steps: 28,
-        num_images: parseInt(renderCount, 10),
-        output_format: "png",
-        safety_tolerance: "6",
-        enable_safety_checker: true,
-        aspect_ratio: aspectRatio,
-        image_url: imageUrl
-      },
+      input,
       logs: false
     });
 
@@ -60,7 +66,7 @@ export async function POST(req: Request) {
 
     if (Array.isArray(response?.data?.images)) {
       outputImages = response.data.images as string[]
-    } else if (response?.data?.image && typeof response.data.image === 'string') {
+    } else if (response?.data?.image && typeof response.data.image === 'object') {
       outputImages = [response.data.image]
     }
 

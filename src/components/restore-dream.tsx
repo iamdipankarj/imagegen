@@ -10,17 +10,14 @@ import { downloadPhoto } from "@/lib/downloadPhoto";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 import { Dropzone } from "@/components/dropzone";
+import { OutputImage } from "@/lib/types";
 
 export function RestoreDream({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
-  const [restoredImage, setRestoredImage] = useState<{
-    width: number;
-    height: number;
-    url: string;
-  } | null>(null);
+  const [restoredImage, setRestoredImage] = useState<OutputImage | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [sideBySideEnabled, setSideBySideEnabled] = useState<boolean>(false);
   const [downloadLoading, setDownloadLoading] = useState<boolean>(false);
