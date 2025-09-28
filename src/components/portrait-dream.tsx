@@ -11,6 +11,7 @@ import { Dropzone } from "@/components/dropzone";
 import { PromptGuide } from "@/components/prompt-guide";
 import { PromptBox } from "@/components/prompt-box";
 import { Select } from "@/components/select";
+import { OutputImage } from "@/lib/types";
 
 const texts = [
   "A photo of a girl walking down the streets of NYC, surrounded by buildings.",
@@ -38,7 +39,7 @@ export function PortraitDream({
   const [prompt, setPrompt] = useState<string>("");
   const [renderCount, setRenderCount] = useState<string>("1");
   const [loading, setLoading] = useState<boolean>(false);
-  const [outputs, setOutputs] = useState<Array<string>>([]);
+  const [outputs, setOutputs] = useState<Array<OutputImage>>([]);
 
   const [styleName, setStyleName] = useState<string>(styleList[1]);
   const [images, setImages] = useState<Array<string>>([]);
@@ -179,7 +180,9 @@ export function PortraitDream({
             {outputs.map((outputImage, index) => (
               <ImagePreview
                 key={index}
-                src={outputImage}
+                src={outputImage.url}
+                imageWidth={outputImage.width}
+                imageHeight={outputImage.height}
                 loading={loading}
                 photoName={`photoworksai_output_${index + 1}.png`}
                 className="flex-1"

@@ -1,7 +1,7 @@
-import { getFormattedError } from "@/lib/errorHandler";
 import { auth } from '@clerk/nextjs/server'
 import { NextResponse } from "next/server";
 import { fal } from "@fal-ai/client";
+import { getFormattedError } from "@/lib/errorHandler";
 
 fal.config({
   proxyUrl: "/api/fal/proxy",
@@ -15,7 +15,7 @@ const modelList: Record<string, string> = {
   restore: "fal-ai/image-apps-v2/photo-restoration",
   text2image: "fal-ai/flux-pro/kontext/text-to-image",
   upscale: "fal-ai/seedvr/upscale/image",
-  photomaker: "ddfc2b08d209f9fa8c1eca692712918bd449f695dabb4a958da31802a9570fe4",
+  photomaker: "fal-ai/flux-pro/kontext/multi",
   colorize: "fal-ai/ddcolor"
 };
 
@@ -37,7 +37,6 @@ export async function POST(req: Request) {
       model,
       prompt,
       aspectRatio,
-      styleName,
       images
     } = payload;
 
@@ -55,6 +54,8 @@ export async function POST(req: Request) {
 
     if (model === "upscale") {
       input.upscale_factor = 2
+    } else if (model === "photomaker") {
+      input.image_urls = images
     }
 
     const response = await fal.subscribe(modelList[model], {
