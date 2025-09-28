@@ -40,7 +40,7 @@ export function ImagePreview({
   }
 
   return (
-    <a href={src} target="_blank" className={cn("flex aspect-4/3 glightbox", {
+    <a href={src} target="_blank" className={cn("flex aspect-[4/3] glightbox", {
       "cursor-not-allowed": loading,
       "cursor-pointer": !loading,
       "pointer-events-none": loading

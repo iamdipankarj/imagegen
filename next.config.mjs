@@ -9,11 +9,19 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "replicate.com",
+        hostname: "fal.com",
       },
       {
         protocol: "https",
-        hostname: "replicate.delivery",
+        hostname: "v3b.fal.media",
+      },
+      {
+        protocol: "https",
+        hostname: "*.fal.media",
+      },
+      {
+        protocol: "https",
+        hostname: "fal.media",
       },
       {
         protocol: "https",

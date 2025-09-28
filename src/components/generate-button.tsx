@@ -11,7 +11,9 @@ export function GenerateButton({
   ...props
 }: GenerateButtonProps) {
   return (
-    <button className={cn("btn border-none btn-md enabled:bg-gradient-cta bg-[length:200%_200%] animate-shimmer rounded-xl shadow-lg gap-1 w-full", className)} disabled={loading} {...props}>
+    <button className={cn("btn border-none btn-md enabled:bg-gradient-cta bg-[length:200%_200%] animate-shimmer rounded-xl shadow-lg gap-1 w-full", className, {
+      'cursor-not-allowed': loading
+    })} disabled={loading} {...props}>
       {loading ? (
         <Loader2 className="h-6 w-6 animate-spin" />
       ) : (

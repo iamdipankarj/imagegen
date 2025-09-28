@@ -15,12 +15,10 @@ export function InteriorDream({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [renderCount, setRenderCount] = useState<string>("1");
-  const [roomStyle, setRoomStyle] = useState<string>("Modern");
   const [roomType, setRoomType] = useState<string>("Living Room");
   const [loading, setLoading] = useState<boolean>(false);
   const [outputs, setOutputs] = useState<Array<string>>([]);
   const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
-  const [photoName, setPhotoName] = useState<string | null>(null);
 
   const { ready: lightboxReady } = useScript('https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js')
 
@@ -36,10 +34,6 @@ export function InteriorDream({
 
   const handleRenderCount = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setRenderCount(event.target.value as string);
-  }
-
-  const handleRoomStyle = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setRoomStyle(event.target.value as string);
   }
 
   const handleRoomType = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -88,10 +82,8 @@ export function InteriorDream({
       <div className="space-y-4 w-full md:basis-1/3">
         <div>
           <Dropzone
-            photo={originalPhoto}
-            photoName={photoName}
-            onPhotoChange={(photoUrl) => setOriginalPhoto(photoUrl)}
-            onPhotoNameChange={(name) => setPhotoName(name)}
+            onUploaded={(photoUrl) => setOriginalPhoto(photoUrl)}
+            onRemoved={() => setOriginalPhoto(null)}
           />
           <span className="text-xs leading-4 block mt-5">
             Upload a photo of your current room. For best results, make sure it shows the entire room and is well lit. Although the model can handle angled pics, it&apos;s better to have a straight-on view. Try to upload an image in a 90-degree angle facing a wall or a window.

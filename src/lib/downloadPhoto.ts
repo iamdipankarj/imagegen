@@ -1,12 +1,3 @@
-export function appendNewToName(name: string) {
-  let insertPos = name.indexOf(".");
-  let newName = name
-    .substring(0, insertPos)
-    .concat("-new", name.substring(insertPos));
-  return newName;
-}
-
-
 function forceDownload(blobUrl: string, filename: string) {
   let a: any = document.createElement("a");
   a.download = filename;

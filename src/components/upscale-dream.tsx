@@ -6,18 +6,18 @@ import { toast } from "sonner";
 import { Download, FilePlus, Loader2 } from "lucide-react";
 import { SwitchToggle } from "@/components/switch-toggle";
 import { CompareSlider } from "@/components/compare-slider";
-import { appendNewToName, downloadPhoto } from "@/lib/downloadPhoto";
+import { downloadPhoto } from "@/lib/downloadPhoto";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 import { Dropzone } from "@/components/dropzone";
+import { OutputImage } from "@/lib/types";
 
 export function UpscaleDream({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
-  const [photoName, setPhotoName] = useState<string | null>(null);
-  const [restoredImage, setRestoredImage] = useState<string | null>(null);
+  const [restoredImage, setRestoredImage] = useState<OutputImage | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [sideBySideEnabled, setSideBySideEnabled] = useState<boolean>(false);
   const [downloadLoading, setDownloadLoading] = useState<boolean>(false);
@@ -58,7 +58,6 @@ export function UpscaleDream({
   const handleNewPhoto = (e: FormEvent) => {
     e.preventDefault();
     setOriginalPhoto(null);
-    setPhotoName(null);
     setRestoredImage(null);
   }
 
@@ -67,8 +66,8 @@ export function UpscaleDream({
     setDownloadLoading(true);
     setTimeout(() => {
       downloadPhoto(
-        restoredImage!,
-        appendNewToName(photoName!)
+        restoredImage?.url!,
+        'output'
       );
     }, 500);
     setTimeout(() => {
@@ -80,10 +79,8 @@ export function UpscaleDream({
     <div className={cn("flex flex-col md:flex-row items-start gap-6", className)} {...props}>
       <div className="space-y-4 w-full md:basis-1/3">
         <Dropzone
-          photo={originalPhoto}
-          photoName={photoName}
-          onPhotoChange={(photoUrl) => setOriginalPhoto(photoUrl)}
-          onPhotoNameChange={(name) => setPhotoName(name)}
+          onUploaded={(photoUrl) => setOriginalPhoto(photoUrl)}
+          onRemoved={() => setOriginalPhoto(null)}
         />
         {restoredImage ? (
           <SwitchToggle enabled={sideBySideEnabled} onChange={(value: boolean) => {
@@ -120,15 +117,15 @@ export function UpscaleDream({
               <CompareSlider
                 className="md:max-w-[600px] mx-auto"
                 original={originalPhoto!}
-                restored={restoredImage}
+                restored={restoredImage.url}
               />
             ) : (
               <Image
-                src={restoredImage}
-                width={600}
-                height={300}
+                src={restoredImage.url}
+                width={restoredImage.width}
+                height={restoredImage.height}
                 className="block mx-auto rounded-xl"
-                alt="Generate an image in seconds"
+                alt="Restore an image in seconds"
               />
             )}
           </div>
