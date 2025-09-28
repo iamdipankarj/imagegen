@@ -10,13 +10,14 @@ import { downloadPhoto } from "@/lib/downloadPhoto";
 import { cn } from "@/lib/utils";
 import { GenerateButton } from "@/components/generate-button";
 import { Dropzone } from "@/components/dropzone";
+import { OutputImage } from "@/lib/types";
 
 export function UpscaleDream({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
-  const [restoredImage, setRestoredImage] = useState<string | null>(null);
+  const [restoredImage, setRestoredImage] = useState<OutputImage | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [sideBySideEnabled, setSideBySideEnabled] = useState<boolean>(false);
   const [downloadLoading, setDownloadLoading] = useState<boolean>(false);
@@ -65,7 +66,7 @@ export function UpscaleDream({
     setDownloadLoading(true);
     setTimeout(() => {
       downloadPhoto(
-        restoredImage!,
+        restoredImage?.url!,
         'output'
       );
     }, 500);
@@ -116,15 +117,15 @@ export function UpscaleDream({
               <CompareSlider
                 className="md:max-w-[600px] mx-auto"
                 original={originalPhoto!}
-                restored={restoredImage}
+                restored={restoredImage.url}
               />
             ) : (
               <Image
-                src={restoredImage}
-                width={600}
-                height={300}
+                src={restoredImage.url}
+                width={restoredImage.width}
+                height={restoredImage.height}
                 className="block mx-auto rounded-xl"
-                alt="Generate an image in seconds"
+                alt="Restore an image in seconds"
               />
             )}
           </div>

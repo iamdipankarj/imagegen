@@ -9,6 +9,7 @@ import { GenerateButton } from "@/components/generate-button";
 import { PromptGuide } from "@/components/prompt-guide";
 import { PromptBox } from "@/components/prompt-box";
 import { Select } from "@/components/select";
+import { OutputImage } from "@/lib/types";
 
 const texts = [
   "A mysterious forest cloaked in twilight.",
@@ -23,20 +24,16 @@ const texts = [
   "A bustling metropolis seen from above, aglow with city lights."
 ];
 
-const imageResolutions: Array<number> = [
-  384,
-  512,
-  576,
-  640,
-  704,
-  768,
-  960,
-  1024,
-  1152,
-  1280,
-  1536,
-  1792,
-  2048
+const aspectRatios: Array<string> = [
+  '21:9',
+  '16:9',
+  '4:3',
+  '3:2',
+  '1:1',
+  '2:3',
+  '3:4',
+  '9:16',
+  '9:21'
 ]
 
 export function TextToImage({
@@ -44,10 +41,10 @@ export function TextToImage({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [prompt, setPrompt] = useState<string>("");
-  const [resolution, setResolution] = useState<string>("1024");
+  const [aspectRatio, setAspectRatio] = useState<string>("1:1");
   const [renderCount, setRenderCount] = useState<string>("1");
   const [loading, setLoading] = useState<boolean>(false);
-  const [outputs, setOutputs] = useState<Array<string>>([]);
+  const [outputs, setOutputs] = useState<Array<OutputImage>>([]);
 
   const { ready: lightboxReady } = useScript('https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js')
 
@@ -61,8 +58,8 @@ export function TextToImage({
     }
   }, [lightboxReady, outputs])
 
-  const handleResolution = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setResolution(event.target.value as string);
+  const handleAspectRatio = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setAspectRatio(event.target.value as string);
   }
 
   const handleRenderCount = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -91,7 +88,7 @@ export function TextToImage({
         body: JSON.stringify({
           model: "text2image",
           renderCount,
-          resolution,
+          aspectRatio,
           prompt
         }),
         headers: {
@@ -129,11 +126,11 @@ export function TextToImage({
           </div>
         </div>
         <Select
-          label="Select Resolution"
-          value={resolution}
-          onValueChange={handleResolution}
-          options={imageResolutions}
-          description="Choose the resolution of the image you want to generate. Note that, higher resolution images will take longer to generate."
+          label="Select Aspect Ratio"
+          value={aspectRatio}
+          onValueChange={handleAspectRatio}
+          options={aspectRatios}
+          description="Choose the aspect ratio of the image you want to generate."
         />
         <Select
           label="Number of renders"
@@ -153,7 +150,7 @@ export function TextToImage({
         {!loading && outputs.length === 0 ? (
           <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
             <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate an <span className="highlighted">image</span> in seconds.</h3>
-            <p className="text-zinc-500 text-center">Write a prompt, choose your resolution, how many renders do you want to create and hit Generate when you are ready.</p>
+            <p className="text-zinc-500 text-center">Write a prompt, choose your aspect ratio, how many renders do you want to create and hit Generate when you are ready.</p>
             <div className="flex -space-x-4 !mt-8">
               <figure className="shadow-elevate rounded-md overflow-hidden rotate-[4.2deg]">
                 <Image
@@ -182,12 +179,11 @@ export function TextToImage({
             {outputs.map((outputImage, index) => (
               <ImagePreview
                 key={index}
-                src={outputImage}
+                src={outputImage.url}
                 loading={loading}
-                imageWidth={Number(resolution)}
-                imageHeight={Number(resolution)}
+                imageWidth={outputImage.width}
+                imageHeight={outputImage.height}
                 photoName={`photoworksai_output_${index + 1}.png`}
-                className="flex-1"
               />
             ))}
           </div>

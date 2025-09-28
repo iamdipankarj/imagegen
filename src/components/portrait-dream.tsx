@@ -11,25 +11,12 @@ import { Dropzone } from "@/components/dropzone";
 import { PromptGuide } from "@/components/prompt-guide";
 import { PromptBox } from "@/components/prompt-box";
 import { Select } from "@/components/select";
+import { OutputImage } from "@/lib/types";
 
 const texts = [
   "A photo of a girl walking down the streets of NYC, surrounded by buildings.",
   "A photo of a man sitting on a bench in a park, reading a book."
 ];
-
-const styleList = [
-  "(No style)",
-  "Cinematic",
-  "Disney Charactor",
-  "Digital Art",
-  "Photographic (Default)",
-  "Fantasy art",
-  "Neonpunk",
-  "Enhance",
-  "Comic book",
-  "Lowpoly",
-  "Line art"
-]
 
 export function PortraitDream({
   className,
@@ -38,9 +25,7 @@ export function PortraitDream({
   const [prompt, setPrompt] = useState<string>("");
   const [renderCount, setRenderCount] = useState<string>("1");
   const [loading, setLoading] = useState<boolean>(false);
-  const [outputs, setOutputs] = useState<Array<string>>([]);
-
-  const [styleName, setStyleName] = useState<string>(styleList[1]);
+  const [outputs, setOutputs] = useState<Array<OutputImage>>([]);
   const [images, setImages] = useState<Array<string>>([]);
 
   const { ready: lightboxReady } = useScript('https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js')
@@ -63,10 +48,6 @@ export function PortraitDream({
     setRenderCount(event.target.value as string);
   }
 
-  const handleStyleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setStyleName(event.target.value as string);
-  }
-
   async function handleSubmit(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (!prompt) {
@@ -87,7 +68,6 @@ export function PortraitDream({
         body: JSON.stringify({
           prompt,
           images,
-          styleName,
           model: "photomaker",
           renderCount
         }),
@@ -135,14 +115,6 @@ export function PortraitDream({
             <p><span className="font-semibold">Example:&nbsp;</span>A photo of a girl walking down the streets of NYC, surrounded by buildings.</p></PromptGuide>.
           </div>
         </div>
-        {/* Style Name */}
-        <Select
-          label="Style"
-          value={styleName}
-          onValueChange={handleStyleChange}
-          options={styleList}
-          description="Choose the style you want to apply to the generated image. This option is provided in case you want to generate the same prompt with different styles."
-        />
         {/* Render Count */}
         <Select
           label="Number of renders"
@@ -179,7 +151,9 @@ export function PortraitDream({
             {outputs.map((outputImage, index) => (
               <ImagePreview
                 key={index}
-                src={outputImage}
+                src={outputImage.url}
+                imageWidth={outputImage.width}
+                imageHeight={outputImage.height}
                 loading={loading}
                 photoName={`photoworksai_output_${index + 1}.png`}
                 className="flex-1"
