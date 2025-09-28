@@ -13,6 +13,14 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "v3b.fal.media",
+      },
+      {
+        protocol: "https",
+        hostname: "*.fal.media",
+      },
+      {
+        protocol: "https",
         hostname: "fal.media",
       },
       {
