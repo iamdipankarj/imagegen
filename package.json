@@ -14,8 +14,8 @@
     "> 1%"
   ],
   "dependencies": {
-    "@clerk/nextjs": "^6.32.2",
-    "@fal-ai/client": "^1.6.2",
+    "@clerk/nextjs": "^6.35.6",
+    "@fal-ai/client": "^1.7.2",
     "@fal-ai/server-proxy": "^1.1.1",
     "@headlessui/react": "^2.2.9",
     "clsx": "^2.1.1",
@@ -27,7 +27,7 @@
     "filepond-plugin-image-exif-orientation": "^1.0.11",
     "filepond-plugin-image-preview": "^4.6.12",
     "lucide-react": "^0.544.0",
-    "next": "^15.5.4",
+    "next": "^16.0.7",
     "next-nprogress-bar": "^2.4.7",
     "next-sitemap": "^4.2.3",
     "react": "^19.1.1",
