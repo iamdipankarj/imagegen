@@ -56,8 +56,8 @@ export function Dropzone({
   acceptedFileTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/avif'],
   onUploaded,
   onRemoved,
-  processUrl = '/api/upload-image',
-  revertUrl = '/api/remove-image',
+  processUrl = '/api/upload',
+  revertUrl = '/api/remove',
   fieldName = 'file',
   hideCredits = true,
   className,
@@ -80,9 +80,10 @@ export function Dropzone({
         onload: (resText) => {
           try {
             const data = JSON.parse(resText);
-            const url = data?.url ?? resText; // API should return { url: "..." }
+            const url = data?.signedUrl
+            const key = data?.key
             if (url) onUploaded?.(url);
-            return url; // FilePond stores this internally
+            return key
           } catch {
             onUploaded?.(resText);
             return resText;
@@ -106,11 +107,13 @@ export function Dropzone({
         error
       ) => {
         fetch(revertUrl, {
-          method: "DELETE",
+          method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ fileName: uniqueFileId.split('/').pop() }),
+          body: JSON.stringify({
+            key: uniqueFileId
+          }),
         })
           .then(async (res) => {
             if (res.ok) {

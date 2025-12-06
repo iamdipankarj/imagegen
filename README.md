@@ -1,7 +1,7 @@
 # 🖼️ ImageGen - AI Image Generator
 
 An AI-powered image generator built with [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/), and [fal.ai](https://fal.ai/) models.  
-This project allows users to create AI images, upload files seamlessly with [FilePond](https://pqina.nl/filepond/) and [Supabase](https://supabase.com/), and enjoy a clean interface styled using [TailwindCSS](https://tailwindcss.com/) and [DaisyUI](https://daisyui.com/).
+This project allows users to create AI images, upload files seamlessly with [FilePond](https://pqina.nl/filepond/) and [Cloudflare R2](https://www.cloudflare.com/en-in/developer-platform/products/r2/), and enjoy a clean interface styled using [TailwindCSS](https://tailwindcss.com/) and [DaisyUI](https://daisyui.com/).
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7ba5c558-ae1b-4d16-8265-98786ab12d71/deploy-status)](https://app.netlify.com/projects/splendid-paprenjak-e8601a/deploys)
 
@@ -9,10 +9,10 @@ This project allows users to create AI images, upload files seamlessly with [Fil
 
 ## 🚀 Features
 
-- ⚡ AI image generation using [fal.ai](https://fal.ai/)  
-- 📂 Image uploads with [FilePond](https://pqina.nl/filepond/) + [Supabase](https://supabase.com/)  
-- 🎨 Modern UI with [TailwindCSS](https://tailwindcss.com/) + [DaisyUI](https://daisyui.com/)  
-- 🔑 Authentication with [Clerk](https://clerk.com/) and Google OAuth  
+- ⚡ AI image generation using [fal.ai](https://fal.ai/)
+- 📂 Image uploads with [FilePond](https://pqina.nl/filepond/) + [Cloudflare R2](https://www.cloudflare.com/en-in/developer-platform/products/r2/)
+- 🎨 Modern UI with [TailwindCSS](https://tailwindcss.com/) + [DaisyUI](https://daisyui.com/)
+- 🔑 Authentication with [Clerk](https://clerk.com/) and Google OAuth
 - 🛠️ Built on [Next.js](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/)
 
 ---
@@ -71,14 +71,13 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 
 ## 🖼️ Tech Stack
 
-- [Next.js](https://nextjs.org/) – React framework for SSR/SSG  
-- [TypeScript](https://www.typescriptlang.org/) – Strong typing for JavaScript  
-- [fal.ai](https://fal.ai/) – AI model inference  
-- [FilePond](https://pqina.nl/filepond/) – File uploads  
-- [Supabase](https://supabase.com/) – Backend & storage  
-- [TailwindCSS](https://tailwindcss.com/) – Utility-first CSS  
-- [DaisyUI](https://daisyui.com/) – Tailwind component library  
-- [Clerk](https://clerk.com/) – Authentication and user management  
+- [Next.js](https://nextjs.org/) – React framework for SSR/SSG
+- [TypeScript](https://www.typescriptlang.org/) – Strong typing for JavaScript
+- [fal.ai](https://fal.ai/) – AI model inference
+- [FilePond](https://pqina.nl/filepond/) – File uploads
+- [TailwindCSS](https://tailwindcss.com/) – Utility-first CSS
+- [DaisyUI](https://daisyui.com/) – Tailwind component library
+- [Clerk](https://clerk.com/) – Authentication and user management
 
 ---
 
