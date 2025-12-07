@@ -29,6 +29,7 @@ export async function POST(req: Request) {
     if (files.length === 0) {
       return NextResponse.json({ error: `Missing '${FIELD_NAME}'` }, { status: 400 });
     }
+
     if (files.length > 1) {
       return NextResponse.json({ error: `Only one '${FIELD_NAME}' allowed` }, { status: 400 });
     }
