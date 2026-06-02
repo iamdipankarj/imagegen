@@ -29,7 +29,7 @@ export default async function RootLayout({
 }>) {
 
   return (
-    <html lang="en" suppressHydrationWarning data-theme="light">
+    <html lang="en" suppressHydrationWarning data-theme="light" data-scroll-behavior="smooth">
       <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#41c289" />
@@ -46,7 +46,7 @@ export default async function RootLayout({
             {children}
             <Footer />
             <Toaster
-              toastOptions={{ className: 'font-sans !text-sm' }}
+              toastOptions={{ className: 'font-sans text-sm!' }}
               position="top-center"
               richColors
             />

@@ -47,7 +47,7 @@ export function Gallery() {
                 width={300}
                 height={200}
                 alt="imagegen"
-                className="w-full h-[auto]"
+                className="w-full h-auto"
               />
             </a>
           </li>

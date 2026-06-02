@@ -1,107 +1,197 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin "daisyui";
 
-:root {
-  --foreground-rgb: #F6F1ED;
-  --forground-tertiary: #5522FA;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --rgb-black: 35, 28, 51;
-  --model-purple: #9A15FF;
-  --model-yellow: #FCBE0B;
-  --model-orange: #ff7d0f;
-  --model-green: #299850;
-  --model-sunny: #ffcd05;
-  --model-red: #FB112E;
-  --model-teal: #1CD087;
-  --model-blue: #6B61F6;
-  --model-dark-blue: #291B81
-}
+@custom-variant dark (&:is(.dark *));
 
-::selection {
-  color: #fff;
-  background: #27ae60;
-}
+@theme {
+  --color-tertiary: var(--forground-tertiary);
+  --color-model-purple: var(--model-purple);
+  --color-model-yellow: var(--model-yellow);
+  --color-model-red: var(--model-red);
+  --color-model-teal: var(--model-teal);
+  --color-model-blue: var(--model-blue);
+  --color-model-dark-blue: var(--model-dark-blue);
 
-body, html {
-  @apply !scroll-smooth;
-}
+  --background-image-gradient-glow: linear-gradient(
+    135deg,
+    #f79533,
+    #f37055,
+    #ef4e7b,
+    #a166ab,
+    #5073b8,
+    #1098ad,
+    #07b39b,
+    #6fba82
+  );
+  --background-image-gradient-cta: linear-gradient(
+    165deg,
+    var(--model-orange) 0,
+    var(--model-sunny) 100%
+  );
+  --background-image-gradient-heading: linear-gradient(
+    to right,
+    #1ee7b5,
+    #bafd0a,
+    #98ff74,
+    #fa3244,
+    #f94a6e,
+    #15abf3
+  );
+  --background-image-gradient-section: linear-gradient(
+    135deg,
+    #0074e4 0%,
+    #5522fa 100%
+  );
 
-@layer components {
-  .btn {
-    @apply text-white;
-    --tw-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1)!important;
-    @apply shadow-sm;
-  }
+  --shadow-elevate:
+    0 0 0 1px rgba(var(--rgb-black), 0.05),
+    0 1px 0 0 rgba(var(--rgb-black), 0.05),
+    0 0.2em 1.6em -0.8em rgba(var(--rgb-black), 0.2),
+    0 0.4em 2.4em -1em rgba(var(--rgb-black), 0.3),
+    0 0.4em 0.8em -1.2em rgba(var(--rgb-black), 0.4),
+    0 0.8em 1.2em -1.6em rgba(var(--rgb-black), 0.5),
+    0 1.2em 1.6em -2em rgba(var(--rgb-black), 0.6);
 
-  .highlighted {
-    @apply inline-block px-2 py-2 relative rounded-[91%_9%_90%_10%_/_29%_82%_18%_71%];
-    color: var(--model-green);
-    border: 2px solid;
-  }
+  --flex-2: 2 2 0%;
 
-  body[data-menu="open"] #mobileMenu {
-    @apply scale-y-100;
-  }
+  --font-sans:
+    var(--font-sans), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-  .app-main {
-    @apply flex flex-col flex-1 items-stretch py-6 md:py-10;
-  }
+  --animate-shimmer: shimmer 2s ease-in-out infinite;
+  --animate-gradient-text: gradient-text 8s linear infinite;
 
-  .grid-container {
-    @apply grid gap-2 md:gap-4 grid-rows-[repeat(2,auto)] grid-cols-[repeat(2,auto)] mx-auto md:max-w-4xl
-  }
-
-  #uploader {
-    .btn {
-      height: auto;
-      @apply !font-sans;
-      & + p.text-secondary {
-        @apply !font-sans;
-      }
+  @keyframes gradient-text {
+    to {
+      background-position: 200% center;
     }
   }
-
-  .hamburger-root {
-    cursor: pointer;
-    user-select: none;
-    outline: none;
-
-    .ham-svg {
-      transition: transform 400ms;
+  @keyframes shimmer {
+    0% {
+      background-position: 0 50%;
     }
-
-    .ham-line {
-      fill: none;
-      transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-      stroke: currentColor;
-      stroke-width: 5.5;
-      stroke-linecap: round;
+    50% {
+      background-position: 100% 50%;
     }
+    100% {
+      background-position: 0 50%;
+    }
+  }
+}
 
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility btn {
+  @apply text-white;
+  --tw-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1) !important;
+  @apply shadow-xs;
+}
+
+@utility highlighted {
+  @apply inline-block px-2 py-2 relative rounded-[91%_9%_90%_10%/29%_82%_18%_71%];
+  color: var(--model-green);
+  border: 2px solid;
+}
+
+@utility app-main {
+  @apply flex flex-col flex-1 items-stretch py-6 md:py-10;
+}
+
+@utility grid-container {
+  @apply grid gap-2 md:gap-4 grid-rows-[repeat(2,auto)] grid-cols-[repeat(2,auto)] mx-auto md:max-w-4xl;
+}
+
+@utility hamburger-root {
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+
+  .ham-svg {
+    transition: transform 400ms;
+  }
+
+  .ham-line {
+    fill: none;
+    transition:
+      stroke-dasharray 400ms,
+      stroke-dashoffset 400ms;
+    stroke: currentColor;
+    stroke-width: 5.5;
+    stroke-linecap: round;
+  }
+
+  .ham-top {
+    stroke-dasharray: 40 139;
+  }
+
+  .ham-bottom {
+    stroke-dasharray: 40 180;
+  }
+
+  .ham-active {
+    transform: rotate(45deg);
     .ham-top {
-      stroke-dasharray: 40 139;
+      stroke-dashoffset: -98px;
     }
-    
     .ham-bottom {
-      stroke-dasharray: 40 180;
-    }
-
-    .ham-active {
-      transform: rotate(45deg);
-      .ham-top {
-        stroke-dashoffset: -98px;
-      }
-      .ham-bottom {
-        stroke-dashoffset: -138px;
-      }
+      stroke-dashoffset: -138px;
     }
   }
+}
+
+@utility text-balance {
+  text-wrap: balance;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  :root {
+    --foreground-rgb: #f6f1ed;
+    --forground-tertiary: #5522fa;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+    --rgb-black: 35, 28, 51;
+    --model-purple: #9a15ff;
+    --model-yellow: #fcbe0b;
+    --model-orange: #ff7d0f;
+    --model-green: #299850;
+    --model-sunny: #ffcd05;
+    --model-red: #fb112e;
+    --model-teal: #1cd087;
+    --model-blue: #6b61f6;
+    --model-dark-blue: #291b81;
+  }
+
+  ::selection {
+    color: #fff;
+    background: #27ae60;
+  }
+
+  body,
+  html {
+    @apply scroll-smooth!;
+  }
+}
+
+@layer components {
+
+  body[data-menu="open"] #mobileMenu {
+    @apply scale-y-100!;
   }
 }

@@ -40,7 +40,7 @@ export function Accordion({
           "text-base-content": !expanded
         })}>{heading}</span>
         <svg
-          className="flex-shrink-0 w-4 h-4 ml-auto fill-current"
+          className="shrink-0 w-4 h-4 ml-auto fill-current"
           viewBox="0 0 16 16"
           xmlns="http://www.w3.org/2000/svg"
         >

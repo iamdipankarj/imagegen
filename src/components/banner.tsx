@@ -28,20 +28,20 @@ export function Banner() {
           </li>
         </ul>
         <div className="cursor-pointer w-fit flex gap-4">
-          <Link className="btn border-none btn-md bg-gradient-cta bg-[length:200%_200%] animate-shimmer rounded-badge shadow-lg gap-1 text-xl inline-flex" href="/text-to-image">
+          <Link className="btn border-none btn-md bg-gradient-cta bg-size-[200%_200%] animate-shimmer rounded-full shadow-lg gap-1 text-xl inline-flex" href="/text-to-image">
             <div className="blue-overlay" />
-            <Wand className="hidden md:inline w-[18px] h-[18px]" />
+            <Wand className="hidden md:inline w-4.5 h-4.5" />
             Create Now
           </Link>
-          <Link className="btn btn-outline rounded-badge shadow-lg gap-1 text-xl text-zinc-700 inline-flex" href="/#examples">
+          <Link className="btn btn-outline rounded-full shadow-lg gap-1 text-xl text-zinc-700 inline-flex" href="/#examples">
             <div className="blue-overlay" />
-            <ArrowDown className="hidden md:inline w-[18px] h-[18px]" />
+            <ArrowDown className="hidden md:inline w-4.5 h-4.5" />
             View Examples
           </Link>
         </div>
       </div>
       <div className="hero-examples w-full px-8 md:w-1/3">
-      <div className="flex -space-x-4 !mt-8">
+      <div className="flex -space-x-4 mt-8!">
         <figure className="shadow-elevate rounded-md overflow-hidden rotate-[4.2deg]">
           <Image
             src="/samples/sample1.png"

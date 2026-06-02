@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { KeyRound } from "lucide-react"
-import { UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import { UserButton, Show } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 
 export function NavAction({
@@ -11,15 +11,15 @@ export function NavAction({
 }: React.HTMLAttributes<HTMLElement>) {
   return (
     <nav className={cn("flex flex-col md:flex-row items-center gap-2", className)} {...props}>
-      <SignedOut>
+      <Show when="signed-out">
         <Link href="/login" className="btn btn-sm btn-tertiary text-white btn-primary">
           <KeyRound className="h-4 w-4" />
           Sign In
         </Link>
-      </SignedOut>
-      <SignedIn>
+      </Show>
+      <Show when="signed-in">
         <UserButton />
-      </SignedIn>
+      </Show>
     </nav>
-  )
+  );
 }

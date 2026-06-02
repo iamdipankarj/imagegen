@@ -117,7 +117,7 @@ export function RestoreDream({
           <div className="text-center">
             {sideBySideEnabled ? (
               <CompareSlider
-                className="md:max-w-[600px] mx-auto"
+                className="md:max-w-150 mx-auto"
                 original={originalPhoto!}
                 restored={restoredImage.url}
               />
@@ -138,13 +138,13 @@ export function RestoreDream({
             <p className="text-zinc-500 text-center">
               Upload a photo and hit Generate to restore it. You can also compare the original and restored image side by side a toggle that will be visible after the image is restored.
             </p>
-            <div className="flex -space-x-4 !mt-8">
+            <div className="flex -space-x-4 mt-8!">
               <Image
                 src="/restore.png"
                 width={1054}
                 height={760}
                 alt="Restore an image in seconds"
-                className="max-w-[500px]"
+                className="max-w-125"
               />
             </div>
           </div>

@@ -93,7 +93,7 @@ export function PortraitDream({
 
   return (
     <div className={cn("flex flex-col md:flex-row items-start gap-6", className)} {...props}>
-      <div className="space-y-4 w-full md:basis-1/3">
+      <div className="w-full md:basis-1/3 space-y-4">
         <Dropzone
           onUploaded={(photoUrl) => {
             setImages((prev) => [...prev, photoUrl])
@@ -135,13 +135,13 @@ export function PortraitDream({
           <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
             <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate your <span className="highlighted">beautiful portraits</span> in seconds.</h3>
             <p className="text-zinc-500 text-center">Upload a photo, write a prompt of an action or pose, select a style, choose how many renders do you want to create and hit Generate when you are ready.</p>
-            <div className="flex -space-x-4 !mt-8">
+            <div className="flex -space-x-4 mt-8!">
               <Image
                 src="/portrait/style2.png"
                 width={1054}
                 height={760}
                 alt="Restore an image in seconds"
-                className="max-w-[500px]"
+                className="max-w-125"
               />
             </div>
           </div>
