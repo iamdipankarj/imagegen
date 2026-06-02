@@ -29,7 +29,7 @@ export default function NotFound() {
             />
           </svg>
           <input
-            className="pl-12 pr-4 py-3 w-full text-gray-500 font-medium placeholder-gray-500 outline-none border-b border-gray-300 focus:ring focus:ring-indigo-300"
+            className="pl-12 pr-4 py-3 w-full text-gray-500 font-medium placeholder-gray-500 outline-hidden border-b border-gray-300 focus:ring-3 focus:ring-indigo-300"
             id="httpCodeInput5-1"
             type="text"
             placeholder="Type to search"

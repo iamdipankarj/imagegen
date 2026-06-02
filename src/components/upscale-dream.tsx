@@ -136,7 +136,7 @@ export function UpscaleDream({
             <p className="text-zinc-500 text-center">
               Upload a photo and hit Generate to upscale it. You can also compare the original and upscaled image side by side a toggle that will be visible after the image is upscaled.
             </p>
-            <div className="flex -space-x-4 !mt-8">
+            <div className="flex -space-x-4 mt-8!">
               <Image
                 src="/upscale.png"
                 width={1054}

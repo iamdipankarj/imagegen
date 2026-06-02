@@ -18,7 +18,7 @@ export function StyleBanner() {
           Optionally you can add more than one image. The more you add, better the results.
         </p>
         <div>
-          <Link href="/portrait" className="btn btn-success btn-lg">Try it now</Link>
+          <Link href="/portrait" className="btn btn-success btn-lg rounded-full">Try it now</Link>
         </div>
       </div>
       <div className="embla flex flex-1 lg:justify-end overflow-hidden" ref={emblaRef}>

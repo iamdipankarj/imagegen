@@ -46,7 +46,7 @@ export default async function RootLayout({
             {children}
             <Footer />
             <Toaster
-              toastOptions={{ className: 'font-sans !text-sm' }}
+              toastOptions={{ className: 'font-sans text-sm!' }}
               position="top-center"
               richColors
             />

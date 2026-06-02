@@ -40,7 +40,7 @@ export function PromptGuide({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-base-300 bg-opacity-60 backdrop-blur opacity-100" />
+            <div className="fixed inset-0 bg-base-300 bg-opacity-60 backdrop-blur-sm opacity-100" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
@@ -58,7 +58,7 @@ export function PromptGuide({
                   <Dialog.Title as="div" className="flex items-center justify-between">
                     <h3 className="font-extrabold text-center w-full text-2xl">Prompt Guide</h3>
                   </Dialog.Title>
-                  <button className="btn btn-square btn-sm text-slate-500 absolute right-4 top-4" onClick={closeModal}>
+                  <button className="btn btn-square rounded-md btn-sm text-slate-500 absolute right-4 top-4" onClick={closeModal}>
                     <X className="w-4 h-4" />
                   </button>
                   <div className="mt-2 space-y-2">
@@ -68,7 +68,7 @@ export function PromptGuide({
                   <div className="mt-4 text-center">
                     <button
                       type="button"
-                      className="btn btn-neutral btn-sm text-white"
+                      className="btn btn-neutral btn-sm text-white rounded-md"
                       onClick={closeModal}
                     >
                       Got it, thanks!

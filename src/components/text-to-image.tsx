@@ -151,7 +151,7 @@ export function TextToImage({
           <div className="flex items-center flex-col space-y-4 w-full justify-center md:px-10">
             <h3 className="text-4xl font-semibold text-zinc-600 text-center">Generate an <span className="highlighted">image</span> in seconds.</h3>
             <p className="text-zinc-500 text-center">Write a prompt, choose your aspect ratio, how many renders do you want to create and hit Generate when you are ready.</p>
-            <div className="flex -space-x-4 !mt-8">
+            <div className="flex -space-x-4 mt-8!">
               <figure className="shadow-elevate rounded-md overflow-hidden rotate-[4.2deg]">
                 <Image
                   src="/samples/sample1.png"

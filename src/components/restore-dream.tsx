@@ -138,7 +138,7 @@ export function RestoreDream({
             <p className="text-zinc-500 text-center">
               Upload a photo and hit Generate to restore it. You can also compare the original and restored image side by side a toggle that will be visible after the image is restored.
             </p>
-            <div className="flex -space-x-4 !mt-8">
+            <div className="flex -space-x-4 mt-8!">
               <Image
                 src="/restore.png"
                 width={1054}

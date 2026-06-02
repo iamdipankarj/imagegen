@@ -12,7 +12,7 @@ export default function Home() {
       <section className="container px-4 mx-auto">
         <Banner />
       </section>
-      {/* <section className="container px-4 mx-auto mt-10">
+      <section className="container px-4 mx-auto mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr">
           <FeatureCard
             heading="Portraits"
@@ -51,7 +51,7 @@ export default function Home() {
             Restore your old photos. Upload a photo and hit Generate.
           </FeatureCard>
         </div>
-      </section> */}
+      </section>
       <section id="styles" className="py-10">
         <div className="container mx-auto px-4">
           <StyleBanner />
