@@ -17,7 +17,7 @@ export function GenerateButton({
       {loading ? (
         <Loader2 className="h-6 w-6 animate-spin" />
       ) : (
-        <Sparkles className="hidden md:inline w-[18px] h-[18px]" />
+        <Sparkles className="hidden md:inline w-4.5 h-4.5" />
       )}
       {loading ? "Generating..." : "Generate"}
     </button>

@@ -93,7 +93,7 @@ export function PortraitDream({
 
   return (
     <div className={cn("flex flex-col md:flex-row items-start gap-6", className)} {...props}>
-      <div className="space-y-4 w-full md:basis-1/3">
+      <div className="w-full md:basis-1/3 space-y-4">
         <Dropzone
           onUploaded={(photoUrl) => {
             setImages((prev) => [...prev, photoUrl])
@@ -141,7 +141,7 @@ export function PortraitDream({
                 width={1054}
                 height={760}
                 alt="Restore an image in seconds"
-                className="max-w-[500px]"
+                className="max-w-125"
               />
             </div>
           </div>
