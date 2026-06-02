@@ -41,7 +41,7 @@ export function Gallery() {
       <ul role="list" className="max-w-7xl mx-auto md:columns-2 lg:columns-3 xl:columns-4 space-y-4 md:space-y-6 md:gap-6">
         {imageList.map((image, index) => (
           <li key={index} className="break-inside-avoid max-md:flex justify-center overflow-hidden rounded-xl">
-            <a className="max-w-[550px] border border-base-content/20 rounded-xl glightbox block" href={image}>
+            <a className="max-w-137.5 border border-base-content/20 rounded-xl glightbox block" href={image}>
               <Image
                 src={image}
                 width={300}

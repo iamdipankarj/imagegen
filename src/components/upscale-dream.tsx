@@ -115,7 +115,7 @@ export function UpscaleDream({
           <div className="text-center">
             {sideBySideEnabled ? (
               <CompareSlider
-                className="md:max-w-[600px] mx-auto"
+                className="md:max-w-150 mx-auto"
                 original={originalPhoto!}
                 restored={restoredImage.url}
               />
@@ -142,7 +142,7 @@ export function UpscaleDream({
                 width={1054}
                 height={760}
                 alt="Restore an image in seconds"
-                className="max-w-[500px]"
+                className="max-w-125"
               />
             </div>
           </div>
